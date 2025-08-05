@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Minh Hoang\\SOF2052\\PRO131\\PRO131\\PRO131.csproj": {}
+    "E:\\CloneDuAn\\PRO131\\PRO131.csproj": {}
   },
   "projects": {
-    "D:\\Minh Hoang\\SOF2052\\PRO131\\PRO131\\PRO131.csproj": {
+    "E:\\CloneDuAn\\PRO131\\PRO131.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Minh Hoang\\SOF2052\\PRO131\\PRO131\\PRO131.csproj",
+        "projectUniqueName": "E:\\CloneDuAn\\PRO131\\PRO131.csproj",
         "projectName": "PRO131",
-        "projectPath": "D:\\Minh Hoang\\SOF2052\\PRO131\\PRO131\\PRO131.csproj",
+        "projectPath": "E:\\CloneDuAn\\PRO131\\PRO131.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Minh Hoang\\SOF2052\\PRO131\\PRO131\\obj\\",
+        "outputPath": "E:\\CloneDuAn\\PRO131\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -98,7 +98,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
