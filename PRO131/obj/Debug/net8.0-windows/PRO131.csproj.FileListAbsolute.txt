@@ -278,12 +278,10 @@ C:\Users\Admin\Downloads\est\PRO131\bin\Debug\net8.0-windows\runtimes\win-x86\na
 C:\Users\Admin\Downloads\est\PRO131\bin\Debug\net8.0-windows\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\Admin\Downloads\est\PRO131\bin\Debug\net8.0-windows\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.csproj.AssemblyReference.cache
-C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.FormChiTietSanPham.resources
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.Login.resources
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.MainForm.resources
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.Properties.Resources.resources
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.UCSanPham.resources
-C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.UCThemSanPham.resources
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.csproj.GenerateResource.cache
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.AssemblyInfoInputs.cache
@@ -296,3 +294,5 @@ C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\refint\PRO131.dll
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.pdb
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.genruntimeconfig.cache
 C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\ref\PRO131.dll
+C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.UCDanhSach.resources
+C:\Users\Admin\Downloads\est\PRO131\obj\Debug\net8.0-windows\PRO131.UCTonKHo.resources

@@ -38,21 +38,26 @@ namespace PRO131
             panelSubNhanVien.Visible = !panelSubNhanVien.Visible;
         }
 
-        private void LoadUserControl(UserControl uc)
+        public void LoadUserControl(UserControl uc)
         {
             panelMain.Controls.Clear();
             uc.Dock = DockStyle.Fill;
             panelMain.Controls.Add(uc);
         }
 
+
         private void btnDanhSachSP_Click(object sender, EventArgs e)
         {
             LoadUserControl(new UCSanPham());
         }
 
-        private void btnThemSanPham_Click(object sender, EventArgs e)
+            private void btnQuanLyTonKho_Click(object sender, EventArgs e)
         {
-            LoadUserControl(new UCThemSanPham());
+            var ucSanPham = new UCSanPham();
+            ucSanPham.EnableQuanLyTonKhoMode(); // bật chế độ tồn kho
+            LoadUserControl(ucSanPham);
         }
+
     }
 }
+
