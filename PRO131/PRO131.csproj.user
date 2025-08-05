@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+<<<<<<< HEAD
+=======
     <Compile Update="FormChiTietSanPham.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -13,16 +15,20 @@
     <Compile Update="FormQLTaiKhoan.cs">
       <SubType>UserControl</SubType>
     </Compile>
+>>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
     <Compile Update="Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UCDanhSach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UCSanPham.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UCThemSanPham.cs">
+    <Compile Update="UCTonKHo.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

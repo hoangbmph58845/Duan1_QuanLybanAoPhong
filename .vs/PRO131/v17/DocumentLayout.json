@@ -1,5 +1,40 @@
 {
   "Version": 1,
+<<<<<<< HEAD
+  "WorkspaceRootPath": "C:\\Users\\Admin\\Downloads\\est\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|c:\\users\\admin\\downloads\\est\\pro131\\uctonkho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\uctonkho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|c:\\users\\admin\\downloads\\est\\pro131\\uctonkho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\uctonkho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|c:\\users\\admin\\downloads\\est\\pro131\\ucsanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\ucsanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|c:\\users\\admin\\downloads\\est\\pro131\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|c:\\users\\admin\\downloads\\est\\pro131\\ucsanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\ucsanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|c:\\users\\admin\\downloads\\est\\pro131\\ucdanhsach.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\ucdanhsach.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|C:\\Users\\Admin\\Downloads\\est\\pro131\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|C:\\Users\\Admin\\Downloads\\est\\pro131\\ucdanhsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\ucdanhsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+=======
   "WorkspaceRootPath": "E:\\CloneDuAn\\",
   "Documents": [
     {
@@ -73,6 +108,7 @@
     {
       "AbsoluteMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|e:\\cloneduan\\pro131\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6D72D71A-06B4-43B4-A1C0-C9E06CB4EDA5}|PRO131\\PRO131.csproj|solutionrelative:pro131\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
     }
   ],
   "DocumentGroupContainers": [
@@ -82,7 +118,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
+          "SelectedChildIndex": 8,
+=======
           "SelectedChildIndex": 6,
+>>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,7 +142,29 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UCTonKHo.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCTonKHo.cs",
+              "RelativeDocumentMoniker": "PRO131\\UCTonKHo.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCTonKHo.cs [Design]",
+              "RelativeToolTip": "PRO131\\UCTonKHo.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T10:19:07.609Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+<<<<<<< HEAD
+              "Title": "UCSanPham.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCSanPham.cs",
+              "RelativeDocumentMoniker": "PRO131\\UCSanPham.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCSanPham.cs",
+              "RelativeToolTip": "PRO131\\UCSanPham.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAiwDMAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T10:17:42.014Z",
+=======
               "Title": "FormQLTaiKhoan.Designer.cs",
               "DocumentMoniker": "E:\\CloneDuAn\\PRO131\\FormQLTaiKhoan.Designer.cs",
               "RelativeDocumentMoniker": "PRO131\\FormQLTaiKhoan.Designer.cs",
@@ -259,10 +321,45 @@
               "ViewState": "AgIAAAMAAAAAAAAAAAAmwCgAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-01T10:20:36.987Z",
+>>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
+              "DocumentIndex": 3,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\MainForm.cs",
+              "RelativeDocumentMoniker": "PRO131\\MainForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\MainForm.cs",
+              "RelativeToolTip": "PRO131\\MainForm.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T10:17:27.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UCSanPham.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCSanPham.cs",
+              "RelativeDocumentMoniker": "PRO131\\UCSanPham.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCSanPham.cs [Design]",
+              "RelativeToolTip": "PRO131\\UCSanPham.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T10:16:31.074Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UCDanhSach.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCDanhSach.Designer.cs",
+              "RelativeDocumentMoniker": "PRO131\\UCDanhSach.Designer.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCDanhSach.Designer.cs",
+              "RelativeToolTip": "PRO131\\UCDanhSach.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+=======
               "DocumentIndex": 13,
               "Title": "FormChiTietSanPham.cs [Design]",
               "DocumentMoniker": "E:\\CloneDuAn\\PRO131\\FormChiTietSanPham.cs",
@@ -302,11 +399,49 @@
               "ToolTip": "E:\\CloneDuAn\\PRO131\\UCThemSanPham.cs",
               "RelativeToolTip": "PRO131\\UCThemSanPham.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAmwBoAAAAAAAAAAAAAAA==",
+>>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T08:37:29.893Z"
+              "WhenOpened": "2025-08-05T10:12:42.459Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
+              "DocumentIndex": 0,
+              "Title": "UCTonKHo.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCTonKHo.cs",
+              "RelativeDocumentMoniker": "PRO131\\UCTonKHo.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCTonKHo.cs",
+              "RelativeToolTip": "PRO131\\UCTonKHo.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwBMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T10:03:42.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UCDanhSach.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCDanhSach.cs",
+              "RelativeDocumentMoniker": "PRO131\\UCDanhSach.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCDanhSach.cs [Design]",
+              "RelativeToolTip": "PRO131\\UCDanhSach.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-05T07:42:50.336Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\MainForm.cs",
+              "RelativeDocumentMoniker": "PRO131\\MainForm.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\MainForm.cs [Design]",
+              "RelativeToolTip": "PRO131\\MainForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T12:44:27.389Z",
+              "EditorCaption": " [Design]"
+=======
               "DocumentIndex": 17,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\CloneDuAn\\PRO131\\Program.cs",
@@ -316,6 +451,7 @@
               "ViewState": "AgIAAAIAAAAAAAAAAAAxwAsAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-29T12:03:26.637Z"
+>>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
             }
           ]
         }

@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "pdxrDZ1O9dA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\PRO131.csproj",
+=======
   "dgSpecHash": "VJdklN0y8hQ=",
   "success": true,
   "projectFilePath": "E:\\CloneDuAn\\PRO131\\PRO131.csproj",
+>>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

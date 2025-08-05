@@ -51,3 +51,21 @@ Desktop.ini
 
 # Backup
 *.bak
+# Ignore Visual Studio temp files, build results, etc
+.vs/
+*.user
+*.suo
+
+# Build results
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# NuGet
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+*.nuget.props
+*.nuget.targets

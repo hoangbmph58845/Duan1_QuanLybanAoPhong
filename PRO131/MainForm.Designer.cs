@@ -369,7 +369,7 @@ namespace PRO131
             btnQuanLyTonKho.TabIndex = 3;
             btnQuanLyTonKho.Text = "Quản lý tồn kho";
             btnQuanLyTonKho.UseVisualStyleBackColor = false;
-            btnQuanLyTonKho.Click += btnThemSanPham_Click;
+            btnQuanLyTonKho.Click += btnQuanLyTonKho_Click;
             // 
             // btnQLSanPham
             // 

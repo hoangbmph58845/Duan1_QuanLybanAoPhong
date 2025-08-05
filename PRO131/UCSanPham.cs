@@ -41,18 +41,40 @@ namespace PRO131
 
         private void dgvDanhSachSanPham_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Đảm bảo không phải header
+            if (e.RowIndex >= 0)
             {
-                // Lấy mã sản phẩm từ dòng được chọn
                 var maSP = dgvDanhSachSanPham.Rows[e.RowIndex].Cells["MaSP"].Value?.ToString();
 
-                if (!string.IsNullOrEmpty(maSP))
+                if (!string.IsNullOrEmpty(maSP) && IsQuanLyTonKho)
                 {
- 
-                    var form = new FormChiTietSanPham(maSP);
-                    form.ShowDialog();
+                   
+                    var ucTonKho = new UCTonKHo(maSP);
+                    Form parentForm = this.FindForm();
+                    if (parentForm is MainForm mainForm)
+                    {
+                        mainForm.LoadUserControl(ucTonKho);
+                    }
+                }
+                else
+                {
+                    var ucDanhSach = new UCDanhSach();
+                    Form parentForm = this.FindForm();
+                    if (parentForm is MainForm mainForm)
+                    {
+                        mainForm.LoadUserControl(ucDanhSach);
+                    }
                 }
             }
         }
+
+
+
+        private bool IsQuanLyTonKho = false;
+
+        public void EnableQuanLyTonKhoMode()
+        {
+            IsQuanLyTonKho = true;
+        }
+
     }
 }
