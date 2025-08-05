@@ -54,5 +54,21 @@ namespace PRO131
         {
             LoadUserControl(new UCThemSanPham());
         }
+
+        private void btnDSNhanVien_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new FormQLNhanVien());
+
+        }
+
+        private void btnTaiKhoan_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new FormQLTaiKhoan());
+        }
+
+        private void btnLichSuBan_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new FormLichSuBanHang());
+        }
     }
 }
