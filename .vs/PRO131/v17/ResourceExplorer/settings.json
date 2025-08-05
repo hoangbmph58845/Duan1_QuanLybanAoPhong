@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"ShowEmptyProjects":false,"CustomColumnOrderings":{"name":0,"type":1,"neutral-value":2,"neutral-comment":3},"ShowValidationErrors":true,"SelectedResourceGroupsByProjectFilePath":{"C:\\Users\\Admin\\Downloads\\est\\PRO131\\PRO131.csproj":["C:\\Users\\Admin\\Downloads\\est\\PRO131\\UCDanhSach.resx"]},"VisibleColumnKeys":["name","neutral-value","neutral-comment"]}
+=======
+{"ShowEmptyProjects":false,"CustomColumnOrderings":{"name":0,"type":1,"neutral-value":2,"neutral-comment":3,"file-path":1,"file-name":2},"ShowValidationErrors":true,"SelectedResourceGroupsByProject":{"E:\\CloneDuAn\\PRO131\\PRO131.csproj":["E:\\CloneDuAn\\PRO131\\UCThemSanPham.resx","E:\\CloneDuAn\\PRO131\\FormChiTietSanPham.resx"]},"VisibleColumnKeys":["name","neutral-value","neutral-comment"]}
+>>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
