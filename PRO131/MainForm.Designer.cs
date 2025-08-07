@@ -106,7 +106,7 @@ namespace PRO131
             btnLichSuBan.TabIndex = 9;
             btnLichSuBan.Text = "Lịch sử bán hàng";
             btnLichSuBan.UseVisualStyleBackColor = false;
-            btnLichSuBan.Click += btnLichSuBan_Click;
+
             // 
             // btnTaiKhoan
             // 

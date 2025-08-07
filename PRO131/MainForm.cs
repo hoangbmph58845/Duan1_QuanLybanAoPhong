@@ -58,8 +58,7 @@ namespace PRO131
             LoadUserControl(ucSanPham);
         }
 
-<<<<<<< HEAD
-=======
+
         private void btnDSNhanVien_Click(object sender, EventArgs e)
         {
             LoadUserControl(new FormQLNhanVien());
@@ -75,7 +74,7 @@ namespace PRO131
         {
             LoadUserControl(new FormLichSuBanHang());
         }
->>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
+
     }
 }
 
