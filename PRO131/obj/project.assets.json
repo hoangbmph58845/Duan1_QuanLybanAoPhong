@@ -4784,11 +4784,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Minh Hoang\\SOF2052\\PRO131\\PRO131\\PRO131.csproj",
+      "projectUniqueName": "D:\\GitClone\\hoangbmph58845\\PRO131\\PRO131.csproj",
       "projectName": "PRO131",
-      "projectPath": "D:\\Minh Hoang\\SOF2052\\PRO131\\PRO131\\PRO131.csproj",
+      "projectPath": "D:\\GitClone\\hoangbmph58845\\PRO131\\PRO131.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Minh Hoang\\SOF2052\\PRO131\\PRO131\\obj\\",
+      "outputPath": "D:\\GitClone\\hoangbmph58845\\PRO131\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4821,7 +4821,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -4875,7 +4875,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
