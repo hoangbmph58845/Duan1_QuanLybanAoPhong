@@ -2,6 +2,12 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="ChiTietHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DanhSachHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="FormLichSuBanHang.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -19,6 +25,9 @@
     </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TaoHoaDon.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UCDanhSach.cs">
       <SubType>UserControl</SubType>
