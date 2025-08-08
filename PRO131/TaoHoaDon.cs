@@ -28,20 +28,20 @@ namespace PRO131
         }
         private void LoadDanhSachSanPham()
         {
-            var danhSach = _context.SanPhamChiTiets
+            var danhSachsanpham = _context.SanPhamChiTiets
                 //.Include(sp => sp.MaSpNavigation)
-                .Select(sp => new
+                .Select(dssp => new
                 {
-                    MaSP = sp.MaSp,
-                    MASize = sp.MaSize,
-                    TenSP = sp.TenSanPham,
-                    MAMau = sp.MaMau,
-                    SOLuong = sp.SoLuong,
-                    GIaBan = sp.GiaBan,
+                    MaSP = dssp.MaSp,
+                    MASize = dssp.MaSize,
+                    TenSP = dssp.TenSanPham,
+                    MAMau = dssp.MaMau,
+                    SOLuong = dssp.SoLuong,
+                    GIaBan = dssp.GiaBan,
                 })
                 .ToList();
 
-            dataGridView1.DataSource = danhSach;
+            dataGridView1.DataSource = danhSachsanpham;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

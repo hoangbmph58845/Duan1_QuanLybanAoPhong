@@ -23,24 +23,24 @@ namespace PRO131
         private void LoadDanhSachHoaDon()
         {
 
-            var danhSach = _context.HoaDons
+            var danhSachhoadon = _context.HoaDons
                 //.Include(hd => hd.MaKhNavigation)
                 //.Include(hd => hd.MaNvNavigation)
-                .Select(hd => new
+                .Select(dshd => new
                 {
-                    MaHD = hd.MaHd,
-                    MaKH = hd.MaKh,
-                    MaNV = hd.MaNv, 
-                    NGAYBAN = hd.NgayBan,
-                    PHUONGTHUCTHANHTOAN = hd.PhuongThucThanhToan,
-                    TONGTIEN = hd.TongTien,
-                    TRANGTHAI = hd.TrangThai ? "Đã thanh toán" : "Chưa thanh toán",
+                    MaHD = dshd.MaHd,
+                    MaKH = dshd.MaKh,
+                    MaNV = dshd.MaNv, 
+                    NGAYBAN = dshd.NgayBan,
+                    PHUONGTHUCTHANHTOAN = dshd.PhuongThucThanhToan,
+                    TONGTIEN = dshd.TongTien,
+                    TRANGTHAI =dshd.TrangThai ? "Đã thanh toán" : "Chưa thanh toán",
 
                 })
                 .ToList();
 
 
-            dataGridView1.DataSource = danhSach;
+            dataGridView1.DataSource = danhSachhoadon;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,17 +51,17 @@ namespace PRO131
             if (int.TryParse(textBox1.Text.Trim(), out maHD))
             {
                 var ketQua = _context.HoaDons
-                    .Where(hd => hd.MaHd == maHD)
+                    .Where(dshd => dshd.MaHd == maHD)
                     .AsEnumerable()
-                    .Select(hd => new
+                    .Select(dshd => new
                     {
-                        MaHD = hd.MaHd,
-                        MaKH = hd.MaKh,
-                        MaNV = hd.MaNv,
-                        NGAYBAN = hd.NgayBan,
-                        PHUONGTHUCTHANHTOAN = hd.PhuongThucThanhToan,
-                        TONGTIEN = hd.TongTien,
-                        TRANGTHAI = hd.TrangThai ? "Đã thanh toán" : "Chưa thanh toán",
+                        MaHD = dshd.MaHd,
+                        MaKH = dshd.MaKh,
+                        MaNV = dshd.MaNv,
+                        NGAYBAN = dshd.NgayBan,
+                        PHUONGTHUCTHANHTOAN = dshd.PhuongThucThanhToan,
+                        TONGTIEN = dshd.TongTien,
+                        TRANGTHAI = dshd.TrangThai ? "Đã thanh toán" : "Chưa thanh toán",
 
                     })
                     .ToList();
