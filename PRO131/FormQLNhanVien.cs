@@ -68,6 +68,7 @@ namespace PRO131
                 dgvNhanVien.Columns["NgaySinh"].HeaderText = "Ngày sinh";
                 dgvNhanVien.Columns["TrangThai"].HeaderText = "Trạng thái";
                 dgvNhanVien.Columns["ChucVu"].HeaderText = "Chức vụ";
+                dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             catch (Exception ex)
             {
@@ -267,6 +268,23 @@ namespace PRO131
             {
                 MessageBox.Show("❌ Lỗi khi tìm kiếm: " + ex.Message);
             }
+        }
+
+        private void dgvNhanVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cboChucVu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void cboTrangThai_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            
         }
     }
 }

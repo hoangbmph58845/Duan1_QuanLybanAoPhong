@@ -120,7 +120,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(339, 659);
+            panel1.Size = new Size(339, 662);
             panel1.TabIndex = 16;
             // 
             // label7
@@ -217,24 +217,29 @@
             // 
             // cboTrangThai
             // 
+            cboTrangThai.DropDownStyle = ComboBoxStyle.DropDownList;
             cboTrangThai.FormattingEnabled = true;
             cboTrangThai.Items.AddRange(new object[] { "Đang làm", "Nghỉ làm" });
             cboTrangThai.Location = new Point(119, 289);
             cboTrangThai.Name = "cboTrangThai";
             cboTrangThai.Size = new Size(130, 28);
             cboTrangThai.TabIndex = 39;
+            cboTrangThai.SelectedIndexChanged += cboTrangThai_SelectedIndexChanged;
             // 
             // cboChucVu
             // 
+            cboChucVu.DropDownStyle = ComboBoxStyle.DropDownList;
             cboChucVu.FormattingEnabled = true;
-            cboChucVu.Items.AddRange(new object[] { "Quản lí", "Nhân viên" });
+            cboChucVu.Items.AddRange(new object[] { "", "Quản lí", "Nhân viên" });
             cboChucVu.Location = new Point(119, 245);
             cboChucVu.Name = "cboChucVu";
             cboChucVu.Size = new Size(130, 28);
             cboChucVu.TabIndex = 38;
+            cboChucVu.SelectedIndexChanged += cboChucVu_SelectedIndexChanged;
             // 
             // cboGioiTinh
             // 
+            cboGioiTinh.DropDownStyle = ComboBoxStyle.DropDownList;
             cboGioiTinh.FormattingEnabled = true;
             cboGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
             cboGioiTinh.Location = new Point(119, 60);
@@ -317,14 +322,15 @@
             // 
             // dgvNhanVien
             // 
+            dgvNhanVien.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvNhanVien.BackgroundColor = Color.FromArgb(241, 250, 238);
             dgvNhanVien.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvNhanVien.Dock = DockStyle.Fill;
             dgvNhanVien.Location = new Point(339, 0);
             dgvNhanVien.Name = "dgvNhanVien";
             dgvNhanVien.RowHeadersWidth = 51;
             dgvNhanVien.Size = new Size(778, 659);
             dgvNhanVien.TabIndex = 17;
+            dgvNhanVien.CellContentClick += dgvNhanVien_CellContentClick;
             // 
             // FormQLNhanVien
             // 
@@ -338,7 +344,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "FormQLNhanVien";
-            Size = new Size(1117, 659);
+            Size = new Size(1120, 662);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

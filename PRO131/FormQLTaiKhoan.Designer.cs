@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormQLTaiKhoan));
             panel1 = new Panel();
+            cboNhanVien = new ComboBox();
             pictureBox1 = new PictureBox();
             btnXoaTK = new Button();
             btnSuaTK = new Button();
@@ -39,7 +40,6 @@
             txtSearchTK = new TextBox();
             txtMatKhau = new TextBox();
             txtTenDangNhap = new TextBox();
-            txtMaNV = new TextBox();
             txtMaTK = new TextBox();
             label5 = new Label();
             label4 = new Label();
@@ -55,6 +55,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(143, 157, 178);
+            panel1.Controls.Add(cboNhanVien);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(btnXoaTK);
             panel1.Controls.Add(btnSuaTK);
@@ -64,7 +65,6 @@
             panel1.Controls.Add(txtSearchTK);
             panel1.Controls.Add(txtMatKhau);
             panel1.Controls.Add(txtTenDangNhap);
-            panel1.Controls.Add(txtMaNV);
             panel1.Controls.Add(txtMaTK);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
@@ -76,6 +76,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(348, 626);
             panel1.TabIndex = 0;
+            // 
+            // cboNhanVien
+            // 
+            cboNhanVien.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboNhanVien.FormattingEnabled = true;
+            cboNhanVien.Location = new Point(142, 52);
+            cboNhanVien.Name = "cboNhanVien";
+            cboNhanVien.Size = new Size(171, 28);
+            cboNhanVien.TabIndex = 20;
             // 
             // pictureBox1
             // 
@@ -133,8 +142,9 @@
             // 
             // cboTrangThaiTK
             // 
+            cboTrangThaiTK.DropDownStyle = ComboBoxStyle.DropDownList;
             cboTrangThaiTK.FormattingEnabled = true;
-            cboTrangThaiTK.Items.AddRange(new object[] { "Hoạt Động", "Dừng Hoạt Động" });
+            cboTrangThaiTK.Items.AddRange(new object[] { "", "Hoạt Động", "Dừng Hoạt Động" });
             cboTrangThaiTK.Location = new Point(142, 186);
             cboTrangThaiTK.Name = "cboTrangThaiTK";
             cboTrangThaiTK.Size = new Size(171, 28);
@@ -163,14 +173,6 @@
             txtTenDangNhap.Name = "txtTenDangNhap";
             txtTenDangNhap.Size = new Size(171, 27);
             txtTenDangNhap.TabIndex = 12;
-            // 
-            // txtMaNV
-            // 
-            txtMaNV.BorderStyle = BorderStyle.FixedSingle;
-            txtMaNV.Location = new Point(142, 53);
-            txtMaNV.Name = "txtMaNV";
-            txtMaNV.Size = new Size(171, 27);
-            txtMaNV.TabIndex = 13;
             // 
             // txtMaTK
             // 
@@ -228,14 +230,15 @@
             // 
             // dgvTaiKhoan
             // 
+            dgvTaiKhoan.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvTaiKhoan.BackgroundColor = Color.FromArgb(241, 250, 238);
             dgvTaiKhoan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTaiKhoan.Dock = DockStyle.Fill;
             dgvTaiKhoan.Location = new Point(348, 0);
             dgvTaiKhoan.Name = "dgvTaiKhoan";
             dgvTaiKhoan.RowHeadersWidth = 51;
             dgvTaiKhoan.Size = new Size(716, 626);
             dgvTaiKhoan.TabIndex = 2;
+            dgvTaiKhoan.CellContentClick += dgvTaiKhoan_CellContentClick;
             // 
             // FormQLTaiKhoan
             // 
@@ -264,7 +267,6 @@
         private TextBox txtSearchTK;
         private TextBox txtMatKhau;
         private TextBox txtTenDangNhap;
-        private TextBox txtMaNV;
         private TextBox txtMaTK;
         private Label label5;
         private Label label4;
@@ -272,5 +274,6 @@
         private Label label2;
         private Label label1;
         private DataGridView dgvTaiKhoan;
+        private ComboBox cboNhanVien;
     }
 }
