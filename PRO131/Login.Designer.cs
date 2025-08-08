@@ -119,6 +119,7 @@
             chkShowPass.TabIndex = 24;
             chkShowPass.Text = "Hiện mật khẩu";
             chkShowPass.UseVisualStyleBackColor = true;
+            chkShowPass.CheckedChanged += chkShowPass_CheckedChanged;
             chkShowPass.TextChanged += chkShowPass_CheckedChanged_1;
             // 
             // txtMatKhau
@@ -203,6 +204,7 @@
             btnForgotPassword.TabIndex = 25;
             btnForgotPassword.Text = "Quên mật khẩu ?";
             btnForgotPassword.UseVisualStyleBackColor = true;
+            btnForgotPassword.Click += btnForgotPassword_Click;
             // 
             // Login
             // 

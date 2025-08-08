@@ -17,6 +17,9 @@
     <Compile Update="FormQLTaiKhoan.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Formquenmatkhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Login.cs">
       <SubType>Form</SubType>
     </Compile>

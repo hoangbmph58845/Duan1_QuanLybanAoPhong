@@ -16,5 +16,9 @@ namespace PRO131
         {
             InitializeComponent();
         }
+
+        private void chkShowPass_CheckedChanged(object sender, EventArgs e)
+        {
+        }
     }
 }
