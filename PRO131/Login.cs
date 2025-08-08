@@ -99,6 +99,27 @@
         {
             txtMatKhau.UseSystemPasswordChar = !chkShowPass.Checked;
         }
+
+        private void chkShowPass_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkShowPass.Checked)
+            {
+                txtMatKhau.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                txtMatKhau.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void btnForgotPassword_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using (Formquenmatkhau quenMatKhauForm = new Formquenmatkhau())
+            {
+                quenMatKhauForm.ShowDialog(); // Mở form quên mật khẩu dạng modal
+            }
+        }
     }
 
 }
