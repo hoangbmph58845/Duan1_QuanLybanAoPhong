@@ -4778,31 +4778,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Users\\huan-PC\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\PRO131.csproj",
+      "projectUniqueName": "C:\\Users\\huan-PC\\source\\repos\\Duan1_QuanLybanAoPhong\\PRO131\\PRO131.csproj",
       "projectName": "PRO131",
-      "projectPath": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\PRO131.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Downloads\\est\\PRO131\\obj\\",
-=======
-      "projectUniqueName": "E:\\CloneDuAn\\PRO131\\PRO131.csproj",
-      "projectName": "PRO131",
-      "projectPath": "E:\\CloneDuAn\\PRO131\\PRO131.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "E:\\CloneDuAn\\PRO131\\obj\\",
->>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
+      "projectPath": "C:\\Users\\huan-PC\\source\\repos\\Duan1_QuanLybanAoPhong\\PRO131\\PRO131.csproj",
+      "packagesPath": "C:\\Users\\huan-PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\huan-PC\\Source\\Repos\\Duan1_QuanLybanAoPhong\\PRO131\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\huan-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4811,6 +4803,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4829,7 +4822,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -4883,7 +4876,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -106,7 +106,7 @@ namespace PRO131
             btnLichSuBan.TabIndex = 9;
             btnLichSuBan.Text = "Lịch sử bán hàng";
             btnLichSuBan.UseVisualStyleBackColor = false;
-            btnLichSuBan.Click += btnLichSuBan_Click;
+         
             // 
             // btnTaiKhoan
             // 
@@ -122,7 +122,7 @@ namespace PRO131
             btnTaiKhoan.TabIndex = 8;
             btnTaiKhoan.Text = "\tQuản lý tài khoản";
             btnTaiKhoan.UseVisualStyleBackColor = false;
-            btnTaiKhoan.Click += btnTaiKhoan_Click;
+       
             // 
             // btnDSNhanVien
             // 
@@ -138,7 +138,7 @@ namespace PRO131
             btnDSNhanVien.TabIndex = 6;
             btnDSNhanVien.Text = "Danh sách nhân viên";
             btnDSNhanVien.UseVisualStyleBackColor = false;
-            btnDSNhanVien.Click += btnDSNhanVien_Click;
+        
             // 
             // btnNhanVien
             // 

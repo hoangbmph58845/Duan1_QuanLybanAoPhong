@@ -451,3 +451,17 @@ E:\CloneDuAn\PRO131\obj\Debug\net8.0-windows\PRO131.FormQLNhanVien.resources
 E:\CloneDuAn\PRO131\obj\Debug\net8.0-windows\PRO131.FormLichSuBanHang.resources
 E:\CloneDuAn\PRO131\obj\Debug\net8.0-windows\PRO131.FormQLTaiKhoan.resources
 >>>>>>> e319c5d8c341af042f03bf78c680ac0ea93259bf
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.csproj.AssemblyReference.cache
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.FormLichSuBanHang.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.FormQLNhanVien.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.FormQLTaiKhoan.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.Login.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.Properties.Resources.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.QlKhachHang.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.UCDanhSach.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.UCSanPham.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.UCTonKHo.resources
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.csproj.GenerateResource.cache
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.dll
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\refint\PRO131.dll
+C:\Users\huan-PC\Source\Repos\Duan1_QuanLybanAoPhong\PRO131\obj\Debug\net8.0-windows\PRO131.pdb
