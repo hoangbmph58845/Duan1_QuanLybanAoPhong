@@ -29,7 +29,6 @@ namespace PRO131
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             panelMenu = new Panel();
             panelSubNhanVien = new Panel();
             btnLichSuBan = new Button();
@@ -106,7 +105,6 @@ namespace PRO131
             btnLichSuBan.TabIndex = 9;
             btnLichSuBan.Text = "Lịch sử bán hàng";
             btnLichSuBan.UseVisualStyleBackColor = false;
-
             // 
             // btnTaiKhoan
             // 
@@ -191,6 +189,7 @@ namespace PRO131
             btnChiTietHoaDon.TabIndex = 5;
             btnChiTietHoaDon.Text = "Chi tiết hóa đơn";
             btnChiTietHoaDon.UseVisualStyleBackColor = false;
+            btnChiTietHoaDon.Click += btnChiTietHoaDon_Click;
             // 
             // btnDSHoaDon
             // 
@@ -206,6 +205,7 @@ namespace PRO131
             btnDSHoaDon.TabIndex = 4;
             btnDSHoaDon.Text = "Danh sách hóa đơn";
             btnDSHoaDon.UseVisualStyleBackColor = false;
+            btnDSHoaDon.Click += btnDSHoaDon_Click;
             // 
             // btnTaoHoaDon
             // 
@@ -221,6 +221,7 @@ namespace PRO131
             btnTaoHoaDon.TabIndex = 3;
             btnTaoHoaDon.Text = "Tạo hóa đơn mới";
             btnTaoHoaDon.UseVisualStyleBackColor = false;
+            btnTaoHoaDon.Click += btnTaoHoaDon_Click;
             // 
             // btnBanHang
             // 
@@ -398,7 +399,6 @@ namespace PRO131
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Top;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.ImageLocation = "";
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Margin = new Padding(2);

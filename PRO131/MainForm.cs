@@ -51,7 +51,7 @@ namespace PRO131
             LoadUserControl(new UCSanPham());
         }
 
-            private void btnQuanLyTonKho_Click(object sender, EventArgs e)
+        private void btnQuanLyTonKho_Click(object sender, EventArgs e)
         {
             var ucSanPham = new UCSanPham();
             ucSanPham.EnableQuanLyTonKhoMode(); // bật chế độ tồn kho
@@ -75,6 +75,20 @@ namespace PRO131
             LoadUserControl(new FormLichSuBanHang());
         }
 
+        private void btnTaoHoaDon_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new TaoHoaDon());
+        }
+
+        private void btnDSHoaDon_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new DanhSachHoaDon());
+        }
+
+        private void btnChiTietHoaDon_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new ChiTietHoaDon());
+        }
     }
 }
 

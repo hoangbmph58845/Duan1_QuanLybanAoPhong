@@ -8,6 +8,7 @@ public partial class SanPhamChiTiet
     public int MaSpct { get; set; }
 
     public int MaSp { get; set; }
+    public string TenSanPham { get; set; } = null!;
 
     public int MaSize { get; set; }
 
