@@ -1,0 +1,19 @@
+.vs/
+.bin/
+obj/
+*.user
+*.db
+ bin/
+.vs/
+bin/
+obj/
+*user/
+*db/
+.vs/
+obj/
+*.user/
+*.db/
+.vs/
+PRO131/obj/
+*.user
+*.db
