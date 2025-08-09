@@ -39,7 +39,6 @@
             txtSearchTK = new TextBox();
             txtMatKhau = new TextBox();
             txtTenDangNhap = new TextBox();
-            txtMaNV = new TextBox();
             txtMaTK = new TextBox();
             label5 = new Label();
             label4 = new Label();
@@ -47,6 +46,7 @@
             label2 = new Label();
             label1 = new Label();
             dgvTaiKhoan = new DataGridView();
+            cboNhanVien = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvTaiKhoan).BeginInit();
@@ -55,6 +55,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(143, 157, 178);
+            panel1.Controls.Add(cboNhanVien);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(btnXoaTK);
             panel1.Controls.Add(btnSuaTK);
@@ -64,7 +65,6 @@
             panel1.Controls.Add(txtSearchTK);
             panel1.Controls.Add(txtMatKhau);
             panel1.Controls.Add(txtTenDangNhap);
-            panel1.Controls.Add(txtMaNV);
             panel1.Controls.Add(txtMaTK);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
@@ -164,14 +164,6 @@
             txtTenDangNhap.Size = new Size(171, 27);
             txtTenDangNhap.TabIndex = 12;
             // 
-            // txtMaNV
-            // 
-            txtMaNV.BorderStyle = BorderStyle.FixedSingle;
-            txtMaNV.Location = new Point(142, 53);
-            txtMaNV.Name = "txtMaNV";
-            txtMaNV.Size = new Size(171, 27);
-            txtMaNV.TabIndex = 13;
-            // 
             // txtMaTK
             // 
             txtMaTK.BorderStyle = BorderStyle.FixedSingle;
@@ -236,6 +228,16 @@
             dgvTaiKhoan.RowHeadersWidth = 51;
             dgvTaiKhoan.Size = new Size(716, 626);
             dgvTaiKhoan.TabIndex = 2;
+            dgvTaiKhoan.CellContentClick += dgvTaiKhoan_CellContentClick;
+            // 
+            // cboNhanVien
+            // 
+            cboNhanVien.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboNhanVien.FormattingEnabled = true;
+            cboNhanVien.Location = new Point(142, 52);
+            cboNhanVien.Name = "cboNhanVien";
+            cboNhanVien.Size = new Size(171, 28);
+            cboNhanVien.TabIndex = 21;
             // 
             // FormQLTaiKhoan
             // 
@@ -264,7 +266,6 @@
         private TextBox txtSearchTK;
         private TextBox txtMatKhau;
         private TextBox txtTenDangNhap;
-        private TextBox txtMaNV;
         private TextBox txtMaTK;
         private Label label5;
         private Label label4;
@@ -272,5 +273,6 @@
         private Label label2;
         private Label label1;
         private DataGridView dgvTaiKhoan;
+        private ComboBox cboNhanVien;
     }
 }
