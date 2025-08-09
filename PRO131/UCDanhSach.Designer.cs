@@ -31,6 +31,7 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             dgvDsChiTietHoaDon = new DataGridView();
             gbChiTietSP = new GroupBox();
+            btnHuyCT = new Button();
             label3 = new Label();
             cboMau = new ComboBox();
             txtGiaNhap = new TextBox();
@@ -46,16 +47,18 @@
             lblMaHangHoa = new Label();
             lblTenHangHoa = new Label();
             gbThongTinSP = new GroupBox();
+            cboHangSX = new ComboBox();
+            label4 = new Label();
             lblPhieuBanHang = new Label();
             cboLoaiSP = new ComboBox();
             label1 = new Label();
-            btnLamMoi = new Button();
+            btnHuy = new Button();
             btnXoa = new Button();
             btnSua = new Button();
             btnThem = new Button();
-            txtNgayTao = new TextBox();
+            txtTenSP = new TextBox();
             lblNgayTao = new Label();
-            txtMaHoaDon = new TextBox();
+            txtMaSP = new TextBox();
             lblMaHoaDon = new Label();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDsChiTietHoaDon).BeginInit();
@@ -86,6 +89,7 @@
             // 
             dgvDsChiTietHoaDon.AllowUserToAddRows = false;
             dgvDsChiTietHoaDon.AllowUserToDeleteRows = false;
+            dgvDsChiTietHoaDon.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDsChiTietHoaDon.BackgroundColor = Color.FromArgb(241, 250, 238);
             dgvDsChiTietHoaDon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             tableLayoutPanel1.SetColumnSpan(dgvDsChiTietHoaDon, 2);
@@ -98,11 +102,13 @@
             dgvDsChiTietHoaDon.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDsChiTietHoaDon.Size = new Size(1100, 377);
             dgvDsChiTietHoaDon.TabIndex = 15;
-            dgvDsChiTietHoaDon.CellClick += dgvDsChiTietHoaDon_CellClick;
+            dgvDsChiTietHoaDon.SelectionChanged += dgvDsChiTietHoaDon_SelectionChanged;
             // 
             // gbChiTietSP
             // 
+            gbChiTietSP.Anchor = AnchorStyles.None;
             gbChiTietSP.BackColor = Color.FromArgb(241, 250, 238);
+            gbChiTietSP.Controls.Add(btnHuyCT);
             gbChiTietSP.Controls.Add(label3);
             gbChiTietSP.Controls.Add(cboMau);
             gbChiTietSP.Controls.Add(txtGiaNhap);
@@ -117,7 +123,6 @@
             gbChiTietSP.Controls.Add(lblGiaNhap);
             gbChiTietSP.Controls.Add(lblMaHangHoa);
             gbChiTietSP.Controls.Add(lblTenHangHoa);
-            gbChiTietSP.Dock = DockStyle.Fill;
             gbChiTietSP.ForeColor = Color.FromArgb(29, 53, 87);
             gbChiTietSP.Location = new Point(558, 4);
             gbChiTietSP.Margin = new Padding(4);
@@ -126,6 +131,17 @@
             gbChiTietSP.Size = new Size(546, 376);
             gbChiTietSP.TabIndex = 14;
             gbChiTietSP.TabStop = false;
+            // 
+            // btnHuyCT
+            // 
+            btnHuyCT.Location = new Point(424, 332);
+            btnHuyCT.Margin = new Padding(4);
+            btnHuyCT.Name = "btnHuyCT";
+            btnHuyCT.Size = new Size(102, 36);
+            btnHuyCT.TabIndex = 50;
+            btnHuyCT.Text = "Hủy";
+            btnHuyCT.UseVisualStyleBackColor = true;
+            btnHuyCT.Click += btnHuyCT_Click;
             // 
             // label3
             // 
@@ -141,6 +157,7 @@
             // 
             // cboMau
             // 
+            cboMau.Enabled = false;
             cboMau.FormattingEnabled = true;
             cboMau.Location = new Point(191, 92);
             cboMau.Name = "cboMau";
@@ -152,11 +169,13 @@
             txtGiaNhap.Location = new Point(192, 182);
             txtGiaNhap.Margin = new Padding(4);
             txtGiaNhap.Name = "txtGiaNhap";
+            txtGiaNhap.ReadOnly = true;
             txtGiaNhap.Size = new Size(308, 31);
             txtGiaNhap.TabIndex = 7;
             // 
             // cboSize
             // 
+            cboSize.Enabled = false;
             cboSize.FormattingEnabled = true;
             cboSize.Location = new Point(192, 138);
             cboSize.Name = "cboSize";
@@ -167,13 +186,14 @@
             // 
             numericUpDownSoLuong.Location = new Point(189, 275);
             numericUpDownSoLuong.Name = "numericUpDownSoLuong";
+            numericUpDownSoLuong.ReadOnly = true;
             numericUpDownSoLuong.Size = new Size(308, 31);
             numericUpDownSoLuong.TabIndex = 5;
             // 
             // lblSoLuong
             // 
             lblSoLuong.AutoSize = true;
-            lblSoLuong.Location = new Point(67, 275);
+            lblSoLuong.Location = new Point(34, 275);
             lblSoLuong.Name = "lblSoLuong";
             lblSoLuong.Size = new Size(89, 25);
             lblSoLuong.TabIndex = 4;
@@ -181,46 +201,50 @@
             // 
             // btnXoaCT
             // 
-            btnXoaCT.Location = new Point(364, 332);
+            btnXoaCT.Location = new Point(293, 332);
             btnXoaCT.Margin = new Padding(4);
             btnXoaCT.Name = "btnXoaCT";
-            btnXoaCT.Size = new Size(118, 36);
+            btnXoaCT.Size = new Size(103, 36);
             btnXoaCT.TabIndex = 3;
             btnXoaCT.Text = "Xóa";
             btnXoaCT.UseVisualStyleBackColor = true;
+            btnXoaCT.Click += btnSuaCT_Click;
             // 
             // txtGiaBan
             // 
             txtGiaBan.Location = new Point(192, 221);
             txtGiaBan.Margin = new Padding(4);
             txtGiaBan.Name = "txtGiaBan";
+            txtGiaBan.ReadOnly = true;
             txtGiaBan.Size = new Size(308, 31);
             txtGiaBan.TabIndex = 1;
             // 
             // btnSuaCT
             // 
-            btnSuaCT.Location = new Point(228, 332);
+            btnSuaCT.Location = new Point(163, 332);
             btnSuaCT.Margin = new Padding(4);
             btnSuaCT.Name = "btnSuaCT";
-            btnSuaCT.Size = new Size(118, 36);
+            btnSuaCT.Size = new Size(102, 36);
             btnSuaCT.TabIndex = 3;
             btnSuaCT.Text = "Sửa";
             btnSuaCT.UseVisualStyleBackColor = true;
+            btnSuaCT.Click += btnSuaCT_Click;
             // 
             // btnThemCT
             // 
-            btnThemCT.Location = new Point(87, 332);
+            btnThemCT.Location = new Point(37, 332);
             btnThemCT.Margin = new Padding(4);
             btnThemCT.Name = "btnThemCT";
-            btnThemCT.Size = new Size(118, 36);
+            btnThemCT.Size = new Size(102, 36);
             btnThemCT.TabIndex = 3;
             btnThemCT.Text = "Thêm";
             btnThemCT.UseVisualStyleBackColor = true;
+            btnThemCT.Click += btnThemCT_Click;
             // 
             // lblGiaBan
             // 
             lblGiaBan.AutoSize = true;
-            lblGiaBan.Location = new Point(67, 227);
+            lblGiaBan.Location = new Point(34, 227);
             lblGiaBan.Margin = new Padding(4, 0, 4, 0);
             lblGiaBan.Name = "lblGiaBan";
             lblGiaBan.Size = new Size(72, 25);
@@ -230,7 +254,7 @@
             // lblGiaNhap
             // 
             lblGiaNhap.AutoSize = true;
-            lblGiaNhap.Location = new Point(67, 188);
+            lblGiaNhap.Location = new Point(34, 188);
             lblGiaNhap.Margin = new Padding(4, 0, 4, 0);
             lblGiaNhap.Name = "lblGiaNhap";
             lblGiaNhap.Size = new Size(82, 25);
@@ -240,7 +264,7 @@
             // lblMaHangHoa
             // 
             lblMaHangHoa.AutoSize = true;
-            lblMaHangHoa.Location = new Point(70, 106);
+            lblMaHangHoa.Location = new Point(37, 106);
             lblMaHangHoa.Margin = new Padding(4, 0, 4, 0);
             lblMaHangHoa.Name = "lblMaHangHoa";
             lblMaHangHoa.Size = new Size(47, 25);
@@ -250,7 +274,7 @@
             // lblTenHangHoa
             // 
             lblTenHangHoa.AutoSize = true;
-            lblTenHangHoa.Location = new Point(67, 147);
+            lblTenHangHoa.Location = new Point(34, 147);
             lblTenHangHoa.Margin = new Padding(4, 0, 4, 0);
             lblTenHangHoa.Name = "lblTenHangHoa";
             lblTenHangHoa.Size = new Size(43, 25);
@@ -259,19 +283,21 @@
             // 
             // gbThongTinSP
             // 
+            gbThongTinSP.Anchor = AnchorStyles.None;
             gbThongTinSP.BackColor = Color.FromArgb(241, 250, 238);
+            gbThongTinSP.Controls.Add(cboHangSX);
+            gbThongTinSP.Controls.Add(label4);
             gbThongTinSP.Controls.Add(lblPhieuBanHang);
             gbThongTinSP.Controls.Add(cboLoaiSP);
             gbThongTinSP.Controls.Add(label1);
-            gbThongTinSP.Controls.Add(btnLamMoi);
+            gbThongTinSP.Controls.Add(btnHuy);
             gbThongTinSP.Controls.Add(btnXoa);
             gbThongTinSP.Controls.Add(btnSua);
             gbThongTinSP.Controls.Add(btnThem);
-            gbThongTinSP.Controls.Add(txtNgayTao);
+            gbThongTinSP.Controls.Add(txtTenSP);
             gbThongTinSP.Controls.Add(lblNgayTao);
-            gbThongTinSP.Controls.Add(txtMaHoaDon);
+            gbThongTinSP.Controls.Add(txtMaSP);
             gbThongTinSP.Controls.Add(lblMaHoaDon);
-            gbThongTinSP.Dock = DockStyle.Fill;
             gbThongTinSP.ForeColor = Color.FromArgb(29, 53, 87);
             gbThongTinSP.Location = new Point(4, 4);
             gbThongTinSP.Margin = new Padding(4);
@@ -280,6 +306,25 @@
             gbThongTinSP.Size = new Size(546, 376);
             gbThongTinSP.TabIndex = 12;
             gbThongTinSP.TabStop = false;
+            // 
+            // cboHangSX
+            // 
+            cboHangSX.Enabled = false;
+            cboHangSX.FormattingEnabled = true;
+            cboHangSX.Location = new Point(240, 277);
+            cboHangSX.Name = "cboHangSX";
+            cboHangSX.Size = new Size(244, 33);
+            cboHangSX.TabIndex = 50;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(59, 277);
+            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(125, 25);
+            label4.TabIndex = 49;
+            label4.Text = "Hãng sản xuất";
             // 
             // lblPhieuBanHang
             // 
@@ -295,8 +340,9 @@
             // 
             // cboLoaiSP
             // 
+            cboLoaiSP.Enabled = false;
             cboLoaiSP.FormattingEnabled = true;
-            cboLoaiSP.Location = new Point(240, 237);
+            cboLoaiSP.Location = new Point(240, 224);
             cboLoaiSP.Name = "cboLoaiSP";
             cboLoaiSP.Size = new Size(244, 33);
             cboLoaiSP.TabIndex = 5;
@@ -304,22 +350,24 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(59, 237);
+            label1.Location = new Point(59, 224);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(127, 25);
             label1.TabIndex = 4;
             label1.Text = "Loại sản phẩm";
             // 
-            // btnLamMoi
+            // btnHuy
             // 
-            btnLamMoi.Location = new Point(394, 332);
-            btnLamMoi.Margin = new Padding(4);
-            btnLamMoi.Name = "btnLamMoi";
-            btnLamMoi.Size = new Size(99, 36);
-            btnLamMoi.TabIndex = 3;
-            btnLamMoi.Text = "Làm mới";
-            btnLamMoi.UseVisualStyleBackColor = true;
+            btnHuy.Location = new Point(394, 332);
+            btnHuy.Margin = new Padding(4);
+            btnHuy.Name = "btnHuy";
+            btnHuy.Size = new Size(99, 36);
+            btnHuy.TabIndex = 3;
+            btnHuy.Text = "Hủy";
+            btnHuy.UseVisualStyleBackColor = true;
+            btnHuy.Visible = false;
+            btnHuy.Click += btnHuy_Click;
             // 
             // btnXoa
             // 
@@ -330,6 +378,7 @@
             btnXoa.TabIndex = 3;
             btnXoa.Text = "Xóa";
             btnXoa.UseVisualStyleBackColor = true;
+            btnXoa.Click += btnXoa_Click;
             // 
             // btnSua
             // 
@@ -340,6 +389,7 @@
             btnSua.TabIndex = 3;
             btnSua.Text = "Sửa";
             btnSua.UseVisualStyleBackColor = true;
+            btnSua.Click += btnSua_Click;
             // 
             // btnThem
             // 
@@ -350,38 +400,40 @@
             btnThem.TabIndex = 3;
             btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = true;
+            btnThem.Click += btnThem_Click;
             // 
-            // txtNgayTao
+            // txtTenSP
             // 
-            txtNgayTao.Location = new Point(241, 170);
-            txtNgayTao.Margin = new Padding(4);
-            txtNgayTao.Name = "txtNgayTao";
-            txtNgayTao.Size = new Size(243, 31);
-            txtNgayTao.TabIndex = 1;
+            txtTenSP.Location = new Point(241, 157);
+            txtTenSP.Margin = new Padding(4);
+            txtTenSP.Name = "txtTenSP";
+            txtTenSP.ReadOnly = true;
+            txtTenSP.Size = new Size(243, 31);
+            txtTenSP.TabIndex = 1;
             // 
             // lblNgayTao
             // 
             lblNgayTao.AutoSize = true;
-            lblNgayTao.Location = new Point(59, 177);
+            lblNgayTao.Location = new Point(59, 164);
             lblNgayTao.Margin = new Padding(4, 0, 4, 0);
             lblNgayTao.Name = "lblNgayTao";
             lblNgayTao.Size = new Size(121, 25);
             lblNgayTao.TabIndex = 0;
             lblNgayTao.Text = "Tên sản phẩm";
             // 
-            // txtMaHoaDon
+            // txtMaSP
             // 
-            txtMaHoaDon.Location = new Point(241, 112);
-            txtMaHoaDon.Margin = new Padding(4);
-            txtMaHoaDon.Name = "txtMaHoaDon";
-            txtMaHoaDon.ReadOnly = true;
-            txtMaHoaDon.Size = new Size(243, 31);
-            txtMaHoaDon.TabIndex = 1;
+            txtMaSP.Location = new Point(241, 99);
+            txtMaSP.Margin = new Padding(4);
+            txtMaSP.Name = "txtMaSP";
+            txtMaSP.ReadOnly = true;
+            txtMaSP.Size = new Size(243, 31);
+            txtMaSP.TabIndex = 1;
             // 
             // lblMaHoaDon
             // 
             lblMaHoaDon.AutoSize = true;
-            lblMaHoaDon.Location = new Point(59, 119);
+            lblMaHoaDon.Location = new Point(59, 106);
             lblMaHoaDon.Margin = new Padding(4, 0, 4, 0);
             lblMaHoaDon.Name = "lblMaHoaDon";
             lblMaHoaDon.Size = new Size(120, 25);
@@ -415,9 +467,9 @@
         private Button btnXoa;
         private Button btnSua;
         private Button btnThem;
-        private TextBox txtNgayTao;
+        private TextBox txtTenSP;
         private Label lblNgayTao;
-        private TextBox txtMaHoaDon;
+        private TextBox txtMaSP;
         private Label lblMaHoaDon;
         private GroupBox gbChiTietSP;
         private ComboBox cboMau;
@@ -438,5 +490,9 @@
         private Label lblPhieuBanHang;
         private Label lblGiaBan;
         private Label lblGiaNhap;
+        private Button btnHuy;
+        private ComboBox cboHangSX;
+        private Label label4;
+        private Button btnHuyCT;
     }
 }

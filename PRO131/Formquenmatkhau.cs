@@ -36,7 +36,7 @@ namespace PRO131
             }
 
             // 2. Chuỗi kết nối mới
-            string connectionString = @"Data Source=TUAN;Initial Catalog=DuAn_1;User ID=sa;Password=123456;TrustServerCertificate=True";
+            string connectionString = @"Data Source=TUAN;Initial Catalog=DuAn_1;;TrustServerCertificate=True";
 
             // 3. Tạo và mở kết nối
             using (SqlConnection conn = new SqlConnection(connectionString))

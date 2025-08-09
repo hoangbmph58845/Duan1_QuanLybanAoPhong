@@ -1,80 +1,77 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using PRO131.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PRO131.DataContext; // nơi chứa DuAn1Context
-using PRO131.Models;
-using DuAn1Context = PRO131.Models.DuAn1Context;      // nơi chứa class NhanVien
-
+using PRO131.DataContext;
 namespace PRO131
 {
     public partial class FormQLNhanVien : UserControl
     {
+        private readonly DuAn1Context _context;
         public FormQLNhanVien()
         {
             InitializeComponent();
-            // Khởi tạo DbContext
-            _context = new DuAn1Context();
-
-            // Gán sự kiện Load
+            _context = new DuAn1Context();  // khởi tạo 1 lần
             this.Load += FormQLNhanVien_Load;
             dgvNhanVien.CellClick += dgvNhanVien_CellClick;
         }
-        private DuAn1Context _context = new DuAn1Context();
-
-
 
         private void FormQLNhanVien_Load(object sender, EventArgs e)
         {
-            LoadNhanVien();
             LoadChucVu();
+            LoadNhanVien();
         }
+
         private void LoadChucVu()
         {
-            cboChucVu.DataSource = _context.ChucVus.ToList();
-            cboChucVu.DisplayMember = "TenChucVu";
-            cboChucVu.ValueMember = "MaCv";
+            try
+            {
+                var ds = _context.ChucVus.ToList();
+                cboChucVu.DataSource = ds;
+                cboChucVu.DisplayMember = "TenChucVu";
+                cboChucVu.ValueMember = "MaCv";
+                cboChucVu.DropDownStyle = ComboBoxStyle.DropDownList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải chức vụ: " + ex.Message);
+            }
         }
+
         private void LoadNhanVien()
         {
             try
             {
                 var dsNhanVien = _context.NhanViens
-        .Select(nv => new
-        {
-            MaNV = nv.MaNv,
-            HoTen = nv.TenNhanVien,
-            GioiTinh = nv.GioiTinh,
-            DiaChi = nv.DiaChi,
-            SoDienThoai = nv.SoDienThoai,
-            NgaySinh = nv.NgaySinh,
-            TrangThai = nv.TrangThai ? "Đang làm" : "Nghỉ làm",
-            MaCV = nv.MaCv,
-            ChucVu = nv.MaCvNavigation.TenChucVu
-        }).ToList();
+                    .Select(nv => new
+                    {
+                        MaNV = nv.MaNv,
+                        HoTen = nv.TenNhanVien,
+                        GioiTinh = nv.GioiTinh,
+                        DiaChi = nv.DiaChi,
+                        SoDienThoai = nv.SoDienThoai,
+                        NgaySinh = nv.NgaySinh,
+                        TrangThai = nv.TrangThai ? "Đang làm" : "Nghỉ làm",
+                        MaCV = nv.MaCv,
+                        ChucVu = nv.MaCvNavigation.TenChucVu
+                    })
+                    .ToList();
 
                 dgvNhanVien.DataSource = dsNhanVien;
 
-                // Tuỳ chỉnh tiêu đề cột
                 dgvNhanVien.Columns["MaNV"].HeaderText = "Mã NV";
                 dgvNhanVien.Columns["HoTen"].HeaderText = "Họ tên";
-                dgvNhanVien.Columns["GioiTinh"].HeaderText = "Giới tính";
-                dgvNhanVien.Columns["DiaChi"].HeaderText = "Địa chỉ";
-                dgvNhanVien.Columns["SoDienThoai"].HeaderText = "SĐT";
-                dgvNhanVien.Columns["NgaySinh"].HeaderText = "Ngày sinh";
-                dgvNhanVien.Columns["TrangThai"].HeaderText = "Trạng thái";
-                dgvNhanVien.Columns["ChucVu"].HeaderText = "Chức vụ";
+                // ... các header khác
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi tải danh sách nhân viên: " + ex.Message);
             }
         }
+
+        
         private void cboGioiTinh_SelectedIndexChanged(object sender, EventArgs e)
         {
 

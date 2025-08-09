@@ -64,7 +64,6 @@ namespace PRO131
             LoadUserControl(new FormQLNhanVien());
 
         }
-
         private void btnTaiKhoan_Click(object sender, EventArgs e)
         {
             LoadUserControl(new FormQLTaiKhoan());
@@ -88,6 +87,12 @@ namespace PRO131
         private void btnChiTietHoaDon_Click(object sender, EventArgs e)
         {
             LoadUserControl(new ChiTietHoaDon());
+        }
+
+
+        private void btnThemKH_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Chưa nộp bài", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

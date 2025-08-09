@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PRO131.DataContext;
 using PRO131.Models;
-using DuAn1Context = PRO131.Models.DuAn1Context;
+
 
 namespace PRO131
 {
