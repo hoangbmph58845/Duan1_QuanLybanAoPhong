@@ -15,5 +15,7 @@ public partial class TaiKhoan
 
     public bool TrangThai { get; set; }
 
+    public string? Email { get; set; }
+
     public virtual NhanVien MaNvNavigation { get; set; } = null!;
 }

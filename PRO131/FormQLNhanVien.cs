@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PRO131.DataContext; // nơi chứa DuAn1Context
-using PRO131.Models;      // nơi chứa class NhanVien
+using PRO131.Models;
+using DuAn1Context = PRO131.Models.DuAn1Context;      // nơi chứa class NhanVien
 
 namespace PRO131
 {
