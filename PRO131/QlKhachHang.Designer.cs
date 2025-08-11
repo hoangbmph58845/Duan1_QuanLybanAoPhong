@@ -141,13 +141,13 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(0, 245);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(931, 239);
             dataGridView1.TabIndex = 20;
-            
             // 
             // buttonThem
             // 
@@ -205,7 +205,6 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1307, 486);
             Controls.Add(textBox_TK);
             Controls.Add(buttonTK);
             Controls.Add(buttonLuu);
@@ -225,7 +224,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "QlKhachHang";
-            Text = "QlKhachHang";
+            Size = new Size(1307, 486);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

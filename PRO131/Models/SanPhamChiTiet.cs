@@ -5,6 +5,8 @@ namespace PRO131.Models;
 
 public partial class SanPhamChiTiet
 {
+    internal readonly object TenSanPham;
+
     public int MaSpct { get; set; }
 
     public int MaSp { get; set; }

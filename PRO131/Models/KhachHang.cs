@@ -18,4 +18,9 @@ public partial class KhachHang
     public bool TrangThai { get; set; }
 
     public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
+
+    public static implicit operator QlKhachHang(KhachHang v)
+    {
+        throw new NotImplementedException();
+    }
 }
