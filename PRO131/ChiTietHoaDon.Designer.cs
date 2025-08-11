@@ -34,13 +34,17 @@
             button1 = new Button();
             textBox1 = new TextBox();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(241, 250, 238);
+            panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(groupBox1);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(textBox1);
@@ -62,6 +66,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = Color.FromArgb(241, 250, 238);
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(6, 26);
             dataGridView1.Name = "dataGridView1";
@@ -96,11 +101,21 @@
             label1.TabIndex = 0;
             label1.Text = "Mã hóa đơn chi tiết";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Quy_Trinh_Xuat_Hoa_Don_2;
+            pictureBox1.Location = new Point(404, 28);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(435, 186);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
+            // 
             // ChiTietHoaDon
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaption;
+            BackColor = Color.FromArgb(241, 250, 238);
             Controls.Add(panel1);
             Name = "ChiTietHoaDon";
             Size = new Size(871, 635);
@@ -108,6 +123,7 @@
             panel1.PerformLayout();
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -119,5 +135,6 @@
         private Button button1;
         private TextBox textBox1;
         private Label label1;
+        private PictureBox pictureBox1;
     }
 }

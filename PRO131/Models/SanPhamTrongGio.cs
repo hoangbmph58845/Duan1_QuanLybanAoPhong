@@ -14,5 +14,6 @@ namespace PRO131.Models
         public string MaMau { get; set; }
         public decimal GiaBan { get; set; }
         public int SoLuong { get; set; }
+        
     }
 }

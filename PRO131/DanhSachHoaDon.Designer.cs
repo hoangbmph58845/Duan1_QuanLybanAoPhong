@@ -44,8 +44,9 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(241, 250, 238);
             panel1.Controls.Add(groupBox1);
-            panel1.Location = new Point(3, 6);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(841, 614);
             panel1.TabIndex = 0;
@@ -68,6 +69,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = Color.FromArgb(241, 250, 238);
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(6, 180);
             dataGridView1.Name = "dataGridView1";
@@ -134,7 +136,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaption;
+            BackColor = Color.FromArgb(241, 250, 238);
             Controls.Add(panel1);
             Name = "DanhSachHoaDon";
             Size = new Size(847, 620);
