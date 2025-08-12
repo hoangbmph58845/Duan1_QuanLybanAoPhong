@@ -4784,11 +4784,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\cloneNgay108\\PRO131\\PRO131.csproj",
+      "projectUniqueName": "E:\\MyProject\\cloneNgay108\\PRO131\\PRO131.csproj",
       "projectName": "PRO131",
-      "projectPath": "E:\\cloneNgay108\\PRO131\\PRO131.csproj",
+      "projectPath": "E:\\MyProject\\cloneNgay108\\PRO131\\PRO131.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "E:\\cloneNgay108\\PRO131\\obj\\",
+      "outputPath": "E:\\MyProject\\cloneNgay108\\PRO131\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
