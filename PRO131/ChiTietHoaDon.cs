@@ -36,6 +36,12 @@ namespace PRO131
 
 
             dataGridView1.DataSource = hoadonCT;
+            dataGridView1.Columns["MaHDCT"].HeaderText = "Mã HDCT";
+            dataGridView1.Columns["MaHD"].HeaderText = "Mã HD";
+            dataGridView1.Columns["MaSPCT"].HeaderText = "Mã SPCT";
+            dataGridView1.Columns["Soluong"].HeaderText = "Số Lượng";
+            dataGridView1.Columns["Dongia"].HeaderText = "Đơn Giá";
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void button1_Click(object sender, EventArgs e)
