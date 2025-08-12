@@ -17,3 +17,5 @@ obj/
 PRO131/obj/
 *.user
 *.db
+.vs/
+.vs/
