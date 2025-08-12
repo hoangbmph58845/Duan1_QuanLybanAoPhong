@@ -59,5 +59,15 @@ namespace PRO131.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Quy_Trinh_Xuat_Hoa_Don_2 {
+            get {
+                object obj = ResourceManager.GetObject("Quy-Trinh-Xuat-Hoa-Don-2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

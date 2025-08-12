@@ -24,13 +24,13 @@ namespace PRO131
         {
 
             var danhSach = _context.HoaDons
-                //.Include(hd => hd.MaKhNavigation)
-                //.Include(hd => hd.MaNvNavigation)
+                .Include(hd => hd.MaKhNavigation)
+                .Include(hd => hd.MaNvNavigation)
                 .Select(hd => new
                 {
                     MaHD = hd.MaHd,
-                    MaKH = hd.MaKh,
-                    MaNV = hd.MaNv, 
+                    MaKh = hd.MaKh,
+                    TenNV = hd.MaNvNavigation.TenNhanVien,
                     NGAYBAN = hd.NgayBan,
                     PHUONGTHUCTHANHTOAN = hd.PhuongThucThanhToan,
                     TONGTIEN = hd.TongTien,
@@ -51,13 +51,15 @@ namespace PRO131
             if (int.TryParse(textBox1.Text.Trim(), out maHD))
             {
                 var ketQua = _context.HoaDons
+                    .Include(hd => hd.MaKhNavigation)
+                    .Include(hd => hd.MaNvNavigation)
                     .Where(hd => hd.MaHd == maHD)
                     .AsEnumerable()
                     .Select(hd => new
                     {
                         MaHD = hd.MaHd,
-                        MaKH = hd.MaKh,
-                        MaNV = hd.MaNv,
+                        MaKh = hd.MaKh,
+                        TenNV = hd.MaNvNavigation.TenNhanVien,
                         NGAYBAN = hd.NgayBan,
                         PHUONGTHUCTHANHTOAN = hd.PhuongThucThanhToan,
                         TONGTIEN = hd.TongTien,
@@ -67,6 +69,7 @@ namespace PRO131
                     .ToList();
 
                 dataGridView1.DataSource = ketQua;
+
             }
             else
             {
