@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="ChiTietHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DanhSachHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DSKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="FormLichSuBanHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="FormQLNhanVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="FormQLTaiKhoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Formquenmatkhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="LSMuaHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="QLKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="TaoHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UCDanhSach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UCSanPham.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UCTonKHo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="MainForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
