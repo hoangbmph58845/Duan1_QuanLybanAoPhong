@@ -24,13 +24,13 @@ namespace PRO131
         {
 
             var danhSachhoadon = _context.HoaDons
-                //.Include(hd => hd.MaKhNavigation)
-                //.Include(hd => hd.MaNvNavigation)
+                .Include(hd => hd.MaKhNavigation)
+                .Include(hd => hd.MaNvNavigation)
                 .Select(dshd => new
                 {
                     MaHD = dshd.MaHd,
-                    MaKH = dshd.MaKh,
-                    MaNV = dshd.MaNv, 
+                    MaKh = dshd.MaKh,
+                    TenNV = dshd.MaNvNavigation.TenNhanVien,
                     NGAYBAN = dshd.NgayBan,
                     PHUONGTHUCTHANHTOAN = dshd.PhuongThucThanhToan,
                     TONGTIEN = dshd.TongTien,
@@ -51,13 +51,15 @@ namespace PRO131
             if (int.TryParse(textBox1.Text.Trim(), out maHD))
             {
                 var ketQua = _context.HoaDons
+                    .Include(hd => hd.MaKhNavigation)
+                    .Include(hd => hd.MaNvNavigation)
                     .Where(dshd => dshd.MaHd == maHD)
                     .AsEnumerable()
                     .Select(dshd => new
                     {
                         MaHD = dshd.MaHd,
-                        MaKH = dshd.MaKh,
-                        MaNV = dshd.MaNv,
+                        MaKh = dshd.MaKh,
+                        TenNV = dshd.MaNvNavigation.TenNhanVien,
                         NGAYBAN = dshd.NgayBan,
                         PHUONGTHUCTHANHTOAN = dshd.PhuongThucThanhToan,
                         TONGTIEN = dshd.TongTien,

@@ -45,9 +45,10 @@
             // panel1
             // 
             panel1.Controls.Add(groupBox1);
-            panel1.Location = new Point(3, 6);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(841, 614);
+            panel1.Size = new Size(847, 620);
             panel1.TabIndex = 0;
             // 
             // groupBox1
@@ -59,7 +60,7 @@
             groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(3, 6);
+            groupBox1.Location = new Point(3, 9);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(835, 608);
             groupBox1.TabIndex = 0;
@@ -68,6 +69,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = Color.FromArgb(241, 250, 238);
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(6, 180);
             dataGridView1.Name = "dataGridView1";
@@ -107,6 +109,7 @@
             // 
             // textBox1
             // 
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
             textBox1.Location = new Point(129, 59);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(148, 27);
@@ -134,7 +137,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaption;
+            BackColor = Color.FromArgb(241, 250, 238);
             Controls.Add(panel1);
             Name = "DanhSachHoaDon";
             Size = new Size(847, 620);

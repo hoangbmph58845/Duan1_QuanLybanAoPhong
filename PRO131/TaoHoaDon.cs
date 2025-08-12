@@ -43,7 +43,27 @@ namespace PRO131
                 .ToList();
 
             dataGridView1.DataSource = danhSachsanpham;
+            dataGridView1.Columns["MaSP"].HeaderText = "Mã Sp";
+            dataGridView1.Columns["TenSP"].HeaderText = "Tên Sản Phẩm";
+            dataGridView1.Columns["MaSize"].HeaderText = "Mã Size";
+            dataGridView1.Columns["MaMau"].HeaderText = "Mã Màu";
+            dataGridView1.Columns["GiaBan"].HeaderText = "Giá Bán";
+            dataGridView1.Columns["SoLuong"].HeaderText = "Số Lượng";
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            var danhSachNhanVien = _context.NhanViens
+                .Select(nv => new
+                {
+                    MaNv = nv.MaNv,
+                    TenNv = nv.TenNhanVien
+                })
+        .ToList();
+
+            comboBox3.DataSource = danhSachNhanVien;
+            comboBox3.DisplayMember = "TenNv";   // Hiển thị tên nhân viên
+            comboBox3.ValueMember = "MaNv";      // Giá trị là mã nhân viên
+
         }
+  
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -87,6 +107,7 @@ namespace PRO131
                 dataGridView2.DataSource = null;
                 dataGridView2.DataSource = _gioHang;
                 textBox3.Text = TinhTongTienGioHang().ToString("N0");
+                dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
 
@@ -113,63 +134,16 @@ namespace PRO131
                 MessageBox.Show("Vui lòng chọn sản phẩm cần xóa khỏi giỏ hàng.");
             }
         }
-        //private bool KiemTraThongTin()
-        //{
-        //    if (string.IsNullOrWhiteSpace(textBox1.Text))
-        //    {
-        //        MessageBox.Show("Vui lòng nhập mã khách hàng.");
-        //        return false;
-        //    }
-
-        //    if (!int.TryParse(textBox1.Text.Trim(), out _))
-        //    {
-        //        MessageBox.Show("Mã khách hàng phải là số.");
-        //        return false;
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(textBox2.Text))
-        //    {
-        //        MessageBox.Show("Vui lòng nhập mã nhân viên.");
-        //        return false;
-        //    }
-
-        //    if (comboBox1.SelectedIndex == -1)
-        //    {
-        //        MessageBox.Show("Vui lòng chọn hình thức thanh toán.");
-        //        return false;
-        //    }
-
-        //    if (comboBox2.SelectedIndex == -1)
-        //    {
-        //        MessageBox.Show("Vui lòng chọn trạng thái thanh toán.");
-        //        return false;
-        //    }
-
-        //    if (_gioHang == null || _gioHang.Count == 0)
-        //    {
-        //        MessageBox.Show("Giỏ hàng đang trống.");
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
-
+       
         private void button1_Click(object sender, EventArgs e)
         {
             // Ép kiểu mã khách hàng
-            if (!int.TryParse(textBox1.Text.Trim(), out int maKhInt))
+            if (!int.TryParse(textBox2.Text.Trim(), out int maKhInt))
             {
                 MessageBox.Show("Mã khách hàng phải là số.");
                 return;
             }
-
-            // Ép kiểu mã nhân viên
-            if (!int.TryParse(textBox2.Text.Trim(), out int maNvInt))
-            {
-                MessageBox.Show("Mã nhân viên phải là số.");
-                return;
-            }
-
+            int maNvInt = Convert.ToInt32(comboBox3.SelectedValue);
             decimal tongTien = decimal.Parse(textBox3.Text.Trim());
             string hinhThucTT = comboBox1.SelectedItem?.ToString();
             string trangThaiText = comboBox2.SelectedItem?.ToString();
@@ -178,25 +152,6 @@ namespace PRO131
                 MessageBox.Show("Vui lòng chọn hình thức thanh toán.");
                 return;
             }
-
-
-            //var khach = _context.KhachHangs.FirstOrDefault(k => k.TenKhachHang == tenKhach);
-            //if (khach == null)
-            //{
-            //    khach = new KhachHang { TenKhachHang = tenKhach };
-            //    _context.KhachHangs.Add(khach);
-            //    _context.SaveChanges(); // để sinh MaKh
-            //}
-
-            //// Kiểm tra nhân viên
-            //var nhanVien = _context.NhanViens.FirstOrDefault(n => n.TenNhanVien == tenNhanVien);
-            //if (nhanVien == null)
-            //{
-            //    nhanVien = new NhanVien { TenNhanVien = tenNhanVien };
-            //    _context.NhanViens.Add(nhanVien);
-            //    _context.SaveChanges(); // để sinh MaNv
-            //}
-
 
             if (_gioHang.Count == 0)
             {
@@ -252,7 +207,7 @@ namespace PRO131
 
             _gioHang.Clear();
             dataGridView2.DataSource = null;
-            textBox1.Clear();
+            //textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
             comboBox1.SelectedIndex = -1;

@@ -45,7 +45,7 @@ public partial class DuAn1Context : DbContext
 
         
         
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-9MI2RPM;Database= DuAn_1;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=GNAS\\SQLEXPRESS;Database= DuAn_1;Trusted_Connection=True;TrustServerCertificate=True");
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

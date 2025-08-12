@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
             groupBox3 = new GroupBox();
             button2 = new Button();
             dataGridView2 = new DataGridView();
@@ -40,39 +39,32 @@
             comboBox1 = new ComboBox();
             textBox3 = new TextBox();
             textBox2 = new TextBox();
-            textBox1 = new TextBox();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            panel1.SuspendLayout();
+            panel1 = new Panel();
+            pictureBox1 = new PictureBox();
+            panel2 = new Panel();
+            comboBox3 = new ComboBox();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(groupBox3);
-            panel1.Controls.Add(groupBox2);
-            panel1.Controls.Add(groupBox1);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1050, 677);
-            panel1.TabIndex = 0;
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(button2);
             groupBox3.Controls.Add(dataGridView2);
-            groupBox3.Location = new Point(3, 355);
+            groupBox3.Location = new Point(6, 349);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(1034, 319);
+            groupBox3.Size = new Size(771, 344);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "Giỏ Hàng";
@@ -89,41 +81,43 @@
             // 
             // dataGridView2
             // 
+            dataGridView2.BackgroundColor = Color.FromArgb(241, 250, 238);
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(6, 65);
+            dataGridView2.Location = new Point(12, 65);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(1022, 248);
+            dataGridView2.Size = new Size(753, 273);
             dataGridView2.TabIndex = 0;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(dataGridView1);
-            groupBox2.Location = new Point(403, 3);
+            groupBox2.Location = new Point(12, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(634, 346);
+            groupBox2.Size = new Size(759, 346);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Danh Sách Sản Phẩm";
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = Color.FromArgb(241, 250, 238);
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(6, 39);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(622, 301);
+            dataGridView1.Size = new Size(747, 301);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(comboBox3);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(comboBox2);
             groupBox1.Controls.Add(comboBox1);
             groupBox1.Controls.Add(textBox3);
             groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
@@ -179,13 +173,6 @@
             textBox2.TabIndex = 6;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(191, 29);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(175, 27);
-            textBox1.TabIndex = 5;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -218,9 +205,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(34, 72);
             label2.Name = "label2";
-            label2.Size = new Size(119, 20);
+            label2.Size = new Size(117, 20);
             label2.TabIndex = 1;
-            label2.Text = "Tên Khách Hàng:";
+            label2.Text = "Mã Khách Hàng:";
             // 
             // label1
             // 
@@ -231,32 +218,72 @@
             label1.TabIndex = 0;
             label1.Text = "Tên Nhân Viên:";
             // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(groupBox1);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(412, 707);
+            panel1.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Quy_Trinh_Xuat_Hoa_Don_2;
+            pictureBox1.Location = new Point(63, 414);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(291, 214);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(groupBox2);
+            panel2.Controls.Add(groupBox3);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(412, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(802, 707);
+            panel2.TabIndex = 4;
+            // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(191, 24);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(175, 28);
+            comboBox3.TabIndex = 11;
+            // 
             // TaoHoaDon
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(241, 250, 238);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "TaoHoaDon";
-            Size = new Size(1050, 677);
-            panel1.ResumeLayout(false);
+            Size = new Size(1214, 707);
             groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panel1;
         private GroupBox groupBox1;
         private ComboBox comboBox2;
         private ComboBox comboBox1;
         private TextBox textBox3;
         private TextBox textBox2;
-        private TextBox textBox1;
         private Label label5;
         private Label label4;
         private Label label3;
@@ -268,5 +295,9 @@
         private GroupBox groupBox2;
         private DataGridView dataGridView1;
         private Button button1;
+        private Panel panel1;
+        private PictureBox pictureBox1;
+        private Panel panel2;
+        private ComboBox comboBox3;
     }
 }
