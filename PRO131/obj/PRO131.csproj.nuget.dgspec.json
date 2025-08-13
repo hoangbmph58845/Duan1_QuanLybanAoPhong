@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Minh Hoang\\DuAn1\\PRO131\\PRO131.csproj": {}
+    "D:\\ra dại\\PRO131\\PRO131.csproj": {}
   },
   "projects": {
-    "D:\\Minh Hoang\\DuAn1\\PRO131\\PRO131.csproj": {
+    "D:\\ra dại\\PRO131\\PRO131.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Minh Hoang\\DuAn1\\PRO131\\PRO131.csproj",
+        "projectUniqueName": "D:\\ra dại\\PRO131\\PRO131.csproj",
         "projectName": "PRO131",
-        "projectPath": "D:\\Minh Hoang\\DuAn1\\PRO131\\PRO131.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Minh Hoang\\DuAn1\\PRO131\\obj\\",
+        "projectPath": "D:\\ra dại\\PRO131\\PRO131.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "D:\\ra dại\\PRO131\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

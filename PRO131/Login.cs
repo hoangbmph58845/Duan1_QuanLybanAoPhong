@@ -115,7 +115,7 @@
         private void btnForgotPassword_Click(object sender, EventArgs e)
         {
             this.Hide();
-            using (Formquenmatkhau quenMatKhauForm = new Formquenmatkhau())
+            using (btnXacNhan quenMatKhauForm = new btnXacNhan())
             {
                 quenMatKhauForm.ShowDialog(); // Mở form quên mật khẩu dạng modal
             }

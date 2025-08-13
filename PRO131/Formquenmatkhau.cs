@@ -5,62 +5,108 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PRO131
 {
-    public partial class Formquenmatkhau : Form
+    public partial class btnXacNhan : Form
     {
-        public Formquenmatkhau()
+        SqlConnection conn;
+        string generatedOtp = "";
+        public btnXacNhan()
         {
             InitializeComponent();
+            connect();
         }
+        public void connect()
+        {
+            string connectionString = "Data Source=TUAN;Initial Catalog=DuAn_1;User ID=sa;Password=123456;TrustServerCertificate=True";
+            conn = new SqlConnection(connectionString);
+            conn.Open();
 
+        }
         private void Formquenmatkhau_Load(object sender, EventArgs e)
         {
-            this.btnLayLaiMatKhau.Click += new System.EventHandler(this.btnLayLaiMatKhau_Click);
+
         }
 
         private void btnLayLaiMatKhau_Click(object sender, EventArgs e)
         {
-            string email = txtEmail.Text.Trim();
-
-            // 1. Kiểm tra email rỗng
-            if (string.IsNullOrEmpty(email))
+            try
             {
-                lblKetQua.Text = "⚠ Bạn chưa nhập email.";
-                lblKetQua.ForeColor = Color.Yellow;
-                return;
+                string email = txtEnv.Text.Trim();
+                string taiKhoan = txtTknv.Text.Trim();
+                string newPassword = txtMkm.Text.Trim();
+
+                // Validate đầu vào
+                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(taiKhoan) || string.IsNullOrEmpty(newPassword))
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (newPassword.Length < 6)
+                {
+                    MessageBox.Show("Mật khẩu phải có ít nhất 6 ký tự.", "Mật khẩu yếu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Kiểm tra tài khoản + email có tồn tại không
+                string queryCheck = @"
+                            SELECT COUNT(*) 
+                            FROM NhanVien nv
+                            INNER JOIN TaiKhoan tk ON nv.MaNV = tk.MaNV
+                            WHERE tk.Email = @Email AND tk.TenDangNhap = @TaiKhoan";
+
+                using (SqlCommand cmd = new SqlCommand(queryCheck, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@TaiKhoan", taiKhoan);
+
+                    int count = (int)cmd.ExecuteScalar();
+
+                    if (count != 1)
+                    {
+                        MessageBox.Show("Email hoặc tài khoản không đúng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                // Xác nhận đổi mật khẩu
+                var result = MessageBox.Show("Bạn có chắc muốn đổi mật khẩu không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result != DialogResult.Yes)
+                {
+                    return; // Người dùng chọn No
+                }
+
+                // Thực hiện cập nhật mật khẩu
+                string queryUpdate = @"
+                                UPDATE TaiKhoan
+                                SET MatKhau = @MatKhau
+                                WHERE Email = @Email AND TenDangNhap = @TaiKhoan";
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdate, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MatKhau", newPassword);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@TaiKhoan", taiKhoan);
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Đổi mật khẩu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Reset giao diện
+                txtEnv.Clear();
+                txtTknv.Clear();
+                txtMkm.Clear();
             }
-
-            // 2. Chuỗi kết nối mới
-            string connectionString = @"Data Source=TUAN;Initial Catalog=DuAn_1;;TrustServerCertificate=True";
-
-            // 3. Tạo và mở kết nối
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            catch (Exception ex)
             {
-                conn.Open();
-
-                // 4. Truy vấn kiểm tra email
-                string query = "SELECT MatKhau FROM TaiKhoan WHERE Email = @Email";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Email", email);
-
-                object result = cmd.ExecuteScalar();
-
-                // 5. Xử lý kết quả
-                if (result != null)
-                {
-                    lblKetQua.Text = $"✅ Mật khẩu của bạn là: {result}";
-                    lblKetQua.ForeColor = Color.LightGreen;
-                }
-                else
-                {
-                    lblKetQua.Text = "❌ Email không tồn tại";
-                    lblKetQua.ForeColor = Color.Red;
-                }
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -71,6 +117,17 @@ namespace PRO131
             {
                 logins.ShowDialog(); // Mở form quên mật khẩu dạng modal             
             }
+        }
+
+        private void txtEnv_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guiMaOTP_Click(object sender, EventArgs e)
+        {
+            
+            
         }
     }
 }
