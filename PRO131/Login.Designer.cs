@@ -59,8 +59,8 @@
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(1289, 490);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+            tableLayoutPanel1.Size = new Size(1031, 392);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox1
@@ -71,7 +71,7 @@
             pictureBox1.Location = new Point(2, 2);
             pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(640, 486);
+            pictureBox1.Size = new Size(511, 388);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 17;
             pictureBox1.TabStop = false;
@@ -93,7 +93,7 @@
             tlpLogin.Controls.Add(btnForgotPassword, 1, 3);
             tlpLogin.Dock = DockStyle.Fill;
             tlpLogin.ForeColor = Color.FromArgb(168, 218, 220);
-            tlpLogin.Location = new Point(646, 2);
+            tlpLogin.Location = new Point(517, 2);
             tlpLogin.Margin = new Padding(2);
             tlpLogin.Name = "tlpLogin";
             tlpLogin.RowCount = 6;
@@ -103,7 +103,7 @@
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
             tlpLogin.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
-            tlpLogin.Size = new Size(641, 486);
+            tlpLogin.Size = new Size(512, 388);
             tlpLogin.TabIndex = 18;
             // 
             // chkShowPass
@@ -111,10 +111,10 @@
             chkShowPass.AutoSize = true;
             chkShowPass.Dock = DockStyle.Fill;
             chkShowPass.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkShowPass.Location = new Point(2, 267);
+            chkShowPass.Location = new Point(2, 215);
             chkShowPass.Margin = new Padding(2);
             chkShowPass.Name = "chkShowPass";
-            chkShowPass.Size = new Size(188, 68);
+            chkShowPass.Size = new Size(149, 54);
             chkShowPass.TabIndex = 24;
             chkShowPass.Text = "Hiện mật khẩu";
             chkShowPass.UseVisualStyleBackColor = true;
@@ -125,10 +125,10 @@
             // 
             tlpLogin.SetColumnSpan(txtMatKhau, 2);
             txtMatKhau.Dock = DockStyle.Fill;
-            txtMatKhau.Location = new Point(194, 195);
+            txtMatKhau.Location = new Point(155, 157);
             txtMatKhau.Margin = new Padding(2);
             txtMatKhau.Name = "txtMatKhau";
-            txtMatKhau.Size = new Size(445, 31);
+            txtMatKhau.Size = new Size(355, 27);
             txtMatKhau.TabIndex = 22;
             txtMatKhau.TextChanged += txtMatKhau_TextChanged;
             // 
@@ -136,10 +136,10 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(2, 193);
+            label3.Location = new Point(2, 155);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(89, 25);
+            label3.Size = new Size(74, 20);
             label3.TabIndex = 21;
             label3.Text = "Mật khẩu";
             // 
@@ -147,10 +147,10 @@
             // 
             tlpLogin.SetColumnSpan(txtTenDangNhap, 2);
             txtTenDangNhap.Dock = DockStyle.Fill;
-            txtTenDangNhap.Location = new Point(194, 123);
+            txtTenDangNhap.Location = new Point(155, 99);
             txtTenDangNhap.Margin = new Padding(2);
             txtTenDangNhap.Name = "txtTenDangNhap";
-            txtTenDangNhap.Size = new Size(445, 31);
+            txtTenDangNhap.Size = new Size(355, 27);
             txtTenDangNhap.TabIndex = 20;
             txtTenDangNhap.TextChanged += txtTenDangNhap_TextChanged;
             // 
@@ -158,10 +158,10 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(2, 121);
+            label2.Location = new Point(2, 97);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(134, 25);
+            label2.Size = new Size(111, 20);
             label2.TabIndex = 19;
             label2.Text = "Tên đăng nhập";
             // 
@@ -174,7 +174,7 @@
             label1.Location = new Point(2, 0);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(637, 121);
+            label1.Size = new Size(508, 97);
             label1.TabIndex = 18;
             label1.Text = "HỆ THỐNG QUẢN LÝ BÁN ÁO PHÔNG";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -184,10 +184,10 @@
             tlpLogin.SetColumnSpan(btnLogin, 3);
             btnLogin.Dock = DockStyle.Fill;
             btnLogin.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLogin.Location = new Point(2, 411);
+            btnLogin.Location = new Point(2, 331);
             btnLogin.Margin = new Padding(2);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(637, 73);
+            btnLogin.Size = new Size(508, 55);
             btnLogin.TabIndex = 26;
             btnLogin.Text = "ĐĂNG NHẬP";
             btnLogin.UseVisualStyleBackColor = true;
@@ -199,10 +199,9 @@
             btnForgotPassword.Dock = DockStyle.Fill;
             btnForgotPassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnForgotPassword.ForeColor = Color.FromArgb(255, 128, 128);
-            btnForgotPassword.Location = new Point(196, 269);
-            btnForgotPassword.Margin = new Padding(4);
+            btnForgotPassword.Location = new Point(156, 216);
             btnForgotPassword.Name = "btnForgotPassword";
-            btnForgotPassword.Size = new Size(441, 64);
+            btnForgotPassword.Size = new Size(353, 52);
             btnForgotPassword.TabIndex = 25;
             btnForgotPassword.Text = "Quên mật khẩu ?";
             btnForgotPassword.UseVisualStyleBackColor = true;
@@ -210,9 +209,9 @@
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1289, 490);
+            ClientSize = new Size(1031, 392);
             Controls.Add(tableLayoutPanel1);
             Margin = new Padding(2);
             Name = "Login";

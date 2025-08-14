@@ -36,6 +36,9 @@
             lblKetQua = new Label();
             btnLayLaiMatKhau = new Button();
             button1 = new Button();
+            txtTdn = new TextBox();
+            txtMkm = new TextBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -43,7 +46,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(142, 32);
+            label1.Location = new Point(204, 32);
             label1.Name = "label1";
             label1.Size = new Size(237, 41);
             label1.TabIndex = 0;
@@ -53,7 +56,7 @@
             // 
             pictureBox1.BackColor = Color.FromArgb(29, 53, 87);
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(153, 93);
+            pictureBox1.Location = new Point(217, 86);
             pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(215, 201);
@@ -66,7 +69,7 @@
             lblEmail.AutoSize = true;
             lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblEmail.ForeColor = SystemColors.ActiveCaption;
-            lblEmail.Location = new Point(65, 317);
+            lblEmail.Location = new Point(114, 321);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(64, 28);
             lblEmail.TabIndex = 23;
@@ -75,9 +78,9 @@
             // txtEmail
             // 
             txtEmail.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(153, 317);
+            txtEmail.Location = new Point(204, 319);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(206, 30);
+            txtEmail.Size = new Size(276, 30);
             txtEmail.TabIndex = 24;
             // 
             // lblKetQua
@@ -85,21 +88,21 @@
             lblKetQua.AutoSize = true;
             lblKetQua.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblKetQua.ForeColor = SystemColors.ActiveCaption;
-            lblKetQua.Location = new Point(39, 387);
+            lblKetQua.Location = new Point(26, 378);
             lblKetQua.Name = "lblKetQua";
-            lblKetQua.Size = new Size(90, 28);
+            lblKetQua.Size = new Size(152, 28);
             lblKetQua.TabIndex = 25;
-            lblKetQua.Text = "Kết quả:";
+            lblKetQua.Text = "Tên đăng nhập";
             // 
             // btnLayLaiMatKhau
             // 
             btnLayLaiMatKhau.BackColor = SystemColors.ButtonShadow;
-            btnLayLaiMatKhau.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLayLaiMatKhau.Location = new Point(118, 432);
+            btnLayLaiMatKhau.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLayLaiMatKhau.Location = new Point(173, 505);
             btnLayLaiMatKhau.Name = "btnLayLaiMatKhau";
-            btnLayLaiMatKhau.Size = new Size(201, 40);
+            btnLayLaiMatKhau.Size = new Size(142, 40);
             btnLayLaiMatKhau.TabIndex = 26;
-            btnLayLaiMatKhau.Text = "Lấy lại Mật khẩu";
+            btnLayLaiMatKhau.Text = "Xác Nhận";
             btnLayLaiMatKhau.UseVisualStyleBackColor = false;
             btnLayLaiMatKhau.Click += btnLayLaiMatKhau_Click;
             // 
@@ -108,7 +111,7 @@
             button1.BackColor = SystemColors.ButtonShadow;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.Red;
-            button1.Location = new Point(364, 432);
+            button1.Location = new Point(427, 506);
             button1.Name = "button1";
             button1.Size = new Size(100, 40);
             button1.TabIndex = 27;
@@ -116,12 +119,42 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // txtTdn
+            // 
+            txtTdn.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTdn.Location = new Point(204, 376);
+            txtTdn.Name = "txtTdn";
+            txtTdn.Size = new Size(276, 30);
+            txtTdn.TabIndex = 28;
+            // 
+            // txtMkm
+            // 
+            txtMkm.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtMkm.Location = new Point(204, 436);
+            txtMkm.Name = "txtMkm";
+            txtMkm.Size = new Size(276, 30);
+            txtMkm.TabIndex = 29;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.ActiveCaption;
+            label2.Location = new Point(33, 436);
+            label2.Name = "label2";
+            label2.Size = new Size(145, 28);
+            label2.TabIndex = 30;
+            label2.Text = "Mật khẩu mới";
+            // 
             // Formquenmatkhau
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(29, 53, 87);
-            ClientSize = new Size(538, 500);
+            ClientSize = new Size(626, 590);
+            Controls.Add(label2);
+            Controls.Add(txtMkm);
+            Controls.Add(txtTdn);
             Controls.Add(button1);
             Controls.Add(btnLayLaiMatKhau);
             Controls.Add(lblKetQua);
@@ -146,5 +179,8 @@
         private Label lblKetQua;
         private Button btnLayLaiMatKhau;
         private Button button1;
+        private TextBox txtTdn;
+        private TextBox txtMkm;
+        private Label label2;
     }
 }
