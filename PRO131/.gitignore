@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sdf
+*.cache
+*.db
+
+# Build results
+bin/
+obj/
+
+# VS Code settings
+.vscode/
+
+# Temporary files
+*.log
+*.tmp
+*.bak
