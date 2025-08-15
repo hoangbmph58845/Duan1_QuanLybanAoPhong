@@ -8,6 +8,9 @@
     <Compile Update="DanhSachHoaDon.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="DSKH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="FormLichSuBanHang.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -20,6 +23,9 @@
     <Compile Update="Formquenmatkhau.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="LichSuMH.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -28,6 +34,9 @@
     </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="QLKH.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="TaoHoaDon.cs">
       <SubType>UserControl</SubType>

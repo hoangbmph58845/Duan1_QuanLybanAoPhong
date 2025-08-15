@@ -92,7 +92,17 @@ namespace PRO131
 
         private void btnThemKH_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chưa nộp bài", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            LoadUserControl(new QLKH());
+        }
+
+        private void btnDanhSachKH_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new DSKH());
+        }
+
+        private void btnLichSuMua_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new LichSuMH());
         }
     }
 }

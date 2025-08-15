@@ -22,7 +22,7 @@ namespace PRO131
         }
         public void connect()
         {
-            string connectionString = "Data Source=TUAN;Initial Catalog=DuAn_1;User ID=sa;Password=123456;TrustServerCertificate=True";
+            string connectionString = "Data Source=DESKTOP-9MI2RPM;Initial Catalog=DuAn_1;User ID=sa;Password=123456;TrustServerCertificate=True";
             conn = new SqlConnection(connectionString);
             conn.Open();
 

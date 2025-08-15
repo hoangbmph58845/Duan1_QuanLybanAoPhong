@@ -76,7 +76,7 @@ namespace PRO131
             panelMenu.Location = new Point(0, 0);
             panelMenu.Margin = new Padding(2);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(300, 956);
+            panelMenu.Size = new Size(240, 765);
             panelMenu.TabIndex = 0;
             // 
             // panelSubNhanVien
@@ -85,10 +85,10 @@ namespace PRO131
             panelSubNhanVien.Controls.Add(btnTaiKhoan);
             panelSubNhanVien.Controls.Add(btnDSNhanVien);
             panelSubNhanVien.Dock = DockStyle.Top;
-            panelSubNhanVien.Location = new Point(0, 772);
+            panelSubNhanVien.Location = new Point(0, 618);
             panelSubNhanVien.Margin = new Padding(2);
             panelSubNhanVien.Name = "panelSubNhanVien";
-            panelSubNhanVien.Size = new Size(300, 138);
+            panelSubNhanVien.Size = new Size(240, 110);
             panelSubNhanVien.TabIndex = 15;
             panelSubNhanVien.Visible = false;
             // 
@@ -99,10 +99,10 @@ namespace PRO131
             btnLichSuBan.FlatAppearance.BorderSize = 0;
             btnLichSuBan.FlatStyle = FlatStyle.Flat;
             btnLichSuBan.ForeColor = Color.FromArgb(29, 53, 87);
-            btnLichSuBan.Location = new Point(0, 90);
+            btnLichSuBan.Location = new Point(0, 72);
             btnLichSuBan.Margin = new Padding(2);
             btnLichSuBan.Name = "btnLichSuBan";
-            btnLichSuBan.Size = new Size(300, 48);
+            btnLichSuBan.Size = new Size(240, 38);
             btnLichSuBan.TabIndex = 9;
             btnLichSuBan.Text = "Lịch sử bán hàng";
             btnLichSuBan.UseVisualStyleBackColor = false;
@@ -114,10 +114,10 @@ namespace PRO131
             btnTaiKhoan.FlatAppearance.BorderSize = 0;
             btnTaiKhoan.FlatStyle = FlatStyle.Flat;
             btnTaiKhoan.ForeColor = Color.FromArgb(29, 53, 87);
-            btnTaiKhoan.Location = new Point(0, 45);
+            btnTaiKhoan.Location = new Point(0, 36);
             btnTaiKhoan.Margin = new Padding(2);
             btnTaiKhoan.Name = "btnTaiKhoan";
-            btnTaiKhoan.Size = new Size(300, 45);
+            btnTaiKhoan.Size = new Size(240, 36);
             btnTaiKhoan.TabIndex = 8;
             btnTaiKhoan.Text = "\tQuản lý tài khoản";
             btnTaiKhoan.UseVisualStyleBackColor = false;
@@ -133,7 +133,7 @@ namespace PRO131
             btnDSNhanVien.Location = new Point(0, 0);
             btnDSNhanVien.Margin = new Padding(2);
             btnDSNhanVien.Name = "btnDSNhanVien";
-            btnDSNhanVien.Size = new Size(300, 45);
+            btnDSNhanVien.Size = new Size(240, 36);
             btnDSNhanVien.TabIndex = 6;
             btnDSNhanVien.Text = "Danh sách nhân viên";
             btnDSNhanVien.UseVisualStyleBackColor = false;
@@ -151,11 +151,11 @@ namespace PRO131
             btnNhanVien.IconFont = IconFont.Auto;
             btnNhanVien.IconSize = 24;
             btnNhanVien.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNhanVien.Location = new Point(0, 712);
+            btnNhanVien.Location = new Point(0, 570);
             btnNhanVien.Margin = new Padding(2);
             btnNhanVien.Name = "btnNhanVien";
-            btnNhanVien.Padding = new Padding(10, 0, 10, 0);
-            btnNhanVien.Size = new Size(300, 60);
+            btnNhanVien.Padding = new Padding(8, 0, 8, 0);
+            btnNhanVien.Size = new Size(240, 48);
             btnNhanVien.TabIndex = 14;
             btnNhanVien.Text = "Quản Lý Nhân viên";
             btnNhanVien.TextAlign = ContentAlignment.MiddleRight;
@@ -169,10 +169,10 @@ namespace PRO131
             panelSubBanHang.Controls.Add(btnDSHoaDon);
             panelSubBanHang.Controls.Add(btnTaoHoaDon);
             panelSubBanHang.Dock = DockStyle.Top;
-            panelSubBanHang.Location = new Point(0, 577);
+            panelSubBanHang.Location = new Point(0, 462);
             panelSubBanHang.Margin = new Padding(2);
             panelSubBanHang.Name = "panelSubBanHang";
-            panelSubBanHang.Size = new Size(300, 135);
+            panelSubBanHang.Size = new Size(240, 108);
             panelSubBanHang.TabIndex = 13;
             panelSubBanHang.Visible = false;
             // 
@@ -183,10 +183,10 @@ namespace PRO131
             btnChiTietHoaDon.FlatAppearance.BorderSize = 0;
             btnChiTietHoaDon.FlatStyle = FlatStyle.Flat;
             btnChiTietHoaDon.ForeColor = Color.FromArgb(29, 53, 87);
-            btnChiTietHoaDon.Location = new Point(0, 90);
+            btnChiTietHoaDon.Location = new Point(0, 72);
             btnChiTietHoaDon.Margin = new Padding(2);
             btnChiTietHoaDon.Name = "btnChiTietHoaDon";
-            btnChiTietHoaDon.Size = new Size(300, 45);
+            btnChiTietHoaDon.Size = new Size(240, 36);
             btnChiTietHoaDon.TabIndex = 5;
             btnChiTietHoaDon.Text = "Chi tiết hóa đơn";
             btnChiTietHoaDon.UseVisualStyleBackColor = false;
@@ -199,10 +199,10 @@ namespace PRO131
             btnDSHoaDon.FlatAppearance.BorderSize = 0;
             btnDSHoaDon.FlatStyle = FlatStyle.Flat;
             btnDSHoaDon.ForeColor = Color.FromArgb(29, 53, 87);
-            btnDSHoaDon.Location = new Point(0, 45);
+            btnDSHoaDon.Location = new Point(0, 36);
             btnDSHoaDon.Margin = new Padding(2);
             btnDSHoaDon.Name = "btnDSHoaDon";
-            btnDSHoaDon.Size = new Size(300, 45);
+            btnDSHoaDon.Size = new Size(240, 36);
             btnDSHoaDon.TabIndex = 4;
             btnDSHoaDon.Text = "Danh sách hóa đơn";
             btnDSHoaDon.UseVisualStyleBackColor = false;
@@ -218,7 +218,7 @@ namespace PRO131
             btnTaoHoaDon.Location = new Point(0, 0);
             btnTaoHoaDon.Margin = new Padding(2);
             btnTaoHoaDon.Name = "btnTaoHoaDon";
-            btnTaoHoaDon.Size = new Size(300, 45);
+            btnTaoHoaDon.Size = new Size(240, 36);
             btnTaoHoaDon.TabIndex = 3;
             btnTaoHoaDon.Text = "Tạo hóa đơn mới";
             btnTaoHoaDon.UseVisualStyleBackColor = false;
@@ -236,11 +236,11 @@ namespace PRO131
             btnBanHang.IconFont = IconFont.Auto;
             btnBanHang.IconSize = 24;
             btnBanHang.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBanHang.Location = new Point(0, 517);
+            btnBanHang.Location = new Point(0, 414);
             btnBanHang.Margin = new Padding(2);
             btnBanHang.Name = "btnBanHang";
-            btnBanHang.Padding = new Padding(10, 0, 10, 0);
-            btnBanHang.Size = new Size(300, 60);
+            btnBanHang.Padding = new Padding(8, 0, 8, 0);
+            btnBanHang.Size = new Size(240, 48);
             btnBanHang.TabIndex = 12;
             btnBanHang.Text = "Quản Lý Bán hàng";
             btnBanHang.TextAlign = ContentAlignment.MiddleRight;
@@ -254,10 +254,10 @@ namespace PRO131
             panelSubKhachHang.Controls.Add(btnDanhSachKH);
             panelSubKhachHang.Controls.Add(btnThemKH);
             panelSubKhachHang.Dock = DockStyle.Top;
-            panelSubKhachHang.Location = new Point(0, 382);
+            panelSubKhachHang.Location = new Point(0, 306);
             panelSubKhachHang.Margin = new Padding(2);
             panelSubKhachHang.Name = "panelSubKhachHang";
-            panelSubKhachHang.Size = new Size(300, 135);
+            panelSubKhachHang.Size = new Size(240, 108);
             panelSubKhachHang.TabIndex = 11;
             panelSubKhachHang.Visible = false;
             // 
@@ -268,13 +268,14 @@ namespace PRO131
             btnLichSuMua.FlatAppearance.BorderSize = 0;
             btnLichSuMua.FlatStyle = FlatStyle.Flat;
             btnLichSuMua.ForeColor = Color.FromArgb(29, 53, 87);
-            btnLichSuMua.Location = new Point(0, 90);
+            btnLichSuMua.Location = new Point(0, 72);
             btnLichSuMua.Margin = new Padding(2);
             btnLichSuMua.Name = "btnLichSuMua";
-            btnLichSuMua.Size = new Size(300, 45);
+            btnLichSuMua.Size = new Size(240, 36);
             btnLichSuMua.TabIndex = 4;
             btnLichSuMua.Text = "\tLịch sử mua hàng";
             btnLichSuMua.UseVisualStyleBackColor = false;
+            btnLichSuMua.Click += btnLichSuMua_Click;
             // 
             // btnDanhSachKH
             // 
@@ -283,13 +284,14 @@ namespace PRO131
             btnDanhSachKH.FlatAppearance.BorderSize = 0;
             btnDanhSachKH.FlatStyle = FlatStyle.Flat;
             btnDanhSachKH.ForeColor = Color.FromArgb(29, 53, 87);
-            btnDanhSachKH.Location = new Point(0, 45);
+            btnDanhSachKH.Location = new Point(0, 36);
             btnDanhSachKH.Margin = new Padding(2);
             btnDanhSachKH.Name = "btnDanhSachKH";
-            btnDanhSachKH.Size = new Size(300, 45);
+            btnDanhSachKH.Size = new Size(240, 36);
             btnDanhSachKH.TabIndex = 3;
             btnDanhSachKH.Text = "Danh sách KH";
             btnDanhSachKH.UseVisualStyleBackColor = false;
+            btnDanhSachKH.Click += btnDanhSachKH_Click;
             // 
             // btnThemKH
             // 
@@ -301,7 +303,7 @@ namespace PRO131
             btnThemKH.Location = new Point(0, 0);
             btnThemKH.Margin = new Padding(2);
             btnThemKH.Name = "btnThemKH";
-            btnThemKH.Size = new Size(300, 45);
+            btnThemKH.Size = new Size(240, 36);
             btnThemKH.TabIndex = 2;
             btnThemKH.Text = "Thêm khách hàng";
             btnThemKH.UseVisualStyleBackColor = false;
@@ -319,11 +321,11 @@ namespace PRO131
             btnKhachHang.IconFont = IconFont.Auto;
             btnKhachHang.IconSize = 24;
             btnKhachHang.ImageAlign = ContentAlignment.MiddleLeft;
-            btnKhachHang.Location = new Point(0, 322);
+            btnKhachHang.Location = new Point(0, 258);
             btnKhachHang.Margin = new Padding(2);
             btnKhachHang.Name = "btnKhachHang";
-            btnKhachHang.Padding = new Padding(10, 0, 10, 0);
-            btnKhachHang.Size = new Size(300, 60);
+            btnKhachHang.Padding = new Padding(8, 0, 8, 0);
+            btnKhachHang.Size = new Size(240, 48);
             btnKhachHang.TabIndex = 10;
             btnKhachHang.Text = "Quản Lý Khách hàng";
             btnKhachHang.TextAlign = ContentAlignment.MiddleRight;
@@ -337,10 +339,10 @@ namespace PRO131
             panelSubSanPham.Controls.Add(btnDanhSachSP);
             panelSubSanPham.Controls.Add(btnQuanLyTonKho);
             panelSubSanPham.Dock = DockStyle.Top;
-            panelSubSanPham.Location = new Point(0, 232);
+            panelSubSanPham.Location = new Point(0, 186);
             panelSubSanPham.Margin = new Padding(2);
             panelSubSanPham.Name = "panelSubSanPham";
-            panelSubSanPham.Size = new Size(300, 90);
+            panelSubSanPham.Size = new Size(240, 72);
             panelSubSanPham.TabIndex = 3;
             panelSubSanPham.Visible = false;
             // 
@@ -353,7 +355,7 @@ namespace PRO131
             btnDanhSachSP.Location = new Point(0, 0);
             btnDanhSachSP.Margin = new Padding(2);
             btnDanhSachSP.Name = "btnDanhSachSP";
-            btnDanhSachSP.Size = new Size(300, 45);
+            btnDanhSachSP.Size = new Size(240, 36);
             btnDanhSachSP.TabIndex = 2;
             btnDanhSachSP.Text = "Danh sách sản phẩm";
             btnDanhSachSP.UseVisualStyleBackColor = false;
@@ -365,10 +367,10 @@ namespace PRO131
             btnQuanLyTonKho.FlatAppearance.BorderSize = 0;
             btnQuanLyTonKho.FlatStyle = FlatStyle.Flat;
             btnQuanLyTonKho.ForeColor = Color.FromArgb(29, 53, 87);
-            btnQuanLyTonKho.Location = new Point(-2, 39);
+            btnQuanLyTonKho.Location = new Point(-2, 31);
             btnQuanLyTonKho.Margin = new Padding(2);
             btnQuanLyTonKho.Name = "btnQuanLyTonKho";
-            btnQuanLyTonKho.Size = new Size(302, 51);
+            btnQuanLyTonKho.Size = new Size(242, 41);
             btnQuanLyTonKho.TabIndex = 3;
             btnQuanLyTonKho.Text = "Quản lý tồn kho";
             btnQuanLyTonKho.UseVisualStyleBackColor = false;
@@ -386,11 +388,11 @@ namespace PRO131
             btnQLSanPham.IconFont = IconFont.Auto;
             btnQLSanPham.IconSize = 24;
             btnQLSanPham.ImageAlign = ContentAlignment.MiddleLeft;
-            btnQLSanPham.Location = new Point(0, 172);
+            btnQLSanPham.Location = new Point(0, 138);
             btnQLSanPham.Margin = new Padding(2);
             btnQLSanPham.Name = "btnQLSanPham";
-            btnQLSanPham.Padding = new Padding(10, 0, 10, 0);
-            btnQLSanPham.Size = new Size(300, 60);
+            btnQLSanPham.Padding = new Padding(8, 0, 8, 0);
+            btnQLSanPham.Size = new Size(240, 48);
             btnQLSanPham.TabIndex = 0;
             btnQLSanPham.Text = "Quản Lý Sản Phẩm";
             btnQLSanPham.TextAlign = ContentAlignment.MiddleRight;
@@ -406,7 +408,7 @@ namespace PRO131
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(300, 172);
+            pictureBox1.Size = new Size(240, 138);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 16;
             pictureBox1.TabStop = false;
@@ -415,18 +417,18 @@ namespace PRO131
             // 
             panelMain.BackColor = Color.FromArgb(241, 250, 238);
             panelMain.Dock = DockStyle.Fill;
-            panelMain.Location = new Point(300, 0);
+            panelMain.Location = new Point(240, 0);
             panelMain.Margin = new Padding(2);
             panelMain.Name = "panelMain";
-            panelMain.Size = new Size(1030, 956);
+            panelMain.Size = new Size(824, 765);
             panelMain.TabIndex = 1;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(249, 250, 251);
-            ClientSize = new Size(1330, 956);
+            ClientSize = new Size(1064, 765);
             Controls.Add(panelMain);
             Controls.Add(panelMenu);
             HelpButton = true;
