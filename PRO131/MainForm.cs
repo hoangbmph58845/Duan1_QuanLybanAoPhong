@@ -94,6 +94,11 @@ namespace PRO131
         {
             MessageBox.Show("Chưa nộp bài", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            LoadUserControl(new Thongke());
+        }
     }
 }
 
