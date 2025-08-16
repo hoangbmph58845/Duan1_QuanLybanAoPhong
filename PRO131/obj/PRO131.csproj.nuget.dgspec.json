@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DA1-N6\\PRO131\\PRO131.csproj": {}
+    "D:\\anhtuan\\PRO131\\PRO131.csproj": {}
   },
   "projects": {
-    "D:\\DA1-N6\\PRO131\\PRO131.csproj": {
+    "D:\\anhtuan\\PRO131\\PRO131.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DA1-N6\\PRO131\\PRO131.csproj",
+        "projectUniqueName": "D:\\anhtuan\\PRO131\\PRO131.csproj",
         "projectName": "PRO131",
-        "projectPath": "D:\\DA1-N6\\PRO131\\PRO131.csproj",
+        "projectPath": "D:\\anhtuan\\PRO131\\PRO131.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\DA1-N6\\PRO131\\obj\\",
+        "outputPath": "D:\\anhtuan\\PRO131\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -77,6 +77,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.7, )"
+            },
+            "WinForms.DataVisualization": {
+              "target": "Package",
+              "version": "[1.10.0, )"
             }
           },
           "imports": [

@@ -32,6 +32,9 @@
     <Compile Update="TaoHoaDon.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Thongke.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UCDanhSach.cs">
       <SubType>UserControl</SubType>
     </Compile>
