@@ -8,6 +8,7 @@ namespace PRO131.Models
 {
     public class SanPhamTrongGio
     {
+        public int MaSPCT { get; set; }
         public string MaSP { get; set; }
         public string TenSanPham { get; set; }
         public string MaSize { get; set; }
