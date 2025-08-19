@@ -41,9 +41,32 @@ namespace PRO131
 
 
             dataGridView1.DataSource = danhSach;
+            dataGridView1.Columns["MaHD"].HeaderText = "Mã hd";
+            dataGridView1.Columns["MaKh"].HeaderText = "mã khách hàng";
+            dataGridView1.Columns["TenNV"].HeaderText = "tên nhân viên";
+            dataGridView1.Columns["NGAYBAN"].HeaderText = "ngày bán";
+            dataGridView1.Columns["PHUONGTHUCTHANHTOAN"].HeaderText = "Phương thức thanh toán";
+            dataGridView1.Columns["TONGTIEN"].HeaderText = "Tổng tiền";
+            dataGridView1.Columns["TRANGTHAI"].HeaderText = "trạng thái";
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+        }
+        private int _maHoaDonDangChon = -1;
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             int maHD;
 
@@ -75,10 +98,10 @@ namespace PRO131
             {
                 MessageBox.Show("Vui lòng nhập Mã hóa đơn hợp lệ (số nguyên).");
             }
-        }
-        private int _maHoaDonDangChon = -1;
 
-        private void button2_Click(object sender, EventArgs e)
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
         {
             if (_maHoaDonDangChon == -1)
             {
@@ -105,7 +128,7 @@ namespace PRO131
             }
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {

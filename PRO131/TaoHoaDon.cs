@@ -34,6 +34,7 @@ namespace PRO131
                 .Select(sp => new
                 {
                     MaSP = sp.MaSp,
+                    MaSpct = sp.MaSpct,
                     MASize = sp.MaSize,
                     TenSP = sp.TenSanPham,
                     MAMau = sp.MaMau,
@@ -44,6 +45,7 @@ namespace PRO131
 
             dataGridView1.DataSource = danhSach;
             dataGridView1.Columns["MaSP"].HeaderText = "Mã Sp";
+            dataGridView1.Columns["MaSPCT"].HeaderText = "Mã SP Chi Tiết";
             dataGridView1.Columns["TenSP"].HeaderText = "Tên Sản Phẩm";
             dataGridView1.Columns["MaSize"].HeaderText = "Mã Size";
             dataGridView1.Columns["MaMau"].HeaderText = "Mã Màu";
@@ -59,9 +61,21 @@ namespace PRO131
         .ToList();
 
             comboBox3.DataSource = danhSachNhanVien;
-            comboBox3.DisplayMember = "TenNv";   // Hiển thị tên nhân viên
-            comboBox3.ValueMember = "MaNv";      // Giá trị là mã nhân viên
+            comboBox3.DisplayMember = "TenNv";  
+            comboBox3.ValueMember = "MaNv";     
+            var dsKhachHang = _context.KhachHangs
+                              .Select(kh => new
+                              {
+                                  MaKh = kh.MaKh,
+                                  TenKh = kh.TenKhachHang
+                              })
+                              .ToList();
+            
+            dsKhachHang.Insert(0, new { MaKh = 0, TenKh = "Khách vãng lai" });
 
+            comboBox4.DataSource = dsKhachHang;
+            comboBox4.DisplayMember = "TenKh";
+            comboBox4.ValueMember = "MaKh";
 
         }
 
@@ -77,31 +91,12 @@ namespace PRO131
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (dataGridView2.CurrentRow != null)
-            {
-
-                string maSP = dataGridView2.CurrentRow.Cells["MaSP"].Value.ToString();
-
-
-                var spCanXoa = _gioHang.FirstOrDefault(sp => sp.MaSP == maSP);
-                if (spCanXoa != null)
-                {
-                    _gioHang.Remove(spCanXoa);
-
-
-                    dataGridView2.DataSource = null;
-                    dataGridView2.DataSource = _gioHang;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn sản phẩm cần xóa khỏi giỏ hàng.");
-            }
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -116,12 +111,21 @@ namespace PRO131
                 var row = dataGridView1.Rows[e.RowIndex];
 
                 var maSP = row.Cells["MaSP"].Value.ToString();
+                var maSPCT = Convert.ToInt32(row.Cells["MaSPCT"].Value);
                 var tenSP = row.Cells["TenSP"].Value.ToString();
                 var maSize = row.Cells["MASize"].Value.ToString();
                 var maMau = row.Cells["MAMau"].Value.ToString();
                 var giaBan = Convert.ToDecimal(row.Cells["GIaBan"].Value);
+                var soLuong = Convert.ToInt32(row.Cells["SoLuong"].Value);
 
                 // Kiểm tra sản phẩm có trong giỏ hàng chưa (theo mã sp + size + màu)
+                if (soLuong <= 0)
+                {
+                    MessageBox.Show("Sản phẩm này đã hết hàng!");
+                    return;
+                }
+
+                // Kiểm tra sản phẩm có trong giỏ hàng chưa
                 var spDaCo = _gioHang.FirstOrDefault(sp =>
                     sp.MaSP == maSP && sp.MaSize == maSize && sp.MaMau == maMau);
 
@@ -134,6 +138,7 @@ namespace PRO131
                     var spMoi = new SanPhamTrongGio
                     {
                         MaSP = maSP,
+                        MaSPCT = maSPCT,
                         TenSanPham = tenSP,
                         MaSize = maSize,
                         MaMau = maMau,
@@ -142,6 +147,9 @@ namespace PRO131
                     };
                     _gioHang.Add(spMoi);
                 }
+
+                // Trừ số lượng tồn kho trong grid
+                row.Cells["SoLuong"].Value = soLuong - 1;
 
                 dataGridView2.DataSource = null;
                 dataGridView2.DataSource = _gioHang;
@@ -152,12 +160,7 @@ namespace PRO131
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            // Ép kiểu mã khách hàng
-            if (!int.TryParse(textBox2.Text.Trim(), out int maKhInt))
-            {
-                MessageBox.Show("Mã khách hàng phải là số.");
-                return;
-            }
+            string maKhachHang = comboBox4.SelectedValue.ToString();
             int maNvInt = Convert.ToInt32(comboBox3.SelectedValue);
             decimal tongTien = decimal.Parse(textBox3.Text.Trim());
             string hinhThucTT = comboBox1.SelectedItem?.ToString();
@@ -182,7 +185,7 @@ namespace PRO131
 
             HoaDon hoaDonMoi = new HoaDon
             {
-                MaKh = maKhInt,
+                MaKh = maKhachHang == "VL" ? (int?)null : int.Parse(maKhachHang),
                 MaNv = maNvInt,
                 NgayBan = DateOnly.FromDateTime(DateTime.Now),
                 TongTien = tongTien,
@@ -194,25 +197,18 @@ namespace PRO131
             _context.SaveChanges();
 
 
-            //foreach (var sp in _gioHang)
-            //{
-            //    HoaDonChiTiet ct = new HoaDonChiTiet
-            //    {
-            //        MaHd = hoaDonMoi.MaHd,      
-            //        //MaSpct = sp.MaSP,            
-            //        SoLuong = sp.SoLuong,
-            //        DonGia = sp.GiaBan
-            //    };
+            foreach (var sp in _gioHang)
+            {
+                HoaDonChiTiet ct = new HoaDonChiTiet
+                {
+                    MaHd = hoaDonMoi.MaHd,
+                    MaSpct = sp.MaSPCT,        
+                    SoLuong = sp.SoLuong,
+                    DonGia = sp.GiaBan
+                };
 
-            //    _context.HoaDonChiTiets.Add(ct);
-
-
-            //    var spct = _context.SanPhamChiTiets.FirstOrDefault(x => x.MaSpct == sp.MaSpct);
-            //    if (spct != null)
-            //    {
-            //        spct.SoLuongTon -= sp.SoLuong;
-            //    }
-            //}
+                _context.HoaDonChiTiets.Add(ct);
+            }
 
             _context.SaveChanges();
 
@@ -221,10 +217,38 @@ namespace PRO131
 
             _gioHang.Clear();
             dataGridView2.DataSource = null;
-            //textBox1.Clear();
-            textBox2.Clear();
             textBox3.Clear();
             comboBox1.SelectedIndex = -1;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridView2.CurrentRow != null)
+            {
+
+                string maSP = dataGridView2.CurrentRow.Cells["MaSP"].Value.ToString();
+
+
+                var spCanXoa = _gioHang.FirstOrDefault(sp => sp.MaSP == maSP);
+                if (spCanXoa != null)
+                {
+                    _gioHang.Remove(spCanXoa);
+
+
+                    dataGridView2.DataSource = null;
+                    dataGridView2.DataSource = _gioHang;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn sản phẩm cần xóa khỏi giỏ hàng.");
+            }
+            textBox3.Clear();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

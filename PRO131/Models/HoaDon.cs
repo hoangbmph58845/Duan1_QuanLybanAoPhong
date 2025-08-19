@@ -9,7 +9,7 @@ public partial class HoaDon
 
     public int MaNv { get; set; }
 
-    public int MaKh { get; set; }
+    public int? MaKh { get; set; }
 
     public DateOnly NgayBan { get; set; }
 
