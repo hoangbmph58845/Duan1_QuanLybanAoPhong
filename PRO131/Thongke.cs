@@ -14,7 +14,7 @@ namespace PRO131
 {
     public partial class Thongke : UserControl
     {
-        string connectionString = "Server=TUAN;Database=DuAn_1;User Id=sa;Password=123456;TrustServerCertificate=true;";
+        string connectionString = "Server=PHONGG\\MSSQLSERVER02;Database=DuAn_1;Trusted_Connection=True;TrustServerCertificate=True";
         public Thongke()
         {
             InitializeComponent();
