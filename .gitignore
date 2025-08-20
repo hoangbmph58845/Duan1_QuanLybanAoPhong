@@ -1,18 +1,18 @@
-# Visual Studio build folders
+# Build folders
 bin/
 obj/
-.vs/
 
-# User-specific files
+# Visual Studio
+.vs/
 *.user
 *.suo
 
-# Build results
-*.exe
-*.dll
-*.pdb
-
-# Others
+# Backup & logs
 *.log
-*.cache
+*.tmp
 
+# DotNet artifacts
+*.dll
+*.exe
+*.pdb
+*.cache
