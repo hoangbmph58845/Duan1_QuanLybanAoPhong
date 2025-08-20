@@ -29,7 +29,7 @@ namespace PRO131
         }
         private void Formquenmatkhau_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnLayLaiMatKhau_Click(object sender, EventArgs e)
@@ -116,6 +116,16 @@ namespace PRO131
             {
                 logins.ShowDialog(); // Mở form quên mật khẩu dạng modal             
             }
+        }
+
+        private void lblEmail_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
