@@ -51,6 +51,8 @@ namespace PRO131
             dataGridView1.Columns["MaMau"].HeaderText = "Mã Màu";
             dataGridView1.Columns["GiaBan"].HeaderText = "Giá Bán";
             dataGridView1.Columns["SoLuong"].HeaderText = "Số Lượng";
+            dataGridView1.Columns["Giaban"].DefaultCellStyle.Format = "N0";
+            dataGridView1.Columns["Giaban"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("vi-VN");
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             var danhSachNhanVien = _context.NhanViens
         .Select(nv => new
@@ -61,8 +63,8 @@ namespace PRO131
         .ToList();
 
             comboBox3.DataSource = danhSachNhanVien;
-            comboBox3.DisplayMember = "TenNv";  
-            comboBox3.ValueMember = "MaNv";     
+            comboBox3.DisplayMember = "TenNv";
+            comboBox3.ValueMember = "MaNv";
             var dsKhachHang = _context.KhachHangs
                               .Select(kh => new
                               {
@@ -70,7 +72,7 @@ namespace PRO131
                                   TenKh = kh.TenKhachHang
                               })
                               .ToList();
-            
+
             dsKhachHang.Insert(0, new { MaKh = 0, TenKh = "Khách vãng lai" });
 
             comboBox4.DataSource = dsKhachHang;
@@ -91,7 +93,7 @@ namespace PRO131
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -117,15 +119,11 @@ namespace PRO131
                 var maMau = row.Cells["MAMau"].Value.ToString();
                 var giaBan = Convert.ToDecimal(row.Cells["GIaBan"].Value);
                 var soLuong = Convert.ToInt32(row.Cells["SoLuong"].Value);
-
-                // Kiểm tra sản phẩm có trong giỏ hàng chưa (theo mã sp + size + màu)
                 if (soLuong <= 0)
                 {
                     MessageBox.Show("Sản phẩm này đã hết hàng!");
                     return;
                 }
-
-                // Kiểm tra sản phẩm có trong giỏ hàng chưa
                 var spDaCo = _gioHang.FirstOrDefault(sp =>
                     sp.MaSP == maSP && sp.MaSize == maSize && sp.MaMau == maMau);
 
@@ -147,13 +145,16 @@ namespace PRO131
                     };
                     _gioHang.Add(spMoi);
                 }
-
-                // Trừ số lượng tồn kho trong grid
-                row.Cells["SoLuong"].Value = soLuong - 1;
-
                 dataGridView2.DataSource = null;
                 dataGridView2.DataSource = _gioHang;
-                textBox3.Text = TinhTongTienGioHang().ToString("N0");
+                dataGridView2.Columns["Giaban"].DefaultCellStyle.Format = "N0";
+                dataGridView2.Columns["Giaban"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("vi-VN");
+                foreach (DataGridViewColumn col in dataGridView2.Columns)
+                {
+                    col.ReadOnly = true;
+                }
+                dataGridView2.Columns["SoLuong"].ReadOnly = false;
+                textBox3.Text = TinhTongTienGioHang().ToString("N0", new System.Globalization.CultureInfo("vi-VN")) + " VNĐ";
                 dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
@@ -162,7 +163,12 @@ namespace PRO131
         {
             string maKhachHang = comboBox4.SelectedValue.ToString();
             int maNvInt = Convert.ToInt32(comboBox3.SelectedValue);
-            decimal tongTien = decimal.Parse(textBox3.Text.Trim());
+            decimal tongTien;
+            if (!decimal.TryParse(textBox3.Text.Trim(), out tongTien))
+            {
+                MessageBox.Show("Vui lòng Chọn sản phẩm vào giỏ hàng");
+                return;
+            }
             string hinhThucTT = comboBox1.SelectedItem?.ToString();
             string trangThaiText = comboBox2.SelectedItem?.ToString();
             if (string.IsNullOrWhiteSpace(hinhThucTT))
@@ -170,10 +176,9 @@ namespace PRO131
                 MessageBox.Show("Vui lòng chọn hình thức thanh toán.");
                 return;
             }
-
-            if (_gioHang.Count == 0)
+            if (comboBox2.SelectedItem == null)
             {
-                MessageBox.Show("Giỏ hàng đang trống.");
+                MessageBox.Show("Vui lòng chọn trạng thái hóa đơn.");
                 return;
             }
             bool trangThai = false;
@@ -195,14 +200,23 @@ namespace PRO131
 
             _context.HoaDons.Add(hoaDonMoi);
             _context.SaveChanges();
-
+            foreach (var sp in _gioHang)
+            {
+                var spTrongDb = _context.SanPhamChiTiets.FirstOrDefault(x => x.MaSpct == sp.MaSPCT);
+                if (spTrongDb != null)
+                {
+                    spTrongDb.SoLuong -= sp.SoLuong;
+                }
+            }
+            _context.SaveChanges();
+            LoadDanhSachSanPham();
 
             foreach (var sp in _gioHang)
             {
                 HoaDonChiTiet ct = new HoaDonChiTiet
                 {
                     MaHd = hoaDonMoi.MaHd,
-                    MaSpct = sp.MaSPCT,        
+                    MaSpct = sp.MaSPCT,
                     SoLuong = sp.SoLuong,
                     DonGia = sp.GiaBan
                 };
@@ -219,6 +233,7 @@ namespace PRO131
             dataGridView2.DataSource = null;
             textBox3.Clear();
             comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -249,6 +264,41 @@ namespace PRO131
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "SoLuong")
+            {
+                if (!int.TryParse(e.FormattedValue.ToString(), out int soLuongMoi))
+                {
+                    MessageBox.Show("Số lượng phải là số nguyên!");
+                    e.Cancel = true; 
+                    return;
+                }
+                if (soLuongMoi <= 0)
+                {
+                    MessageBox.Show("Số lượng phải lớn hơn 0!");
+                    e.Cancel = true;
+                    return;
+                }
+                int maSpct = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells["MaSPCT"].Value);
+                var spTrongDb = _context.SanPhamChiTiets.FirstOrDefault(x => x.MaSpct == maSpct);
+                if (spTrongDb != null && soLuongMoi > spTrongDb.SoLuong)
+                {
+                    MessageBox.Show($"Số lượng hiện không đủ chỉ còn : ({spTrongDb.SoLuong})!");
+                    e.Cancel = true;
+                    return;
+                }
+            }
+        }
+
+        private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "SoLuong")
+            {
+                textBox3.Text = TinhTongTienGioHang().ToString("N0");
+            }
         }
     }
 }

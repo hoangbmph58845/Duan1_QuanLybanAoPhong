@@ -35,6 +35,7 @@
             textBox1 = new TextBox();
             label1 = new Label();
             splitContainer1 = new SplitContainer();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -79,9 +80,10 @@
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             button1.Location = new Point(71, 93);
             button1.Name = "button1";
-            button1.Size = new Size(115, 50);
+            button1.Size = new Size(134, 50);
             button1.TabIndex = 2;
             button1.Text = "Tìm Kiếm";
             button1.UseVisualStyleBackColor = true;
@@ -115,6 +117,7 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.BackColor = Color.FromArgb(143, 157, 178);
+            splitContainer1.Panel1.Controls.Add(button2);
             splitContainer1.Panel1.Controls.Add(button1);
             splitContainer1.Panel1.Controls.Add(pictureBox1);
             splitContainer1.Panel1.Controls.Add(label1);
@@ -126,6 +129,17 @@
             splitContainer1.Size = new Size(871, 635);
             splitContainer1.SplitterDistance = 290;
             splitContainer1.TabIndex = 5;
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            button2.Location = new Point(71, 279);
+            button2.Name = "button2";
+            button2.Size = new Size(134, 42);
+            button2.TabIndex = 5;
+            button2.Text = "Load Danh Sách";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // ChiTietHoaDon
             // 
@@ -154,5 +168,6 @@
         private Label label1;
         private PictureBox pictureBox1;
         private SplitContainer splitContainer1;
+        private Button button2;
     }
 }

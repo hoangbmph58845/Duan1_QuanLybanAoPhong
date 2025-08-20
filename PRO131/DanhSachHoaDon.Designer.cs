@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             splitContainer1 = new SplitContainer();
+            button3 = new Button();
             button2 = new Button();
             pictureBox1 = new PictureBox();
             button1 = new Button();
@@ -56,6 +57,7 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.BackColor = Color.FromArgb(143, 157, 178);
+            splitContainer1.Panel1.Controls.Add(button3);
             splitContainer1.Panel1.Controls.Add(button2);
             splitContainer1.Panel1.Controls.Add(pictureBox1);
             splitContainer1.Panel1.Controls.Add(button1);
@@ -72,9 +74,20 @@
             splitContainer1.SplitterDistance = 287;
             splitContainer1.TabIndex = 0;
             // 
+            // button3
+            // 
+            button3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            button3.Location = new Point(49, 307);
+            button3.Name = "button3";
+            button3.Size = new Size(182, 38);
+            button3.TabIndex = 7;
+            button3.Text = "Load Lại Danh Sách";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // button2
             // 
-            button2.Location = new Point(74, 246);
+            button2.Location = new Point(79, 241);
             button2.Name = "button2";
             button2.Size = new Size(121, 29);
             button2.TabIndex = 6;
@@ -95,9 +108,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(71, 105);
+            button1.Location = new Point(79, 105);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(121, 29);
             button1.TabIndex = 4;
             button1.Text = "Tìm Kiếm";
             button1.UseVisualStyleBackColor = true;
@@ -108,7 +121,7 @@
             comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Đã thanh toán", "Chưa thanh toán" });
-            comboBox1.Location = new Point(109, 180);
+            comboBox1.Location = new Point(114, 175);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 3;
@@ -117,7 +130,7 @@
             // 
             textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(109, 55);
+            textBox1.Location = new Point(114, 50);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(151, 27);
             textBox1.TabIndex = 2;
@@ -126,7 +139,7 @@
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(9, 183);
+            label2.Location = new Point(14, 178);
             label2.Name = "label2";
             label2.Size = new Size(78, 20);
             label2.TabIndex = 1;
@@ -136,7 +149,7 @@
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(9, 58);
+            label1.Location = new Point(14, 53);
             label1.Name = "label1";
             label1.Size = new Size(94, 20);
             label1.TabIndex = 0;
@@ -196,5 +209,6 @@
         private Label label1;
         private GroupBox groupBox1;
         private DataGridView dataGridView1;
+        private Button button3;
     }
 }
