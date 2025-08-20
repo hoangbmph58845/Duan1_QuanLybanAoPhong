@@ -18,6 +18,9 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
+bin/
+obj/
+
 
 ## Visual Studio
 .vs/
@@ -70,3 +73,38 @@ project.lock.json
 project.fragment.lock.json
 *.nuget.props
 *.nuget.targets
+
+# Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+
+# Ignore build results
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.db
+*.json
+*.v2
+*.v9
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
