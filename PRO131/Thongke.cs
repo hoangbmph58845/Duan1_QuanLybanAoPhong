@@ -36,9 +36,19 @@ namespace PRO131
         }
         private void LoadThongKe()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                string query = @"
+                // ✅ Validate ngày hợp lệ
+                if (dtpTuNgay.Value.Date > dtpDenNgay.Value.Date)
+                {
+                    MessageBox.Show("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc!",
+                                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = @"
                 SELECT 
                     HoaDon.NgayBan, 
                     SUM(HoaDon.TongTien) AS DoanhThu
@@ -47,47 +57,63 @@ namespace PRO131
                 GROUP BY HoaDon.NgayBan
                 ORDER BY HoaDon.NgayBan";
 
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@TuNgay", dtpTuNgay.Value.Date);
-                cmd.Parameters.AddWithValue("@DenNgay", dtpDenNgay.Value.Date);
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@TuNgay", dtpTuNgay.Value.Date);
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+                    // ✅ Ngày kết thúc lấy hết cả ngày (23:59:59)
+                    cmd.Parameters.AddWithValue("@DenNgay", dtpDenNgay.Value.Date.AddDays(1).AddTicks(-1));
 
-                // Đổ vào DataGridView
-                dgvHoaDon.DataSource = dt;
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                // Tính tổng
-                decimal tong = 0;
-                foreach (DataRow row in dt.Rows)
-                {
-                    tong += Convert.ToDecimal(row["DoanhThu"]);
+                    // ✅ Kiểm tra dữ liệu rỗng
+                    if (dt.Rows.Count == 0)
+                    {
+                        dgvHoaDon.DataSource = null;
+                        lblTongDoanhThu.Text = "Không có dữ liệu trong khoảng thời gian này!";
+                        chartDoanhThu.Series.Clear();
+                        return;
+                    }
+
+                    // Đổ vào DataGridView
+                    dgvHoaDon.DataSource = dt;
+
+                    // ✅ Tính tổng an toàn
+                    decimal tong = dt.AsEnumerable().Sum(r => r.Field<decimal>("DoanhThu"));
+                    lblTongDoanhThu.Text = "💰 Tổng doanh thu: " + tong.ToString("N0") + " VNĐ";
+
+                    // Vẽ biểu đồ
+                    chartDoanhThu.Series.Clear();
+                    Series series = chartDoanhThu.Series.Add("Doanh thu");
+                    series.ChartType = SeriesChartType.Column;
+                    series.IsValueShownAsLabel = true; // ✅ Hiện giá trị trên cột
+                    series.LabelFormat = "N0";
+
+                    // Trục X là ngày
+                    chartDoanhThu.ChartAreas[0].AxisX.Title = "Ngày bán";
+                    chartDoanhThu.ChartAreas[0].AxisX.LabelStyle.Format = "dd/MM";
+                    chartDoanhThu.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
+                    chartDoanhThu.ChartAreas[0].AxisX.Interval = 1;
+                    chartDoanhThu.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
+                    chartDoanhThu.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
+
+                    // Trục Y là doanh thu
+                    chartDoanhThu.ChartAreas[0].AxisY.Title = "Doanh thu";
+
+                    // ✅ Parse an toàn
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        DateTime ngayBan = row.Field<DateTime>("NgayBan");
+                        decimal doanhThu = row.Field<decimal>("DoanhThu");
+                        series.Points.AddXY(ngayBan, doanhThu);
+                    }
                 }
-                lblTongDoanhThu.Text = "💰 Tổng doanh thu: " + tong.ToString("N0") + " VNĐ";
-
-                // Vẽ biểu đồ
-                chartDoanhThu.Series.Clear();
-                Series series = chartDoanhThu.Series.Add("Doanh thu");
-                series.ChartType = SeriesChartType.Column;
-
-                // Trục X là ngày
-                chartDoanhThu.ChartAreas[0].AxisX.Title = "Ngày bán";
-                chartDoanhThu.ChartAreas[0].AxisX.LabelStyle.Format = "dd/MM";
-                chartDoanhThu.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Days;
-                chartDoanhThu.ChartAreas[0].AxisX.Interval = 1;
-                chartDoanhThu.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
-                chartDoanhThu.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
-
-                // Trục Y là doanh thu
-                chartDoanhThu.ChartAreas[0].AxisY.Title = "Doanh thu";
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    DateTime ngayBan = DateTime.Parse(row["NgayBan"].ToString());
-                    decimal doanhThu = Convert.ToDecimal(row["DoanhThu"]);
-                    series.Points.AddXY(ngayBan.ToOADate(), doanhThu);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải thống kê: " + ex.Message,
+                                "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
