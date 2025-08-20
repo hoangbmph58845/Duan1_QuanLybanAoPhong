@@ -41,10 +41,10 @@ namespace PRO131
 
 
             dataGridView1.DataSource = danhSach;
-            dataGridView1.Columns["MaHD"].HeaderText = "Mã hd";
-            dataGridView1.Columns["MaKh"].HeaderText = "mã khách hàng";
-            dataGridView1.Columns["TenNV"].HeaderText = "tên nhân viên";
-            dataGridView1.Columns["NGAYBAN"].HeaderText = "ngày bán";
+            dataGridView1.Columns["MaHD"].HeaderText = "Mã hóa đơn";
+            dataGridView1.Columns["MaKh"].HeaderText = "Mã khách hàng";
+            dataGridView1.Columns["TenNV"].HeaderText = "Tên nhân viên";
+            dataGridView1.Columns["NGAYBAN"].HeaderText = "Ngày bán";
             dataGridView1.Columns["PHUONGTHUCTHANHTOAN"].HeaderText = "Phương thức thanh toán";
             dataGridView1.Columns["TONGTIEN"].HeaderText = "Tổng tiền";
             dataGridView1.Columns["TRANGTHAI"].HeaderText = "trạng thái";
@@ -69,35 +69,38 @@ namespace PRO131
         private void button1_Click_1(object sender, EventArgs e)
         {
             int maHD;
-
-
-            if (int.TryParse(textBox1.Text.Trim(), out maHD))
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                var ketQua = _context.HoaDons
-                    .Include(hd => hd.MaKhNavigation)
-                    .Include(hd => hd.MaNvNavigation)
-                    .Where(hd => hd.MaHd == maHD)
-                    .AsEnumerable()
-                    .Select(hd => new
-                    {
-                        MaHD = hd.MaHd,
-                        MaKh = hd.MaKh,
-                        TenNV = hd.MaNvNavigation.TenNhanVien,
-                        NGAYBAN = hd.NgayBan,
-                        PHUONGTHUCTHANHTOAN = hd.PhuongThucThanhToan,
-                        TONGTIEN = hd.TongTien,
-                        TRANGTHAI = hd.TrangThai ? "Đã thanh toán" : "Chưa thanh toán",
-
-                    })
-                    .ToList();
-
-                dataGridView1.DataSource = ketQua;
-
+                MessageBox.Show("Vui lòng nhập Mã hóa đơn.");
+                return;
             }
-            else
+            if (!int.TryParse(textBox1.Text.Trim(), out maHD) || maHD <= 0)
             {
-                MessageBox.Show("Vui lòng nhập Mã hóa đơn hợp lệ (số nguyên).");
+                MessageBox.Show("Mã hóa đơn phải là số nguyên dương.");
+                return;
             }
+            var ketQua = _context.HoaDons
+                .Include(hd => hd.MaKhNavigation)
+                .Include(hd => hd.MaNvNavigation)
+                .Where(hd => hd.MaHd == maHD)
+                .AsEnumerable()
+                .Select(hd => new
+                {
+                    MaHD = hd.MaHd,
+                    MaKh = hd.MaKh,
+                    TenNV = hd.MaNvNavigation.TenNhanVien,
+                    NGAYBAN = hd.NgayBan,
+                    PHUONGTHUCTHANHTOAN = hd.PhuongThucThanhToan,
+                    TONGTIEN = hd.TongTien,
+                    TRANGTHAI = hd.TrangThai ? "Đã thanh toán" : "Chưa thanh toán",
+                })
+                .ToList();
+            if (ketQua == null || ketQua.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy hóa đơn với Mã HD: " + maHD);
+                return;
+            }
+            dataGridView1.DataSource = ketQua;
 
         }
 
@@ -122,10 +125,7 @@ namespace PRO131
 
                 button1.PerformClick();
             }
-            else
-            {
-                MessageBox.Show("Không tìm thấy hóa đơn!");
-            }
+            LoadDanhSachHoaDon();
         }
 
         private void dataGridView1_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
@@ -134,11 +134,7 @@ namespace PRO131
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                 textBox1.Text = row.Cells["MaHD"].Value.ToString();
-
-                // Lấy mã hóa đơn đang chọn
                 _maHoaDonDangChon = Convert.ToInt32(row.Cells["MaHD"].Value);
-
-                // Lấy trạng thái
                 string trangThai = row.Cells["TRANGTHAI"].Value.ToString();
                 comboBox1.SelectedIndex = comboBox1.FindStringExact(trangThai);
 
@@ -148,6 +144,11 @@ namespace PRO131
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            LoadDanhSachHoaDon();
         }
     }
 }

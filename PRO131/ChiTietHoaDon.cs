@@ -47,26 +47,39 @@ namespace PRO131
         private void button1_Click(object sender, EventArgs e)
         {
             int maHDCT;
-
-
-            if (int.TryParse(textBox1.Text.Trim(), out maHDCT))
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                var ketQua = _context.HoaDonChiTiets
-                    .Where(hdct => hdct.MaHdct == maHDCT)
-                    .AsEnumerable()
-                    .Select(hdct => new
-                    {
-                        MaHDCT = hdct.MaHdct,
-                        MaHD = hdct.MaHd,
-                        MaSPCT = hdct.MaSpct,
-                        Soluong = hdct.SoLuong,
-                        Dongia = hdct.DonGia,
-
-                    })
-                    .ToList();
-
-                dataGridView1.DataSource = ketQua;
+                MessageBox.Show("Vui lòng nhập Mã hóa đơn chi tiết.");
+                return;
             }
+            if (!int.TryParse(textBox1.Text.Trim(), out maHDCT) || maHDCT <= 0)
+            {
+                MessageBox.Show("Mã hóa đơn chi tiết phải là số nguyên dương.");
+                return;
+            }
+            var ketQua = _context.HoaDonChiTiets
+                .Where(hdct => hdct.MaHdct == maHDCT)
+                .AsEnumerable()
+                .Select(hdct => new
+                {
+                    MaHDCT = hdct.MaHdct,
+                    MaHD = hdct.MaHd,
+                    MaSPCT = hdct.MaSpct,
+                    Soluong = hdct.SoLuong,
+                    Dongia = hdct.DonGia,
+
+                }).ToList();
+            if (ketQua == null || ketQua.Count == 0)
+            {
+                MessageBox.Show("Không tìm thấy hóa đơn với Mã HDCT: " + maHDCT);
+                return;
+            }
+            dataGridView1.DataSource = ketQua;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            LoadChiTietHoaDon();
         }
     }
 }

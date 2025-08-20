@@ -232,6 +232,8 @@
             dataGridView2.RowHeadersWidth = 51;
             dataGridView2.Size = new Size(690, 282);
             dataGridView2.TabIndex = 0;
+            dataGridView2.CellEndEdit += dataGridView2_CellEndEdit;
+            dataGridView2.CellValidating += dataGridView2_CellValidating;
             // 
             // groupBox2
             // 
