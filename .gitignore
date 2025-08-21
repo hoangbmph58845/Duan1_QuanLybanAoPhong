@@ -1,0 +1,13 @@
+# Build & VS
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.VC.db
+*.cache
+*.log
+
+# NuGet
+packages/
+*.nupkg
