@@ -33,7 +33,6 @@ namespace PRO131
             panelMenu = new Panel();
             iconButton1 = new IconButton();
             panelSubNhanVien = new Panel();
-            btnLichSuBan = new Button();
             btnTaiKhoan = new Button();
             btnDSNhanVien = new Button();
             btnNhanVien = new IconButton();
@@ -93,11 +92,11 @@ namespace PRO131
             iconButton1.IconFont = IconFont.Auto;
             iconButton1.IconSize = 24;
             iconButton1.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton1.Location = new Point(0, 728);
+            iconButton1.Location = new Point(0, 718);
             iconButton1.Margin = new Padding(2);
             iconButton1.Name = "iconButton1";
             iconButton1.Padding = new Padding(8, 0, 8, 0);
-            iconButton1.Size = new Size(240, 48);
+            iconButton1.Size = new Size(240, 37);
             iconButton1.TabIndex = 17;
             iconButton1.Text = "Thống kê";
             iconButton1.TextAlign = ContentAlignment.MiddleRight;
@@ -107,31 +106,15 @@ namespace PRO131
             // 
             // panelSubNhanVien
             // 
-            panelSubNhanVien.Controls.Add(btnLichSuBan);
             panelSubNhanVien.Controls.Add(btnTaiKhoan);
             panelSubNhanVien.Controls.Add(btnDSNhanVien);
             panelSubNhanVien.Dock = DockStyle.Top;
-            panelSubNhanVien.Location = new Point(0, 618);
+            panelSubNhanVien.Location = new Point(0, 622);
             panelSubNhanVien.Margin = new Padding(2);
             panelSubNhanVien.Name = "panelSubNhanVien";
-            panelSubNhanVien.Size = new Size(240, 110);
+            panelSubNhanVien.Size = new Size(240, 96);
             panelSubNhanVien.TabIndex = 15;
             panelSubNhanVien.Visible = false;
-            // 
-            // btnLichSuBan
-            // 
-            btnLichSuBan.BackColor = Color.FromArgb(233, 245, 245);
-            btnLichSuBan.Dock = DockStyle.Top;
-            btnLichSuBan.FlatAppearance.BorderSize = 0;
-            btnLichSuBan.FlatStyle = FlatStyle.Flat;
-            btnLichSuBan.ForeColor = Color.FromArgb(29, 53, 87);
-            btnLichSuBan.Location = new Point(0, 72);
-            btnLichSuBan.Margin = new Padding(2);
-            btnLichSuBan.Name = "btnLichSuBan";
-            btnLichSuBan.Size = new Size(240, 38);
-            btnLichSuBan.TabIndex = 9;
-            btnLichSuBan.Text = "Lịch sử bán hàng";
-            btnLichSuBan.UseVisualStyleBackColor = false;
             // 
             // btnTaiKhoan
             // 
@@ -140,10 +123,10 @@ namespace PRO131
             btnTaiKhoan.FlatAppearance.BorderSize = 0;
             btnTaiKhoan.FlatStyle = FlatStyle.Flat;
             btnTaiKhoan.ForeColor = Color.FromArgb(29, 53, 87);
-            btnTaiKhoan.Location = new Point(0, 36);
+            btnTaiKhoan.Location = new Point(0, 47);
             btnTaiKhoan.Margin = new Padding(2);
             btnTaiKhoan.Name = "btnTaiKhoan";
-            btnTaiKhoan.Size = new Size(240, 36);
+            btnTaiKhoan.Size = new Size(240, 48);
             btnTaiKhoan.TabIndex = 8;
             btnTaiKhoan.Text = "\tQuản lý tài khoản";
             btnTaiKhoan.UseVisualStyleBackColor = false;
@@ -159,7 +142,7 @@ namespace PRO131
             btnDSNhanVien.Location = new Point(0, 0);
             btnDSNhanVien.Margin = new Padding(2);
             btnDSNhanVien.Name = "btnDSNhanVien";
-            btnDSNhanVien.Size = new Size(240, 36);
+            btnDSNhanVien.Size = new Size(240, 47);
             btnDSNhanVien.TabIndex = 6;
             btnDSNhanVien.Text = "Danh sách nhân viên";
             btnDSNhanVien.UseVisualStyleBackColor = false;
@@ -181,7 +164,7 @@ namespace PRO131
             btnNhanVien.Margin = new Padding(2);
             btnNhanVien.Name = "btnNhanVien";
             btnNhanVien.Padding = new Padding(8, 0, 8, 0);
-            btnNhanVien.Size = new Size(240, 48);
+            btnNhanVien.Size = new Size(240, 52);
             btnNhanVien.TabIndex = 14;
             btnNhanVien.Text = "Quản Lý Nhân viên";
             btnNhanVien.TextAlign = ContentAlignment.MiddleRight;
@@ -491,7 +474,6 @@ namespace PRO131
         private Button btnTaoHoaDon;
         private IconButton btnNhanVien;
         private Panel panelSubNhanVien;
-        private Button btnLichSuBan;
         private Button btnTaiKhoan;
         private Button btnDSNhanVien;
         private PictureBox pictureBox1;
