@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\LamBai\\LamBai\\PRO131\\PRO131.csproj": {}
+    "E:\\CloneCode\\Duan1_QuanLybanAoPhong\\PRO131\\PRO131.csproj": {}
   },
   "projects": {
-    "E:\\LamBai\\LamBai\\PRO131\\PRO131.csproj": {
+    "E:\\CloneCode\\Duan1_QuanLybanAoPhong\\PRO131\\PRO131.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\LamBai\\LamBai\\PRO131\\PRO131.csproj",
+        "projectUniqueName": "E:\\CloneCode\\Duan1_QuanLybanAoPhong\\PRO131\\PRO131.csproj",
         "projectName": "PRO131",
-        "projectPath": "E:\\LamBai\\LamBai\\PRO131\\PRO131.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "E:\\LamBai\\LamBai\\PRO131\\obj\\",
+        "projectPath": "E:\\CloneCode\\Duan1_QuanLybanAoPhong\\PRO131\\PRO131.csproj",
+        "packagesPath": "C:\\Users\\huan-PC\\.nuget\\packages\\",
+        "outputPath": "E:\\CloneCode\\Duan1_QuanLybanAoPhong\\PRO131\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\huan-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -102,7 +103,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
