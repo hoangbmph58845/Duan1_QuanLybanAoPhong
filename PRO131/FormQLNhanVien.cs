@@ -18,13 +18,10 @@ namespace PRO131
         public FormQLNhanVien()
         {
             InitializeComponent();
-            // Khởi tạo DbContext
             _context = new DuAn1Context();
-
-            // Gán sự kiện Load
             this.Load += FormQLNhanVien_Load;
             dgvNhanVien.CellClick += dgvNhanVien_CellClick;
-            dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; ;
         }
         private DuAn1Context _context = new DuAn1Context();
 
@@ -32,8 +29,10 @@ namespace PRO131
 
         private void FormQLNhanVien_Load(object sender, EventArgs e)
         {
-            LoadNhanVien();
-            LoadChucVu();
+            InitTrangThai();   // đảm bảo combobox trạng thái có dữ liệu
+            LoadChucVu();      // load combobox Chức vụ
+            LoadNhanVien(true); // load từ DB khi mở form
+            ClearForm();
         }
         private void LoadChucVu()
         {
@@ -41,36 +40,101 @@ namespace PRO131
             cboChucVu.DisplayMember = "TenChucVu";
             cboChucVu.ValueMember = "MaCv";
         }
-        private void LoadNhanVien()
+        private bool checksodienthoai(string soDT, int? idDangSua = null)
+        {
+            // Bắt đầu bằng 0 và đúng 10 số
+            if (string.IsNullOrWhiteSpace(soDT) ||
+                !System.Text.RegularExpressions.Regex.IsMatch(soDT, @"^0\d{9}$"))
+            {
+                MessageBox.Show("❌ Số điện thoại không hợp lệ! Phải bắt đầu bằng số 0 và có đúng 10 chữ số.");
+                return false;
+            }
+
+            // Kiểm tra trùng trong DB (và bỏ qua chính bản ghi đang sửa nếu có)
+            bool trungDb = _context.NhanViens.Any(nv => nv.SoDienThoai == soDT &&
+                                                       (idDangSua == null || nv.MaNv != idDangSua.Value));
+
+            // (tuỳ chọn) kiểm tra cả Local (các bản ghi vừa Add/Sửa nhưng chưa SaveChanges)
+            bool trungLocal = _context.NhanViens.Local.Any(nv => nv.SoDienThoai == soDT &&
+                                                                (idDangSua == null || nv.MaNv != idDangSua.Value));
+
+            if (trungDb || trungLocal)
+            {
+                MessageBox.Show("❌ Số điện thoại đã tồn tại!");
+                return false;
+            }
+
+            return true;
+        }
+        private void ClearForm()
+        {
+            txtMaNV.Clear();
+            txtHoTen.Clear();
+            txtDiaChi.Clear();
+            txtSoDT.Clear();
+            cboGioiTinh.SelectedIndex = -1;
+            cboTrangThai.SelectedIndex = -1;
+            cboChucVu.SelectedIndex = -1;
+            dtNgaySinh.Value = DateTime.Now;
+        }
+        private void InitTrangThai()
+        {
+            cboTrangThai.Items.Clear();
+            cboTrangThai.Items.Add("Đang làm");
+            cboTrangThai.Items.Add("Nghỉ làm");
+        }
+        private void LoadNhanVien(bool fromDb = true)
         {
             try
             {
-                var dsNhanVien = _context.NhanViens
-        .Select(nv => new
-        {
-            MaNV = nv.MaNv,
-            HoTen = nv.TenNhanVien,
-            GioiTinh = nv.GioiTinh,
-            DiaChi = nv.DiaChi,
-            SoDienThoai = nv.SoDienThoai,
-            NgaySinh = nv.NgaySinh,
-            TrangThai = nv.TrangThai ? "Đang làm" : "Nghỉ làm",
-            MaCV = nv.MaCv,
-            ChucVu = nv.MaCvNavigation.TenChucVu,
+                List<object> dsNhanVien;
 
-        }).ToList();
+                if (fromDb)
+                {
+                    dsNhanVien = _context.NhanViens
+       .Select(nv => new
+       {
+           MaNV = nv.MaNv,
+           HoTen = nv.TenNhanVien,
+           GioiTinh = nv.GioiTinh,
+           DiaChi = nv.DiaChi,
+           SoDienThoai = nv.SoDienThoai,
+           NgaySinh = nv.NgaySinh,
+           TrangThai = nv.TrangThai ? "Đang làm" : "Nghỉ làm",
+           MaCV = nv.MaCv,
+           ChucVu = nv.MaCvNavigation.TenChucVu
+       }).Cast<object>().ToList();
+                }
+                else
+                {
+                    var locals = _context.NhanViens.Local.ToList();
+                    dsNhanVien = locals
+                        .Select(nv => new
+                        {
+                            MaNV = nv.MaNv > 0 ? nv.MaNv : (int?)null,  // ❌ không hiển thị 0
+                            HoTen = nv.TenNhanVien,
+                            GioiTinh = nv.GioiTinh,
+                            DiaChi = nv.DiaChi,
+                            SoDienThoai = nv.SoDienThoai,
+                            NgaySinh = nv.NgaySinh,
+                            TrangThai = nv.TrangThai ? "Đang làm" : "Nghỉ làm",
+                            MaCV = nv.MaCv,
+                            ChucVu = _context.ChucVus.FirstOrDefault(c => c.MaCv == nv.MaCv)?.TenChucVu
+                        }).Cast<object>().ToList();
+                }
 
+                dgvNhanVien.AutoGenerateColumns = true;
                 dgvNhanVien.DataSource = dsNhanVien;
 
-                // Tuỳ chỉnh tiêu đề cột
-                dgvNhanVien.Columns["MaNV"].HeaderText = "Mã NV";
-                dgvNhanVien.Columns["HoTen"].HeaderText = "Họ tên";
-                dgvNhanVien.Columns["GioiTinh"].HeaderText = "Giới tính";
-                dgvNhanVien.Columns["DiaChi"].HeaderText = "Địa chỉ";
-                dgvNhanVien.Columns["SoDienThoai"].HeaderText = "SĐT";
-                dgvNhanVien.Columns["NgaySinh"].HeaderText = "Ngày sinh";
-                dgvNhanVien.Columns["TrangThai"].HeaderText = "Trạng thái";
-                dgvNhanVien.Columns["ChucVu"].HeaderText = "Chức vụ";
+                // Đặt header
+                if (dgvNhanVien.Columns["MaNV"] != null) dgvNhanVien.Columns["MaNV"].HeaderText = "Mã NV";
+                if (dgvNhanVien.Columns["HoTen"] != null) dgvNhanVien.Columns["HoTen"].HeaderText = "Họ tên";
+                if (dgvNhanVien.Columns["GioiTinh"] != null) dgvNhanVien.Columns["GioiTinh"].HeaderText = "Giới tính";
+                if (dgvNhanVien.Columns["DiaChi"] != null) dgvNhanVien.Columns["DiaChi"].HeaderText = "Địa chỉ";
+                if (dgvNhanVien.Columns["SoDienThoai"] != null) dgvNhanVien.Columns["SoDienThoai"].HeaderText = "SĐT";
+                if (dgvNhanVien.Columns["NgaySinh"] != null) dgvNhanVien.Columns["NgaySinh"].HeaderText = "Ngày sinh";
+                if (dgvNhanVien.Columns["TrangThai"] != null) dgvNhanVien.Columns["TrangThai"].HeaderText = "Trạng thái";
+                if (dgvNhanVien.Columns["ChucVu"] != null) dgvNhanVien.Columns["ChucVu"].HeaderText = "Chức vụ";
             }
             catch (Exception ex)
             {
@@ -91,6 +155,42 @@ namespace PRO131
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(txtHoTen.Text) ||
+                    string.IsNullOrWhiteSpace(cboGioiTinh.Text) ||
+                    string.IsNullOrWhiteSpace(txtDiaChi.Text) ||
+                    string.IsNullOrWhiteSpace(txtSoDT.Text) ||
+                    string.IsNullOrWhiteSpace(cboChucVu.Text) ||
+                    string.IsNullOrWhiteSpace(cboTrangThai.Text))
+                {
+                    MessageBox.Show("⚠️ Vui lòng nhập đầy đủ thông tin nhân viên!");
+                    return;
+                }
+                // --- Check tuổi ---
+                int age = DateTime.Now.Year - dtNgaySinh.Value.Year;
+                if (dtNgaySinh.Value > DateTime.Now.AddYears(-age)) age--; // trừ nếu chưa qua sinh nhật
+
+                if (age < 18)
+                {
+                    MessageBox.Show("❌ Nhân viên chưa đủ 18 tuổi!");
+                    return;
+                }
+                if (age > 50)
+                {
+                    MessageBox.Show("❌ Nhân viên quá tuổi (trên 50)!");
+                    return;
+                }
+
+                // --- Check số điện thoại ---
+                if (!checksodienthoai(txtSoDT.Text.Trim()))
+                    return;
+
+                // --- Check địa chỉ ---
+                if (string.IsNullOrWhiteSpace(txtDiaChi.Text))
+                {
+                    MessageBox.Show("⚠️ Vui lòng nhập địa chỉ!");
+                    return;
+                }
+
                 var nv = new NhanVien()
                 {
                     TenNhanVien = txtHoTen.Text.Trim(),
@@ -103,16 +203,21 @@ namespace PRO131
                 };
 
                 _context.NhanViens.Add(nv);
-                _context.SaveChanges();
-                MessageBox.Show("✅ Thêm nhân viên thành công!");
-                LoadNhanVien();
+                LoadNhanVien(false);
+                MessageBox.Show("📝 Đã thêm vào danh sách tạm. Nhấn Lưu để ghi vào database!");
+                ClearForm();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("❌ Lỗi thêm nhân viên: " + ex.Message);
+                ClearForm();
             }
         }
 
+        private bool CheckSoDienThoaiFormat(string soDT)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(soDT, @"^\d{9,11}$");
+        }
         private void btnSua_Click(object sender, EventArgs e)
         {
             try
@@ -122,30 +227,46 @@ namespace PRO131
                     MessageBox.Show("⚠️ Vui lòng chọn nhân viên để sửa!");
                     return;
                 }
+                int age = DateTime.Now.Year - dtNgaySinh.Value.Year;
+                if (dtNgaySinh.Value > DateTime.Now.AddYears(-age)) age--;
 
-                int maNV = int.Parse(txtMaNV.Text); // lấy từ txtMaNV (readonly)
-                var nv = _context.NhanViens.FirstOrDefault(n => n.MaNv == maNV);
-                if (nv != null)
+                if (age < 18)
                 {
-                    nv.TenNhanVien = txtHoTen.Text.Trim();
-                    nv.GioiTinh = cboGioiTinh.Text;
-                    nv.DiaChi = txtDiaChi.Text.Trim();
-                    nv.SoDienThoai = txtSoDT.Text.Trim();
-                    nv.NgaySinh = DateOnly.FromDateTime(dtNgaySinh.Value);   // ✅ dùng DateTime luôn, không cần DateOnly
-                    nv.TrangThai = cboTrangThai.Text == "Đang làm";
-
-                    // 🔥 Lấy lại MaCV theo tên chức vụ
-                    var cv = _context.ChucVus.FirstOrDefault(c => c.TenChucVu == cboChucVu.Text);
-                    if (cv != null) nv.MaCv = cv.MaCv;
-
-                    _context.SaveChanges();
-                    MessageBox.Show("✅ Cập nhật nhân viên thành công!");
-                    LoadNhanVien();
+                    MessageBox.Show("❌ Nhân viên chưa đủ 18 tuổi!");
+                    return;
                 }
-                else
+                if (age > 50)
                 {
-                    MessageBox.Show("❌ Không tìm thấy nhân viên cần sửa!");
+                    MessageBox.Show("❌ Nhân viên quá tuổi (trên 50)!");
+                    return;
                 }
+
+
+                int maNv = int.Parse(txtMaNV.Text);
+                var nv = _context.NhanViens.Local.FirstOrDefault(x => x.MaNv == maNv)
+                         ?? _context.NhanViens.FirstOrDefault(x => x.MaNv == maNv);
+
+                if (nv == null)
+                {
+                    MessageBox.Show("❌ Không tìm thấy nhân viên để sửa!");
+                    return;
+                }
+                if (!CheckSoDienThoaiFormat(txtSoDT.Text.Trim()))
+                {
+                    MessageBox.Show("⚠️ Số điện thoại không hợp lệ!");
+                    return;
+                }
+                nv.TenNhanVien = txtHoTen.Text.Trim();
+                nv.GioiTinh = cboGioiTinh.Text;
+                nv.DiaChi = txtDiaChi.Text.Trim();
+                nv.SoDienThoai = txtSoDT.Text.Trim();
+                nv.NgaySinh = DateOnly.FromDateTime(dtNgaySinh.Value);
+                nv.TrangThai = cboTrangThai.Text == "Đang làm";
+                nv.MaCv = (int)cboChucVu.SelectedValue;
+
+                LoadNhanVien(false); // refresh local
+                MessageBox.Show("📝 Đã sửa trong danh sách tạm. Nhấn Lưu để ghi vào database!");
+                ClearForm();
             }
             catch (Exception ex)
             {
@@ -156,78 +277,48 @@ namespace PRO131
 
         private void dgvNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex < 0) return;
+
+            var row = dgvNhanVien.Rows[e.RowIndex];
+
+            txtMaNV.Text = row.Cells["MaNV"]?.Value?.ToString() ?? "";
+            txtHoTen.Text = row.Cells["HoTen"]?.Value?.ToString() ?? "";
+            cboGioiTinh.Text = row.Cells["GioiTinh"]?.Value?.ToString() ?? "";
+            txtDiaChi.Text = row.Cells["DiaChi"]?.Value?.ToString() ?? "";
+            txtSoDT.Text = row.Cells["SoDienThoai"]?.Value?.ToString() ?? "";
+
+            // Ngày sinh: hỗ trợ DateOnly | DateTime | string
+            var cellNgaySinh = row.Cells["NgaySinh"]?.Value;
+            if (cellNgaySinh is DateOnly dOnly)
             {
-                DataGridViewRow row = dgvNhanVien.Rows[e.RowIndex];
-
-                // Gán dữ liệu vào các textbox & combobox
-                txtMaNV.Text = row.Cells["MaNV"].Value.ToString();
-                txtHoTen.Text = row.Cells["HoTen"].Value.ToString();
-                cboGioiTinh.Text = row.Cells["GioiTinh"].Value.ToString();
-                txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
-                txtSoDT.Text = row.Cells["SoDienThoai"].Value.ToString();
-
-                // Ngày sinh
-                DateOnly dateOnly = (DateOnly)row.Cells["NgaySinh"].Value;
-                dtNgaySinh.Value = dateOnly.ToDateTime(TimeOnly.MinValue);
-                // Trạng thái
-                cboTrangThai.Text = row.Cells["TrangThai"].Value.ToString();
-
-                // Chức vụ
-                cboChucVu.Text = row.Cells["ChucVu"].Value.ToString();
-                dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dtNgaySinh.Value = dOnly.ToDateTime(TimeOnly.MinValue);
             }
+            else if (cellNgaySinh is DateTime dTime)
+            {
+                dtNgaySinh.Value = dTime;
+            }
+            else if (DateTime.TryParse(cellNgaySinh?.ToString(), out var dParsed))
+            {
+                dtNgaySinh.Value = dParsed;
+            }
+
+            // Trạng thái
+            var trangThaiText = row.Cells["TrangThai"]?.Value?.ToString() ?? "";
+            if (trangThaiText == "Đang làm" || trangThaiText == "Nghỉ làm")
+                cboTrangThai.Text = trangThaiText;
+
+            // Chức vụ: set theo MaCV để luôn đúng
+            if (row.Cells["MaCV"]?.Value != null && int.TryParse(row.Cells["MaCV"].Value.ToString(), out var maCv))
+            {
+                cboChucVu.SelectedValue = maCv;
+            }
+
+            dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(txtMaNV.Text))
-                {
-                    MessageBox.Show("⚠️ Vui lòng chọn nhân viên để xóa!");
-                    return;
-                }
 
-                int maNV = int.Parse(txtMaNV.Text);
-
-                // Tìm nhân viên theo MaNV
-                var nv = _context.NhanViens.FirstOrDefault(n => n.MaNv == maNV);
-                if (nv != null)
-                {
-                    // Hỏi xác nhận trước khi xóa
-                    var confirm = MessageBox.Show("❗Bạn có chắc muốn xóa nhân viên này?",
-                                                  "Xác nhận xóa",
-                                                  MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Warning);
-
-                    if (confirm == DialogResult.Yes)
-                    {
-                        _context.NhanViens.Remove(nv);
-                        _context.SaveChanges();
-
-                        MessageBox.Show("✅ Xóa nhân viên thành công!");
-                        LoadNhanVien();
-
-                        // Xóa thông tin trong các textbox
-                        txtMaNV.Clear();
-                        txtHoTen.Clear();
-                        txtDiaChi.Clear();
-                        txtSoDT.Clear();
-                        cboGioiTinh.SelectedIndex = -1;
-                        cboTrangThai.SelectedIndex = -1;
-                        cboChucVu.SelectedIndex = -1;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("❌ Không tìm thấy nhân viên cần xóa!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("❌ Lỗi khi xóa: " + ex.Message);
-            }
         }
 
         private void btnTim_Click(object sender, EventArgs e)
@@ -238,8 +329,8 @@ namespace PRO131
 
                 if (string.IsNullOrEmpty(keyword))
                 {
-                    // Nếu ô tìm kiếm trống, load lại toàn bộ danh sách
-                    LoadNhanVien();
+                    ClearForm();
+                    LoadNhanVien(true); // xem toàn bộ từ DB
                     return;
                 }
 
@@ -271,6 +362,65 @@ namespace PRO131
             {
                 MessageBox.Show("❌ Lỗi khi tìm kiếm: " + ex.Message);
             }
+        }
+
+        private void btnThem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int changes = _context.SaveChanges(); // lưu tất cả Add/Sửa/Xóa trong Local
+                if (changes > 0)
+                {
+                    MessageBox.Show($"✅ Đã lưu {changes} thay đổi vào database!");
+                    LoadNhanVien(true); // load lại từ DB
+                    ClearForm();
+                }
+                else
+                {
+                    MessageBox.Show("⚠️ Không có thay đổi nào để lưu!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Lỗi khi lưu: " + ex.Message);
+                ClearForm();
+            }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                // Xóa dữ liệu trên form
+                ClearForm();
+
+                // Load lại combobox
+                InitTrangThai();
+                LoadChucVu();
+
+                // Load lại danh sách nhân viên từ DB
+                LoadNhanVien(true);
+
+                // Bỏ chọn trên DataGridView
+                dgvNhanVien.ClearSelection();
+
+                MessageBox.Show("✅ Đã làm mới dữ liệu!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Lỗi khi làm mới: " + ex.Message);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
