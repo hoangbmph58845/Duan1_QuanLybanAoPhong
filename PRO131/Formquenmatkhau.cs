@@ -14,7 +14,7 @@ namespace PRO131
 {
     public partial class Formquenmatkhau : Form
     {
-        private string connectionString = "Data Source=TUAN;Initial Catalog=DuAn_1;User ID=sa;Password=123456;TrustServerCertificate=True";
+        private string connectionString = "Data Source=DESKTOP-9MI2RPM;Initial Catalog=DuAn_1;User ID=sa;Password=123456;TrustServerCertificate=True";
 
         public Formquenmatkhau()
         {
