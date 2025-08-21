@@ -1,6 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using PRO131.DataContext;
+using PRO131.Models;
 using System;
 using System.Data;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -8,32 +10,23 @@ namespace PRO131
 {
     public partial class QLKH : UserControl
     {
-        private readonly string str =
-            "Data Source=DESKTOP-9MI2RPM;Initial Catalog=DuAn_1;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+        private readonly DuAn1Context _context;
 
         public QLKH()
         {
             InitializeComponent();
+            _context = new DuAn1Context();
             this.Load += QLKH_Load;
 
-            // ComboBox Giới tính
             comboBox_GT.Items.Clear();
             comboBox_GT.Items.AddRange(new string[] { "Nam", "Nữ" });
             comboBox_GT.SelectedIndex = 0;
 
-            // RadioButton mặc định
             radioButton_TX.Checked = true;
 
-            // Tìm kiếm realtime
             textBox_TK.TextChanged += Tb_TimKiem_TextChanged;
-
-            // Button tìm kiếm
             button_TK.Click += Bt_TimKiem_Click;
-
-            // Sự kiện click DataGridView
             dataGridView1.CellClick += DataGridView1_CellClick;
-
-            // Button CRUD
             button_Them.Click += Bt_Them_Click;
             button_Sua.Click += Bt_Sua_Click;
             button_Xoa.Click += Bt_Xoa_Click;
@@ -44,42 +37,38 @@ namespace PRO131
             LoadData();
         }
 
-        // Load dữ liệu khách hàng, có tìm kiếm
         private void LoadData(string keyword = "")
         {
             try
             {
-                using SqlConnection con = new SqlConnection(str);
-                con.Open();
+                var khList = _context.KhachHangs.AsQueryable();
 
-                string sql = @"
-                    SELECT * FROM KhachHang
-                    WHERE (@keyword = '' 
-                        OR MaKH LIKE @kw 
-                        OR TenKhachHang LIKE @kw
-                        OR SoDienThoai LIKE @kw
-                        OR GioiTinh LIKE @kw
-                        OR DiaChi LIKE @kw)";
+                if (!string.IsNullOrWhiteSpace(keyword))
+                {
+                    khList = khList.Where(k =>
+                        k.MaKh.ToString().Contains(keyword) ||
+                        k.TenKhachHang.Contains(keyword) ||
+                        k.SoDienThoai.Contains(keyword) ||
+                        k.GioiTinh.Contains(keyword) ||
+                        k.DiaChi.Contains(keyword));
+                }
 
-                using SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@keyword", keyword);
-                cmd.Parameters.AddWithValue("@kw", "%" + keyword + "%");
-
-                DataTable dt = new DataTable();
-                dt.Load(cmd.ExecuteReader());
-
-                if (!dt.Columns.Contains("TrangThaiText"))
-                    dt.Columns.Add("TrangThaiText", typeof(string));
-
-                foreach (DataRow row in dt.Rows)
-                    row["TrangThaiText"] = Convert.ToBoolean(row["TrangThai"]) ? "Thường xuyên" : "Không thường xuyên";
+                var dt = khList
+                    .Select(k => new
+                    {
+                        k.MaKh,
+                        k.TenKhachHang,
+                        k.GioiTinh,
+                        k.SoDienThoai,
+                        k.DiaChi,
+                        TrangThai = k.TrangThai,
+                        TrangThaiText = k.TrangThai ? "Thường xuyên" : "Không thường xuyên"
+                    })
+                    .ToList();
 
                 dataGridView1.DataSource = dt;
 
-                if (dataGridView1.Columns.Contains("TrangThai"))
-                    dataGridView1.Columns["TrangThai"].Visible = false;
-
-                RenameColumn("MaKH", "Mã khách hàng");
+                RenameColumn("MaKh", "Mã khách hàng");
                 RenameColumn("TenKhachHang", "Tên khách hàng");
                 RenameColumn("GioiTinh", "Giới tính");
                 RenameColumn("SoDienThoai", "Số điện thoại");
@@ -102,24 +91,18 @@ namespace PRO131
         {
             if (e.RowIndex < 0 || e.RowIndex >= dataGridView1.Rows.Count) return;
 
-            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            var row = dataGridView1.Rows[e.RowIndex];
 
-            textBox_MK.Text = row.Cells["MaKH"]?.Value?.ToString() ?? "";
+            textBox_MK.Text = row.Cells["MaKh"]?.Value?.ToString() ?? "";
             textBox_T.Text = row.Cells["TenKhachHang"]?.Value?.ToString() ?? "";
 
-            // Sửa ComboBox Giới tính để chọn đúng item
             string gt = row.Cells["GioiTinh"]?.Value?.ToString() ?? "Nam";
-            if (gt == "Nam")
-                comboBox_GT.SelectedIndex = 0;
-            else if (gt == "Nữ")
-                comboBox_GT.SelectedIndex = 1;
-            else
-                comboBox_GT.SelectedIndex = 0;
+            comboBox_GT.SelectedIndex = (gt == "Nữ") ? 1 : 0;
 
             textBox_DT.Text = row.Cells["SoDienThoai"]?.Value?.ToString() ?? "";
             textBox_DC.Text = row.Cells["DiaChi"]?.Value?.ToString() ?? "";
 
-            bool trangThai = row.Cells["TrangThai"]?.Value != DBNull.Value && Convert.ToBoolean(row.Cells["TrangThai"].Value);
+            bool trangThai = row.Cells["TrangThai"] != null && Convert.ToBoolean(row.Cells["TrangThai"].Value);
             radioButton_TX.Checked = trangThai;
             radioButton_KTX.Checked = !trangThai;
         }
@@ -130,31 +113,21 @@ namespace PRO131
 
             try
             {
-                bool trangThai = radioButton_TX.Checked;
-                using SqlConnection con = new SqlConnection(str);
-                con.Open();
-
-                string sql = @"INSERT INTO KhachHang(TenKhachHang, SoDienThoai, GioiTinh, DiaChi, TrangThai) 
-                               VALUES (@TenKhachHang, @SoDienThoai, @GioiTinh, @DiaChi, @TrangThai)";
-
-                using SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@TenKhachHang", textBox_T.Text.Trim());
-                cmd.Parameters.AddWithValue("@SoDienThoai", textBox_DT.Text.Trim());
-                cmd.Parameters.AddWithValue("@GioiTinh", comboBox_GT.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@DiaChi", textBox_DC.Text.Trim());
-                cmd.Parameters.AddWithValue("@TrangThai", trangThai);
-
-                int rows = cmd.ExecuteNonQuery();
-                if (rows > 0)
+                var kh = new KhachHang
                 {
-                    MessageBox.Show("Thêm khách hàng thành công!");
-                    LoadData();
-                    ClearForm();
-                }
-                else
-                {
-                    MessageBox.Show("Thêm khách hàng thất bại!");
-                }
+                    TenKhachHang = textBox_T.Text.Trim(),
+                    SoDienThoai = textBox_DT.Text.Trim(),
+                    GioiTinh = comboBox_GT.SelectedItem.ToString(),
+                    DiaChi = textBox_DC.Text.Trim(),
+                    TrangThai = radioButton_TX.Checked
+                };
+
+                _context.KhachHangs.Add(kh);
+                _context.SaveChanges();
+
+                MessageBox.Show("Thêm khách hàng thành công!");
+                LoadData();
+                ClearForm();
             }
             catch (Exception ex)
             {
@@ -166,35 +139,32 @@ namespace PRO131
         {
             if (!ValidateForm(true)) return;
 
+            if (!int.TryParse(textBox_MK.Text, out int maKh))
+            {
+                MessageBox.Show("Mã khách hàng không hợp lệ.");
+                return;
+            }
+
+            var kh = _context.KhachHangs.Find(maKh);
+            if (kh == null)
+            {
+                MessageBox.Show("Khách hàng không tồn tại.");
+                return;
+            }
+
             try
             {
-                bool trangThai = radioButton_TX.Checked;
-                using SqlConnection con = new SqlConnection(str);
-                con.Open();
+                kh.TenKhachHang = textBox_T.Text.Trim();
+                kh.SoDienThoai = textBox_DT.Text.Trim();
+                kh.GioiTinh = comboBox_GT.SelectedItem.ToString();
+                kh.DiaChi = textBox_DC.Text.Trim();
+                kh.TrangThai = radioButton_TX.Checked;
 
-                string sql = @"UPDATE KhachHang 
-                               SET TenKhachHang=@TenKhachHang, SoDienThoai=@SoDienThoai, GioiTinh=@GioiTinh, DiaChi=@DiaChi, TrangThai=@TrangThai 
-                               WHERE MaKH=@MaKH";
+                _context.SaveChanges();
 
-                using SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@MaKH", textBox_MK.Text.Trim());
-                cmd.Parameters.AddWithValue("@TenKhachHang", textBox_T.Text.Trim());
-                cmd.Parameters.AddWithValue("@SoDienThoai", textBox_DT.Text.Trim());
-                cmd.Parameters.AddWithValue("@GioiTinh", comboBox_GT.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("@DiaChi", textBox_DC.Text.Trim());
-                cmd.Parameters.AddWithValue("@TrangThai", trangThai);
-
-                int rows = cmd.ExecuteNonQuery();
-                if (rows > 0)
-                {
-                    MessageBox.Show("Sửa khách hàng thành công!");
-                    LoadData();
-                    ClearForm();
-                }
-                else
-                {
-                    MessageBox.Show("Sửa khách hàng thất bại!");
-                }
+                MessageBox.Show("Sửa khách hàng thành công!");
+                LoadData();
+                ClearForm();
             }
             catch (Exception ex)
             {
@@ -204,9 +174,16 @@ namespace PRO131
 
         private void Bt_Xoa_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBox_MK.Text))
+            if (!int.TryParse(textBox_MK.Text, out int maKh))
             {
                 MessageBox.Show("Vui lòng chọn khách hàng cần xóa.");
+                return;
+            }
+
+            var kh = _context.KhachHangs.Find(maKh);
+            if (kh == null)
+            {
+                MessageBox.Show("Khách hàng không tồn tại.");
                 return;
             }
 
@@ -215,24 +192,12 @@ namespace PRO131
             {
                 try
                 {
-                    using SqlConnection con = new SqlConnection(str);
-                    con.Open();
+                    _context.KhachHangs.Remove(kh);
+                    _context.SaveChanges();
 
-                    string sql = "DELETE FROM KhachHang WHERE MaKH=@MaKH";
-                    using SqlCommand cmd = new SqlCommand(sql, con);
-                    cmd.Parameters.AddWithValue("@MaKH", textBox_MK.Text.Trim());
-
-                    int rows = cmd.ExecuteNonQuery();
-                    if (rows > 0)
-                    {
-                        MessageBox.Show("Xóa khách hàng thành công!");
-                        LoadData();
-                        ClearForm();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Xóa khách hàng thất bại!");
-                    }
+                    MessageBox.Show("Xóa khách hàng thành công!");
+                    LoadData();
+                    ClearForm();
                 }
                 catch (Exception ex)
                 {
@@ -267,8 +232,8 @@ namespace PRO131
                 return false;
             }
 
-            string gioiTinh = comboBox_GT.SelectedItem?.ToString() ?? "";
-            if (string.IsNullOrEmpty(gioiTinh) || (gioiTinh != "Nam" && gioiTinh != "Nữ"))
+            string gt = comboBox_GT.SelectedItem?.ToString() ?? "";
+            if (gt != "Nam" && gt != "Nữ")
             {
                 MessageBox.Show("Giới tính phải là Nam hoặc Nữ.");
                 comboBox_GT.Focus();
@@ -276,13 +241,7 @@ namespace PRO131
             }
 
             string sdt = textBox_DT.Text.Trim();
-            if (string.IsNullOrEmpty(sdt))
-            {
-                MessageBox.Show("Số điện thoại không được để trống.");
-                textBox_DT.Focus();
-                return false;
-            }
-            if (!Regex.IsMatch(sdt, @"^\d{10}$"))
+            if (string.IsNullOrEmpty(sdt) || !Regex.IsMatch(sdt, @"^\d{10}$"))
             {
                 MessageBox.Show("Số điện thoại phải đúng 10 số.");
                 textBox_DT.Focus();
@@ -297,14 +256,15 @@ namespace PRO131
                 return false;
             }
 
-            if (!isEdit && IsPhoneExists(sdt))
+            if (!isEdit && _context.KhachHangs.Any(k => k.SoDienThoai == sdt))
             {
                 MessageBox.Show("Số điện thoại này đã tồn tại.");
                 textBox_DT.Focus();
                 return false;
             }
 
-            if (isEdit && IsPhoneExists(sdt, textBox_MK.Text.Trim()))
+            if (isEdit && int.TryParse(textBox_MK.Text, out int maKh) &&
+                _context.KhachHangs.Any(k => k.SoDienThoai == sdt && k.MaKh != maKh))
             {
                 MessageBox.Show("Số điện thoại này đã tồn tại với khách hàng khác.");
                 textBox_DT.Focus();
@@ -312,23 +272,6 @@ namespace PRO131
             }
 
             return true;
-        }
-
-        private bool IsPhoneExists(string sdt, string maKH = "")
-        {
-            using SqlConnection con = new SqlConnection(str);
-            con.Open();
-
-            string sql = "SELECT COUNT(*) FROM KhachHang WHERE SoDienThoai=@sdt";
-            if (!string.IsNullOrEmpty(maKH))
-                sql += " AND MaKH<>@MaKH";
-
-            using SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@sdt", sdt);
-            if (!string.IsNullOrEmpty(maKH))
-                cmd.Parameters.AddWithValue("@MaKH", maKH);
-
-            return (int)cmd.ExecuteScalar() > 0;
         }
 
         private void Tb_TimKiem_TextChanged(object sender, EventArgs e)

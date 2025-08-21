@@ -1,6 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using PRO131.DataContext;
+using PRO131.Models;
 using System;
 using System.Data;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -8,13 +10,21 @@ namespace PRO131
 {
     public partial class DSKH : UserControl
     {
-        private string connectionString =
-      @"Server=DESKTOP-9MI2RPM;Database=DuAn_1;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True;";
-
+        private readonly DuAn1Context _context;
 
         public DSKH()
         {
             InitializeComponent();
+            _context = new DuAn1Context();
+
+            // Cấu hình DataGridView
+            dataGridView2.ScrollBars = ScrollBars.Vertical; // Hiển thị thanh trượt dọc
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Cột tự giãn vừa khít
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Chọn cả hàng
+            dataGridView2.MultiSelect = false; // Chỉ chọn 1 hàng
+            dataGridView2.AllowUserToAddRows = false; // Không thêm dòng thủ công
+            dataGridView2.RowHeadersVisible = false; // Ẩn header dòng nếu muốn
+
             LoadData(); // Load toàn bộ KH ban đầu
 
             // Gán sự kiện tìm kiếm realtime
@@ -26,45 +36,51 @@ namespace PRO131
 
         private void LoadData(string keyword = "")
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
+                var khList = _context.KhachHangs.AsQueryable();
 
-                string query = @"
-                    SELECT MaKH, TenKhachHang, GioiTinh, DiaChi, SoDienThoai, TrangThai
-                    FROM KhachHang
-                    WHERE TenKhachHang LIKE @keyword OR SoDienThoai LIKE @keyword
-                ";
-
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.SelectCommand.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
-
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                // Thêm cột hiển thị trạng thái dạng chữ
-                if (!dt.Columns.Contains("TrangThaiText"))
-                    dt.Columns.Add("TrangThaiText", typeof(string));
-
-                foreach (DataRow row in dt.Rows)
+                if (!string.IsNullOrWhiteSpace(keyword))
                 {
-                    int trangThai = Convert.ToInt32(row["TrangThai"]);
-                    row["TrangThaiText"] = trangThai == 1 ? "Thường xuyên" : "Không thường xuyên";
+                    khList = khList.Where(k =>
+                        k.TenKhachHang.Contains(keyword) ||
+                        k.SoDienThoai.Contains(keyword));
                 }
+
+                var dt = khList
+                    .Select(k => new
+                    {
+                        k.MaKh,
+                        k.TenKhachHang,
+                        k.GioiTinh,
+                        k.DiaChi,
+                        k.SoDienThoai,
+                        k.TrangThai,
+                        TrangThaiText = k.TrangThai ? "Thường xuyên" : "Không thường xuyên"
+                    })
+                    .ToList();
 
                 dataGridView2.DataSource = dt;
 
-                // Ẩn cột gốc
-                if (dataGridView2.Columns.Contains("TrangThai"))
-                    dataGridView2.Columns["TrangThai"].Visible = false;
-
                 // Đặt tiêu đề cột
-                RenameColumn(dataGridView2, "MaKH", "Mã khách hàng");
+                RenameColumn(dataGridView2, "MaKh", "Mã khách hàng");
                 RenameColumn(dataGridView2, "TenKhachHang", "Tên khách hàng");
                 RenameColumn(dataGridView2, "GioiTinh", "Giới tính");
                 RenameColumn(dataGridView2, "DiaChi", "Địa chỉ");
                 RenameColumn(dataGridView2, "SoDienThoai", "Số điện thoại");
                 RenameColumn(dataGridView2, "TrangThaiText", "Trạng thái");
+
+                // Ẩn cột gốc
+                if (dataGridView2.Columns.Contains("TrangThai"))
+                    dataGridView2.Columns["TrangThai"].Visible = false;
+
+                // Tự cuộn về đầu khi load
+                if (dataGridView2.Rows.Count > 0)
+                    dataGridView2.FirstDisplayedScrollingRowIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
             }
         }
 
@@ -74,7 +90,6 @@ namespace PRO131
                 dgv.Columns[columnName].HeaderText = headerText;
         }
 
-        // Tìm kiếm realtime
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
             string keyword = textBox_TK2.Text.Trim();
@@ -95,23 +110,21 @@ namespace PRO131
             return Regex.IsMatch(keyword, @"^[\w\s]*$");
         }
 
-        // Xử lý click DataGridView
         private void DataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.RowIndex >= dataGridView2.Rows.Count)
                 return;
 
-            DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
+            var row = dataGridView2.Rows[e.RowIndex];
 
-            // Validate dữ liệu trước khi hiển thị chi tiết
-            if (row.Cells["MaKH"].Value == null || row.Cells["TenKhachHang"].Value == null)
+            if (row.Cells["MaKh"].Value == null || row.Cells["TenKhachHang"].Value == null)
             {
                 MessageBox.Show("Dữ liệu khách hàng không hợp lệ.");
                 return;
             }
 
             // Ví dụ hiển thị chi tiết vào TextBox (nếu có)
-            string maKH = row.Cells["MaKH"].Value.ToString();
+            string maKH = row.Cells["MaKh"].Value.ToString();
             string tenKH = row.Cells["TenKhachHang"].Value.ToString();
             string sdt = row.Cells["SoDienThoai"].Value.ToString();
 
@@ -121,7 +134,7 @@ namespace PRO131
                 return;
             }
 
-            // Bạn có thể gán giá trị vào các TextBox hiển thị chi tiết
+            // Gán giá trị vào TextBox nếu cần
             // textBox_MaKH.Text = maKH;
             // textBox_TenKH.Text = tenKH;
             // textBox_SDT.Text = sdt;
