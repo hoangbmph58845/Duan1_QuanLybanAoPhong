@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PRO131.DataContext;
@@ -17,13 +18,13 @@ namespace PRO131
     public partial class FormQLTaiKhoan : UserControl
     {
         private DuAn1Context _context = new DuAn1Context();
+        private List<TaiKhoan> _dsTaiKhoanTam = new List<TaiKhoan>();
+        private int maNvDangNhap = 5;
 
         public FormQLTaiKhoan()
         {
             InitializeComponent();
             this.Load += FormQLTaiKhoan_Load;
-
-            // Gắn sự kiện cho các nút
             dgvTaiKhoan.CellClick += dgvTaiKhoan_CellClick;
 
         }
@@ -33,7 +34,72 @@ namespace PRO131
             LoadTaiKhoan();
             txtMaTK.ReadOnly = true;
             LoadNhanVienComboBox();
+            clearForm();
 
+        }
+        private void clearForm()
+        {
+            txtMaTK.Clear();
+            txtTenDangNhap.Clear();
+            txtMatKhau.Clear();
+            txtEmail.Clear();
+            txtSearchTK.Clear();
+
+            // Reset combobox
+            cboNhanVien.SelectedIndex = -1;
+            cboTrangThaiTK.SelectedIndex = 0;
+
+            // Bỏ chọn trong DataGridView
+            dgvTaiKhoan.ClearSelection();
+
+            // Tải lại danh sách tài khoản
+        }
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtTenDangNhap.Text))
+            {
+                MessageBox.Show("⚠️ Vui lòng nhập Tên đăng nhập!");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtMatKhau.Text))
+            {
+                MessageBox.Show("⚠️ Vui lòng nhập Mật khẩu!");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                MessageBox.Show("⚠️ Vui lòng nhập Email!");
+                return false;
+            }
+
+            if (cboNhanVien.SelectedValue == null)
+            {
+                MessageBox.Show("⚠️ Vui lòng chọn Nhân viên!");
+                return false;
+            }
+
+            if (txtMatKhau.Text.Length < 6)
+            {
+                MessageBox.Show("⚠️ Mật khẩu phải có ít nhất 6 ký tự!");
+                return false;
+            }
+
+            string pattern = @"^[^@\s]+@[^@\s]+\.com$";
+            if (!Regex.IsMatch(txtEmail.Text.Trim(), pattern))
+            {
+                MessageBox.Show("⚠️ Email không hợp lệ!");
+                return false;
+            }
+
+            string email = txtEmail.Text.Trim();
+            if (!Regex.IsMatch(email, @"[A-Za-z]") || !Regex.IsMatch(email, @"\d"))
+            {
+                MessageBox.Show("⚠️ Email phải chứa cả chữ và số!");
+                return false;
+            }
+            return true;
         }
         private void LoadNhanVienComboBox()
         {
@@ -48,9 +114,9 @@ namespace PRO131
                     .ToList();
 
                 cboNhanVien.DataSource = danhSachNhanVien;
-                cboNhanVien.DisplayMember = "TenHienThi"; // Hiển thị mã + tên
-                cboNhanVien.ValueMember = "MaNv";         // Lưu giá trị là MaNv
-                cboNhanVien.SelectedIndex = -1;           // Không chọn mặc định
+                cboNhanVien.DisplayMember = "TenHienThi";
+                cboNhanVien.ValueMember = "MaNv";
+                cboNhanVien.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -60,16 +126,16 @@ namespace PRO131
         private void LoadTaiKhoan()
         {
             var dsTaiKhoan = _context.TaiKhoans
-                  .Select(tk => new
-                  {
-                      MaTK = tk.MaTk,
-                      TenDangNhap = tk.TenDangNhap,
-                      MatKhau = tk.MatKhau,
-                      MaNV = tk.MaNv,
-                      TenNhanVien = tk.MaNvNavigation.TenNhanVien,
-                      TrangThai = tk.TrangThai ? "Hoạt động" : "Dừng Hoạt Động",
-                      Email = tk.Email,
-                  }).ToList();
+                    .Select(tk => new
+                    {
+                        MaTK = tk.MaTk,
+                        TenDangNhap = tk.TenDangNhap,
+                        MatKhau = tk.MatKhau,
+                        MaNV = tk.MaNv,
+                        TenNhanVien = tk.MaNvNavigation.TenNhanVien,
+                        TrangThai = tk.TrangThai ? "Hoạt động" : "Dừng Hoạt Động",
+                        Email = tk.Email,
+                    }).ToList();
 
             dgvTaiKhoan.DataSource = dsTaiKhoan;
             dgvTaiKhoan.Columns["MaTK"].HeaderText = "Mã TK";
@@ -78,7 +144,7 @@ namespace PRO131
             dgvTaiKhoan.Columns["MaNV"].HeaderText = "Mã NV";
             dgvTaiKhoan.Columns["TenNhanVien"].HeaderText = "Tên nhân viên";
             dgvTaiKhoan.Columns["TrangThai"].HeaderText = "Trạng thái";
-            dgvTaiKhoan.Columns["Email"].HeaderText = "Email"; // Thêm cột Email nếu cần
+            dgvTaiKhoan.Columns["Email"].HeaderText = "Email";
             dgvTaiKhoan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         }
@@ -89,10 +155,42 @@ namespace PRO131
         private void LoadTrangThaiComboBox()
         {
             cboTrangThaiTK.Items.Clear();
-            cboTrangThaiTK.Items.Add("Hoạt động");      // tương ứng 1
-            cboTrangThaiTK.Items.Add("Dừng Hoạt Động"); // tương ứng 0
-            cboTrangThaiTK.SelectedIndex = 0; // mặc định chọn "Hoạt động"
+            cboTrangThaiTK.Items.Add("Hoạt động");
+            cboTrangThaiTK.Items.Add("Dừng Hoạt Động");
+            cboTrangThaiTK.SelectedIndex = 0;
 
+        }
+        private void HienThiDanhSachTam()
+        {
+            var dsDb = _context.TaiKhoans
+                .Select(tk => new
+                {
+                    MaTK = tk.MaTk,
+                    TenDangNhap = tk.TenDangNhap,
+                    MatKhau = tk.MatKhau,
+                    MaNV = tk.MaNv,
+                    TenNhanVien = tk.MaNvNavigation.TenNhanVien,
+                    TrangThai = tk.TrangThai ? "Hoạt động" : "Dừng Hoạt Động",
+                    Email = tk.Email,
+                    Nguon = "DB"
+                }).ToList();
+
+            var dsTam = _dsTaiKhoanTam
+                .Select(tk => new
+                {
+                    MaTK = tk.MaTk,
+                    TenDangNhap = tk.TenDangNhap,
+                    MatKhau = tk.MatKhau,
+                    MaNV = tk.MaNv,
+                    TenNhanVien = _context.NhanViens.FirstOrDefault(nv => nv.MaNv == tk.MaNv)?.TenNhanVien,
+                    TrangThai = tk.TrangThai ? "Hoạt động" : "Dừng Hoạt Động",
+                    Email = tk.Email,
+                    Nguon = "Tạm"
+                }).ToList();
+
+            var dsTong = dsDb.Concat(dsTam).ToList();
+            dgvTaiKhoan.DataSource = dsTong;
+            dgvTaiKhoan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         private void dgvTaiKhoan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -100,27 +198,21 @@ namespace PRO131
             {
                 DataGridViewRow row = dgvTaiKhoan.Rows[e.RowIndex];
 
-                // Gán dữ liệu từ DataGridView vào các điều khiển
                 txtMaTK.Text = row.Cells["MaTK"].Value.ToString();
                 txtTenDangNhap.Text = row.Cells["TenDangNhap"].Value.ToString();
                 txtMatKhau.Text = row.Cells["MatKhau"].Value.ToString();
                 txtEmail.Text = row.Cells["Email"].Value?.ToString();
 
-                // ✅ Gán MaNV vào ComboBox nhân viên
                 int maNv;
                 if (int.TryParse(row.Cells["MaNV"].Value.ToString(), out maNv))
                 {
                     cboNhanVien.SelectedValue = maNv;
                 }
 
-                // ✅ Gán trạng thái vào ComboBox trạng thái
-                bool trangThai;
-                if (bool.TryParse(row.Cells["TrangThai"].Value.ToString(), out trangThai))
-                {
-                    cboTrangThaiTK.SelectedItem = trangThai ? "1" : "0";
-                }
+                // Sửa: Gán giá trị chuỗi vào ComboBox
+                string trangThaiText = row.Cells["TrangThai"].Value.ToString();
+                cboTrangThaiTK.SelectedItem = trangThaiText;
 
-                // ✅ Không cho sửa mã tự tăng
                 txtMaTK.ReadOnly = true;
             }
         }
@@ -134,19 +226,21 @@ namespace PRO131
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtTenDangNhap.Text) || string.IsNullOrWhiteSpace(txtMatKhau.Text))
-                {
-                    MessageBox.Show("⚠️ Vui lòng nhập Tên đăng nhập và Mật khẩu!");
-                    return;
-                }
-
-                if (cboNhanVien.SelectedValue == null)
-                {
-                    MessageBox.Show("⚠️ Vui lòng chọn nhân viên để tạo tài khoản!");
-                    return;
-                }
+                if (!ValidateInput()) return;
 
                 int maNv = Convert.ToInt32(cboNhanVien.SelectedValue);
+
+                // ✅ Kiểm tra trong DB
+                bool daTonTaiTrongDB = _context.TaiKhoans.Any(t => t.MaNv == maNv);
+
+                // ✅ Kiểm tra trong danh sách tạm
+                bool daTonTaiTrongTam = _dsTaiKhoanTam.Any(t => t.MaNv == maNv);
+
+                if (daTonTaiTrongDB || daTonTaiTrongTam)
+                {
+                    MessageBox.Show("⚠️ Nhân viên này đã có tài khoản, không thể thêm mới!");
+                    return;
+                }
 
                 var tk = new TaiKhoan()
                 {
@@ -154,34 +248,37 @@ namespace PRO131
                     MatKhau = txtMatKhau.Text.Trim(),
                     TrangThai = cboTrangThaiTK.SelectedItem.ToString() == "Hoạt động",
                     Email = txtEmail.Text.Trim(),
-                    MaNv = maNv // ✅ Gán đúng mã nhân viên từ ComboBox
-
+                    MaNv = maNv
                 };
 
-                _context.TaiKhoans.Add(tk);
-                _context.SaveChanges();
-                MessageBox.Show("✅ Thêm tài khoản thành công!");
-                LoadTaiKhoan();
+                _dsTaiKhoanTam.Add(tk);
+                HienThiDanhSachTam();
 
-                // Reset form
-                txtTenDangNhap.Clear();
-                txtMatKhau.Clear();
-                txtMaTK.Clear();
-                txtEmail.Clear();
-                cboNhanVien.SelectedIndex = -1;
-                cboTrangThaiTK.SelectedIndex = 0;
+                MessageBox.Show("✅ Đã thêm vào danh sách tạm, nhấn Lưu để ghi vào CSDL!");
+
+                clearForm();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❌ Lỗi thêm tài khoản: " + ex.Message);
+                MessageBox.Show("❌ Lỗi thêm tài khoản tạm: " + ex.Message);
             }
         }
-        private int maNvDangNhap = 5;
+
 
         private void btnSuaTK_Click(object sender, EventArgs e)
         {
             try
             {
+                
+
+                // --- Check đã chọn nhân viên chưa ---
+                if (string.IsNullOrEmpty(cboNhanVien.Text))
+                {
+                    MessageBox.Show("⚠️ Vui lòng chọn tài khoản cần sửa!");
+                    return;
+                }
+
+                // --- Check đã chọn tài khoản chưa ---
                 if (string.IsNullOrEmpty(txtMaTK.Text))
                 {
                     MessageBox.Show("⚠️ Vui lòng chọn tài khoản cần sửa!");
@@ -190,6 +287,7 @@ namespace PRO131
 
                 int maTK = int.Parse(txtMaTK.Text);
                 var tk = _context.TaiKhoans.FirstOrDefault(t => t.MaTk == maTK);
+                if (!ValidateInput()) return;
                 if (tk != null)
                 {
                     tk.TenDangNhap = txtTenDangNhap.Text.Trim();
@@ -200,6 +298,7 @@ namespace PRO131
                     _context.SaveChanges();
                     MessageBox.Show("✅ Sửa tài khoản thành công!");
                     LoadTaiKhoan();
+                    clearForm();
                 }
             }
             catch (Exception ex)
@@ -210,32 +309,7 @@ namespace PRO131
 
         private void btnXoaTK_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(txtMaTK.Text))
-                {
-                    MessageBox.Show("⚠️ Vui lòng chọn tài khoản cần xóa!");
-                    return;
-                }
-
-                int maTK = int.Parse(txtMaTK.Text);
-                var tk = _context.TaiKhoans.FirstOrDefault(t => t.MaTk == maTK);
-                if (tk != null)
-                {
-                    var confirm = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo);
-                    if (confirm == DialogResult.Yes)
-                    {
-                        _context.TaiKhoans.Remove(tk);
-                        _context.SaveChanges();
-                        MessageBox.Show("🗑️ Xóa tài khoản thành công!");
-                        LoadTaiKhoan();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("❌ Lỗi xóa tài khoản: " + ex.Message);
-            }
+            
         }
 
 
@@ -248,17 +322,18 @@ namespace PRO131
 
                 if (string.IsNullOrEmpty(keyword))
                 {
-                    LoadTaiKhoan(); // nếu không nhập → load toàn bộ
+
+                    LoadTaiKhoan();
+                    clearForm();
                     return;
                 }
 
                 var dsTaiKhoan = _context.TaiKhoans
                     .Where(tk => tk.TenDangNhap.Contains(keyword)
-                              || tk.MaNvNavigation.TenNhanVien.Contains(keyword)
-                              || tk.MaNv.ToString().Contains(keyword)
-                              || tk.Email.Contains(keyword)
-                              || (tk.TrangThai ? "Hoạt động" : "Dừng Hoạt Động").Contains(keyword))
-
+                                 || tk.MaNvNavigation.TenNhanVien.Contains(keyword)
+                                 || tk.MaNv.ToString().Contains(keyword)
+                                 || tk.Email.Contains(keyword)
+                                 || (tk.TrangThai ? "Hoạt động" : "Dừng Hoạt Động").Contains(keyword))
                     .Select(tk => new
                     {
                         MaTK = tk.MaTk,
@@ -266,7 +341,8 @@ namespace PRO131
                         MatKhau = tk.MatKhau,
                         MaNV = tk.MaNv,
                         TenNhanVien = tk.MaNvNavigation.TenNhanVien,
-                        TrangThai = tk.TrangThai ? "Hoạt động" : "Dừng Hoạt Động"
+                        TrangThai = tk.TrangThai ? "Hoạt động" : "Dừng Hoạt Động",
+                        Email = tk.Email
                     }).ToList();
 
                 if (dsTaiKhoan.Any())
@@ -287,6 +363,48 @@ namespace PRO131
         private void dgvTaiKhoan_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnLuuTK_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_dsTaiKhoanTam.Count == 0)
+                {
+                    MessageBox.Show("⚠️ Không có tài khoản tạm nào để lưu!");
+                    return;
+                }
+
+                _context.TaiKhoans.AddRange(_dsTaiKhoanTam);
+                _context.SaveChanges();
+
+                MessageBox.Show("✅ Đã lưu tất cả tài khoản tạm vào CSDL!");
+                _dsTaiKhoanTam.Clear();
+                LoadTaiKhoan();
+                clearForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Lỗi khi lưu vào DB: " + ex.Message);
+            }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Xóa dữ liệu trong các textbox
+                clearForm();
+
+                // Tải lại danh sách tài khoản
+                LoadTaiKhoan();
+
+                MessageBox.Show("✅ Form đã được làm mới!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Lỗi khi làm mới: " + ex.Message);
+            }
         }
     }
 }
