@@ -301,6 +301,7 @@ namespace PRO131
             btnLichSuMua.TabIndex = 4;
             btnLichSuMua.Text = "\tLịch sử mua hàng";
             btnLichSuMua.UseVisualStyleBackColor = false;
+            btnLichSuMua.Click += btnLichSuMua_Click;
             // 
             // btnDanhSachKH
             // 
@@ -316,6 +317,7 @@ namespace PRO131
             btnDanhSachKH.TabIndex = 3;
             btnDanhSachKH.Text = "Danh sách KH";
             btnDanhSachKH.UseVisualStyleBackColor = false;
+            btnDanhSachKH.Click += btnDanhSachKH_Click;
             // 
             // btnThemKH
             // 
